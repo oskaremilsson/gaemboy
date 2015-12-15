@@ -26,3 +26,7 @@
 .focus {
 	z-index: 999;
 }
+
+.moving {
+	opacity: 0.6;
+}

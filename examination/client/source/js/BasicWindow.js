@@ -1,15 +1,16 @@
 "use strict";
 
-function BasicWindow(id, x, y, width, height) {
+function BasicWindow(id, x, y) {
     this.id = id || "" + new Date().getTime();
+    this.element = undefined;
     this.x = x || 10;
     this.y = y || 10;
-    this.width = width;
-    this.height = height;
 }
 
 BasicWindow.prototype.destroy = function() {
     // TODO: implement destroy
+    console.log(this.element);
+    document.querySelector("#main-frame").removeChild(this.element);
 };
 
 BasicWindow.prototype.print = function () {
@@ -24,6 +25,7 @@ BasicWindow.prototype.print = function () {
 
     var element = document.querySelector("#main-frame");
     element.appendChild(template);
+    this.element = document.querySelector("#" + this.id);
 };
 
 module.exports = BasicWindow;
