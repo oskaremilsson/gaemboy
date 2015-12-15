@@ -7,7 +7,7 @@
 	width: 250px;
 	height: 300px;
 	background: black;
-	position: relative;
+	position: absolute;
 	border: 3px solid red;
 }
 
@@ -21,4 +21,8 @@
 	width: 100%;
 	height: 20px;
 	background: white;
+}
+
+.focus {
+	z-index: 999;
 }

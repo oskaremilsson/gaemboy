@@ -6,21 +6,35 @@ function Desktop() {
     this.activeWindow = false;
     this.mouseMoveFunc = this.mouseMove.bind(this);
     this.mouseUpFunc = this.mouseUp.bind(this);
+    this.windows = [];
+    this.clickX = 0;
+    this.clickY = 0;
+
+    //variables to handle the "focused" window
+    this.lastFocusedWindow = undefined;
+    this.zIndex = 1;
+
     this.init();
 }
 
 Desktop.prototype.init = function() {
-    var ex = new ExA();
-    ex.print();
+    this.windows.push(new ExA("example", 10 * (this.windows.length +1 ), 10 * (this.windows.length +1 )));
+    this.windows.push(new ExA("example2", 10 * (this.windows.length +1 ), 10 * (this.windows.length +1 )));
+    this.windows.push(new ExA("example3", 10 * (this.windows.length +1 ), 10 * (this.windows.length +1 )));
+
+    this.windows[0].print();
+    this.windows[1].print();
+    this.windows[2].print();
 
     document.addEventListener("mousedown", this.mouseDown.bind(this));
 };
 
 Desktop.prototype.mouseUp = function() {
     console.log("removing move-listener");
-    this.activeWindow.removeEventListener("mousemove", this.mouseMoveFunc);
+
+    window.removeEventListener("mousemove", this.mouseMoveFunc);
     window.removeEventListener("mouseup", this.mouseUpFunc);
-    //this.activeWindow = false;
+    this.activeWindow = undefined;
 };
 
 Desktop.prototype.mouseDown = function(event) {
@@ -34,17 +48,41 @@ Desktop.prototype.mouseDown = function(event) {
 
     if (element.classList.contains("window")) {
         //clicked DOM is a window - do stuff
-        console.log(element);
-        this.activeWindow = element;
-        console.log("adding mousemove-listener");
-        this.activeWindow.addEventListener("mousemove", this.mouseMoveFunc);
-        window.addEventListener("mouseup", this.mouseUpFunc);
+
+        //make sure the last active window is on top
+        if (this.lastFocusedWindow !== element.id) {
+            element.style.zIndex = this.zIndex;
+            this.zIndex += 1;
+            this.lastFocusedWindow = element.id;
+        }
+
+        //find the window in window-array
+        for (var i = 0; i < this.windows.length; i += 1) {
+            if (this.windows[i].id === element.id) {
+                this.activeWindow = this.windows[i];
+            }
+        }
+
+        //add the listeners to check for movement if click were in the window-top of window
+        if (event.target.classList.contains("window-top")) {
+            this.clickX = event.clientX - this.activeWindow.x;
+            this.clickY = event.clientY - this.activeWindow.y;
+
+            console.log("adding mousemove-listener");
+            window.addEventListener("mousemove", this.mouseMoveFunc);
+            window.addEventListener("mouseup", this.mouseUpFunc);
+        }
     }
 
 };
 
 Desktop.prototype.mouseMove = function(event) {
     console.log("trying to move window");
+    this.activeWindow.x = event.clientX - this.clickX;
+    this.activeWindow.y = event.clientY - this.clickY;
+
+    document.querySelector("#" + this.activeWindow.id).style.left = this.activeWindow.x + "px";
+    document.querySelector("#" + this.activeWindow.id).style.top = this.activeWindow.y + "px";
 };
 
 module.exports = Desktop;
