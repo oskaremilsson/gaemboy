@@ -1,8 +1,8 @@
 "use strict";
 var BasicWindow = require("./BasicWindow");
 
-function ExampleApplication() {
-    BasicWindow.call(this);
+function ExampleApplication(id, x, y, width, height) {
+    BasicWindow.call(this, id, x, y, width, height);
 }
 
 ExampleApplication.prototype = Object.create(BasicWindow.prototype);
