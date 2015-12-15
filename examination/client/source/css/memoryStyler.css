@@ -1,9 +1,11 @@
 .memory-app {
 	width: 500px;
-	height: 500px;
+	height: 480px;
 }
 
-#main-board {
+.memory-app .window-content {
+	padding-left: 10px;
+	padding-top: 10px;
 }
 
 #main-board::after {

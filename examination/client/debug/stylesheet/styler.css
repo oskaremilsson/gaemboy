@@ -4,6 +4,11 @@
 	overflow: hidden;
 }
 
+body {
+	background: url(../image/bg.jpg) no-repeat center center fixed;
+	background-size: cover;
+}
+
 .window {
 	width: 250px;
 	height: 300px;
@@ -32,6 +37,7 @@
 }
 
 .exit-cross {
+	pointer-events: none;
 	transform: rotateY(45deg);
 	font-size: 20px;
 }
@@ -47,7 +53,7 @@
 }
 
 .moving {
-	opacity: 0.8;
+	opacity: 0.6;
 }
 
 .launcher {
@@ -55,7 +61,7 @@
 	bottom: 0;
 	height: 40px;
 	width: 100%;
-	background: green;
+	background: rgba(255,255,255,0.4);
 	z-index: 99999999;
 }
 
@@ -65,4 +71,9 @@
 	width: 40px;
 	background: yellow;
 	display: inline-block;
+}
+
+.launcher li:hover {
+	cursor: pointer;
+	background: rgba(0,255,0,0.8);
 }

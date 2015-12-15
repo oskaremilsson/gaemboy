@@ -61,17 +61,15 @@ Game.prototype.addEvents = function() {
 };
 
 Game.prototype.click = function(event) {
-    console.log(event.target);
     if (this.visibleCards.length < 2 && !event.target.classList.contains("disable")) {
-        if (event.target.id !== "main-board") {
-            //var yx = event.target.id.split("-")[1];
+        if (event.target.classList.contains("card")) {
             var yx = event.target.classList[0].split("-")[1];
             var y = yx.charAt(0);
             var x = yx.charAt(1);
 
             event.target.classList.add("img-" + this.board[y][x].imgNr);
             event.target.classList.add("img");
-            console.log(this.board[y][x]);
+
             this.visibleCards.push(this.board[y][x]);
 
             //disable the ca<rd that got clicked
