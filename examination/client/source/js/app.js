@@ -1,5 +1,4 @@
 "use strict";
-var ExA = require("./ExampleApplication");
+var Desktop = require("./Desktop");
 
-var ex = new ExA();
-ex.print();
+var d = new Desktop();
