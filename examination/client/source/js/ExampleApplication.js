@@ -13,9 +13,6 @@ ExampleApplication.prototype.print = function() {
     console.log("printing example");
     document.querySelector("#" + this.id).classList.add("memory-app");
 
-    var exitButton = document.querySelector("#" + this.id + " .exit-button ");
-    exitButton.addEventListener("click", this.destroy.bind(this));
-
 };
 
 module.exports = ExampleApplication;

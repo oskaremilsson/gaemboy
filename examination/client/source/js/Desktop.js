@@ -1,6 +1,7 @@
 "use strict";
 
-var ExA = require("./ExampleApplication");
+//var ExA = require("./ExampleApplication");
+var Launcher = require("./Launcher");
 
 function Desktop() {
     this.activeWindow = false;
@@ -18,13 +19,7 @@ function Desktop() {
 }
 
 Desktop.prototype.init = function() {
-    this.windows.push(new ExA("example", 10 * (this.windows.length +1 ), 10 * (this.windows.length +1 )));
-    this.windows.push(new ExA("example2", 10 * (this.windows.length +1 ), 10 * (this.windows.length +1 )));
-    this.windows.push(new ExA("example3", 10 * (this.windows.length +1 ), 10 * (this.windows.length +1 )));
-
-    this.windows[0].print();
-    this.windows[1].print();
-    this.windows[2].print();
+    var l = new Launcher(this);
 
     document.addEventListener("mousedown", this.mouseDown.bind(this));
 };
