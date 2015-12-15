@@ -9,7 +9,7 @@ function BasicWindow(id, x, y) {
 
 BasicWindow.prototype.destroy = function() {
     // TODO: implement destroy
-    console.log(this.element);
+    console.log("destroying window");
     document.querySelector("#main-frame").removeChild(this.element);
 };
 
@@ -27,6 +27,7 @@ BasicWindow.prototype.print = function () {
     var launcher = document.querySelector(".launcher");
     element.insertBefore(template, launcher);
     this.element = document.querySelector("#" + this.id);
+    console.log(this.element);
 };
 
 module.exports = BasicWindow;

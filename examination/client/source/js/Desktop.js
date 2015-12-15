@@ -27,7 +27,6 @@ Desktop.prototype.init = function() {
 
 Desktop.prototype.mouseUp = function() {
     console.log("removing move-listener");
-
     window.removeEventListener("mousemove", this.mouseMoveFunc);
     window.removeEventListener("mouseup", this.mouseUpFunc);
     this.activeWindow.element.classList.remove("moving");
@@ -82,5 +81,6 @@ Desktop.prototype.mouseMove = function(event) {
     this.activeWindow.element.style.left = this.activeWindow.x + "px";
     this.activeWindow.element.style.top = this.activeWindow.y + "px";
 };
+
 
 module.exports = Desktop;

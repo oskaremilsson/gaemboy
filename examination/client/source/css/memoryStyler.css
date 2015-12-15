@@ -1,5 +1,100 @@
 .memory-app {
-	width: 400px;
+	width: 500px;
 	height: 500px;
 }
 
+#main-board {
+}
+
+#main-board::after {
+	clear:both;
+	content: "";
+	display:block;
+}
+
+.row {
+	display: block;
+	clear: both;
+	height: 100px;
+	width: 100%;
+}
+
+.card {
+	display: inline-block;
+	float:left;
+	height: 100px;
+	width: 100px;
+	background: url(../image/memory/0.png);
+	margin: 10px;
+	background-size: 100px 100px;
+	visibility: visible;
+	opacity: 1;
+	transition: opacity 1s linear;
+}
+
+.img-0 {
+	background: url(../image/memory/1.png);
+}
+
+.img-1 {
+	background: url(../image/memory/2.png);
+}
+
+.img-2 {
+	background: url(../image/memory/3.png);
+}
+
+.img-3 {
+	background: url(../image/memory/4.png);
+}
+
+.img-4 {
+	background: url(../image/memory/5.png);
+}
+
+.img-5 {
+	background: url(../image/memory/6.png);
+}
+
+.img-6 {
+	background: url(../image/memory/7.png);
+}
+
+.img-7 {
+	background: url(../image/memory/8.png);
+}
+
+
+.img {
+	background-size: 100px 100px;
+}
+
+.wrong {
+	background-color: rgba(255, 0, 0, 0.3);
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s 1s, opacity 1s linear;
+}
+
+.right {
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s 1s, opacity 1s linear;
+}
+
+.pile {
+	margin-left: -50px;
+}
+
+.found-pile::after {
+	clear:both;
+	content: "";
+	display: block;
+}
+
+.matched-card:hover {
+	position: relative;
+	z-index: 999;
+	margin-top: -10px;
+	transition: margin-top 0.2s ease-in;
+}
