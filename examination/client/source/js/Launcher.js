@@ -20,8 +20,9 @@ Launcher.prototype.init = function() {
 Launcher.prototype.startApplication = function(event) {
     var newApp;
     var exitButton;
-    var newID = "win-" + this.desktop.windows.length;
-    var margin = 10 * (this.desktop.windows.length +1 );
+    var newID = "win-" + this.desktop.serialNumber;
+    var margin = 10 * (this.desktop.serialNumber + 1 );
+    this.desktop.serialNumber += 1;
 
     switch (event.target.attributes["value"].value) {
         case "example": {
@@ -29,7 +30,7 @@ Launcher.prototype.startApplication = function(event) {
             newApp.print();
 
             exitButton = document.querySelector("#" + newApp.id + " .exit-button ");
-            exitButton.addEventListener("click", newApp.destroy.bind(newApp));
+            exitButton.addEventListener("click", this.desktop.destroyWindow.bind(this.desktop));
             this.desktop.windows.push(newApp);
             break;
         }
@@ -39,8 +40,9 @@ Launcher.prototype.startApplication = function(event) {
             newApp.init();
 
             exitButton = document.querySelector("#" + newApp.id + " .exit-button ");
-            exitButton.addEventListener("click", newApp.destroy.bind(newApp));
+            exitButton.addEventListener("click", this.desktop.destroyWindow.bind(this.desktop));
             this.desktop.windows.push(newApp);
+            console.log(this.desktop.windows);
             break;
         }
     }

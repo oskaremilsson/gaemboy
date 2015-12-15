@@ -9,7 +9,6 @@ function BasicWindow(id, x, y) {
 
 BasicWindow.prototype.destroy = function() {
     // TODO: implement destroy
-    console.log("destroying window");
     document.querySelector("#main-frame").removeChild(this.element);
 };
 

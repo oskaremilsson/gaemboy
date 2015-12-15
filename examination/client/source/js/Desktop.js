@@ -10,6 +10,7 @@ function Desktop() {
     this.windows = [];
     this.clickX = 0;
     this.clickY = 0;
+    this.serialNumber = 0;
 
     //variables to handle the "focused" window
     this.lastFocusedWindow = undefined;
@@ -82,5 +83,28 @@ Desktop.prototype.mouseMove = function(event) {
     this.activeWindow.element.style.top = this.activeWindow.y + "px";
 };
 
+Desktop.prototype.destroyWindow = function(event) {
+    console.log("destroying window");
+    var element = event.target;
+
+    if (element.parentNode) {
+        while (!element.parentNode.id) {
+            element = element.parentNode;
+        }
+        element = element.parentNode;
+    }
+
+    var index = -1;
+    for (var i = 0; i < this.windows.length; i += 1) {
+        if (this.windows[i].id === element.id) {
+            index = i;
+        }
+    }
+
+    if (index !== -1) {
+        this.windows[index].destroy();
+        this.windows.splice(index, 1);
+    }
+};
 
 module.exports = Desktop;
