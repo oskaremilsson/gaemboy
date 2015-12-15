@@ -30,6 +30,7 @@ Desktop.prototype.mouseUp = function() {
 
     window.removeEventListener("mousemove", this.mouseMoveFunc);
     window.removeEventListener("mouseup", this.mouseUpFunc);
+    this.activeWindow.element.classList.remove("moving");
     this.activeWindow = undefined;
 };
 
@@ -63,6 +64,7 @@ Desktop.prototype.mouseDown = function(event) {
         if (event.target.classList.contains("window-top")) {
             this.clickX = event.clientX - this.activeWindow.x;
             this.clickY = event.clientY - this.activeWindow.y;
+            element.classList.add("moving");
 
             console.log("adding mousemove-listener");
             window.addEventListener("mousemove", this.mouseMoveFunc);
@@ -77,8 +79,8 @@ Desktop.prototype.mouseMove = function(event) {
     this.activeWindow.x = event.clientX - this.clickX;
     this.activeWindow.y = event.clientY - this.clickY;
 
-    document.querySelector("#" + this.activeWindow.id).style.left = this.activeWindow.x + "px";
-    document.querySelector("#" + this.activeWindow.id).style.top = this.activeWindow.y + "px";
+    this.activeWindow.element.style.left = this.activeWindow.x + "px";
+    this.activeWindow.element.style.top = this.activeWindow.y + "px";
 };
 
 module.exports = Desktop;
