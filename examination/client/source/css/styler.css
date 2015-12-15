@@ -1,6 +1,7 @@
 * {
 	margin: 0;
 	padding: 0;
+	overflow: hidden;
 }
 
 .window {
@@ -29,4 +30,20 @@
 
 .moving {
 	opacity: 0.6;
+}
+
+.launcher {
+	position: absolute;
+	bottom: 0;
+	height: 40px;
+	width: 100%;
+	background: green;
+}
+
+.launcher li {
+	margin-left: 10px;
+	height: 40px;
+	width: 40px;
+	background: yellow;
+	display: inline-block;
 }

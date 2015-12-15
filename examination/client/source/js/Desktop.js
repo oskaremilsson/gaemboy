@@ -15,11 +15,12 @@ function Desktop() {
     this.lastFocusedWindow = undefined;
     this.zIndex = 1;
 
-    this.init();
+    //this.init();
 }
 
 Desktop.prototype.init = function() {
-    var l = new Launcher(this);
+    var launch = new Launcher(this);
+    launch.init();
 
     document.addEventListener("mousedown", this.mouseDown.bind(this));
 };

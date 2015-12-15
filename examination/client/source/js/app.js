@@ -2,3 +2,4 @@
 var Desktop = require("./Desktop");
 
 var d = new Desktop();
+d.init();
