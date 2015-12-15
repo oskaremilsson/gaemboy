@@ -3,10 +3,6 @@ var ExA = require("./ExampleApplication");
 
 function Launcher(desktop) {
     this.desktop = desktop;
-
-    /*this.startApplication("example");
-    this.startApplication("example");
-    this.startApplication("example");*/
 }
 
 Launcher.prototype.init = function() {

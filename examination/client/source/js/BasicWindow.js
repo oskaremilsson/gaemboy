@@ -24,7 +24,8 @@ BasicWindow.prototype.print = function () {
     templateWindow.style.top = this.y + "px";
 
     var element = document.querySelector("#main-frame");
-    element.appendChild(template);
+    var launcher = document.querySelector(".launcher");
+    element.insertBefore(template, launcher);
     this.element = document.querySelector("#" + this.id);
 };
 
