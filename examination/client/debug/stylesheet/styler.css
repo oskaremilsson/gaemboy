@@ -27,6 +27,8 @@ body {
 	position: absolute;
 	border: 1px solid #f47023;
 	box-shadow: 0px 0px 16px 7px rgba(0,0,0,0.18);
+	opacity: 1;
+	transition: opacity 0.2s ease-in-out;
 }
 
 .window .window-top {
@@ -110,12 +112,17 @@ body {
 }
 
 .minimized {
-	visibility: hidden !important;
+	opacity: 0 !important;
 }
 
 .maximized {
-	width: 100% !important;
-	height: calc(100% - 41px) !important;
+	width: calc(100% - 2px) !important;
+	height: calc(100% - 42px) !important;
+	transition: width 0.2s ease-in-out, height 0.2s ease-in-out, left 0.2s ease-in-out, top 0.2s ease-in-out;
+}
+
+.reset-window {
+	transition: width 0.15s ease-in-out, height 0.15s ease-in-out, left 0.15s ease-in-out, top 0.15s ease-in-out;
 }
 
 .launcher {

@@ -74,6 +74,8 @@ Desktop.prototype.mouseMove = function(event) {
     this.activeWindow.x = event.clientX - this.clickX;
     this.activeWindow.y = event.clientY - this.clickY;
 
+
+    this.activeWindow.element.classList.remove("reset-window");
     this.activeWindow.element.style.left = this.activeWindow.x + "px";
     this.activeWindow.element.style.top = this.activeWindow.y + "px";
 };

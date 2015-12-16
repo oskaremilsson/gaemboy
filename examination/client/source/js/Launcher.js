@@ -98,8 +98,11 @@ Launcher.prototype.switchToWindow = function(id) {
     var window = document.querySelector("#" + id);
     console.log(window);
     if (window) {
-        window.focus();
         window.classList.toggle("minimized");
+
+        if (!window.classList.contains("minimized")) {
+            window.focus();
+        }
     }
 };
 

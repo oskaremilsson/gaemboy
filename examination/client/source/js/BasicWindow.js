@@ -44,18 +44,21 @@ BasicWindow.prototype.print = function() {
 };
 
 BasicWindow.prototype.minimize = function() {
-    this.element.classList.add("minimized");
+    this.element.classList.toggle("minimized");
 };
 
 BasicWindow.prototype.maximize = function() {
     this.element.classList.toggle("maximized");
+
     var icon = this.element.querySelector(".maximize-icon i");
     if (!this.element.classList.contains("maximized")) {
+        this.element.classList.add("reset-window");
         this.element.style.left = this.x + "px";
         this.element.style.top = this.y + "px";
         icon.replaceChild(document.createTextNode("crop_din"), icon.firstChild);
     }
     else {
+        this.element.classList.remove("reset-window");
         this.element.style.top = "0px";
         this.element.style.left = "0px";
         icon.replaceChild(document.createTextNode("filter_none"), icon.firstChild);
