@@ -32,6 +32,7 @@
 	background-size: 80px 80px;
 	opacity: 1;
 	transition: opacity 1s linear;
+	cursor: pointer;
 }
 
 .img-0 {

@@ -51,6 +51,9 @@ body {
 	border-bottom: 1px solid #e2ebf8;
 }
 
+.window .window-menu a {
+	cursor: pointer;
+}
 
 .window .window-content {
 	height: 100%;

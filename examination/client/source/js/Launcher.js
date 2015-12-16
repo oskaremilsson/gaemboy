@@ -71,7 +71,6 @@ Launcher.prototype.startApplication = function(event) {
         case "memory":
         {
             newApp = new MemoryApplication(appOptions);
-            newApp.print();
             newApp.init();
 
             break;

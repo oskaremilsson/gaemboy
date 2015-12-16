@@ -22,7 +22,7 @@ function Game(element, x, y) {
     this.images = [0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7];
     //this.foundPile = document.querySelector("#found-pile");
 
-    //this.timer = new Timer(document.querySelector("h3"));
+    //this.timer = new Timer(this.element.querySelector("h3"));
     //this.timer.start();
 
     this.totalTime = 0;
@@ -40,8 +40,6 @@ Game.prototype.init = function() {
             this.board[i][j+1] = new MemoryCard("" + i + (j + 1), this.images.pop());
         }
     }
-    console.log(this.images);
-    console.log(this.board);
 };
 
 Game.prototype.shuffleImages = function() {
@@ -56,7 +54,6 @@ Game.prototype.shuffleImages = function() {
 };
 
 Game.prototype.addEvents = function() {
-    //var boardElement = document.querySelector("#main-board");
     this.element.addEventListener("click", this.click.bind(this));
 };
 
@@ -72,7 +69,7 @@ Game.prototype.click = function(event) {
 
             this.visibleCards.push(this.board[y][x]);
 
-            //disable the ca<rd that got clicked
+            //disable the card that got clicked
             this.element.querySelector(".card-" + this.board[y][x].id).classList.add("disable");
 
             if(this.visibleCards.length === 2) {

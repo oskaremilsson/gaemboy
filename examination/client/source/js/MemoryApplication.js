@@ -12,7 +12,9 @@ MemoryApplication.prototype = Object.create(BasicWindow.prototype);
 MemoryApplication.prototype.constructor =  MemoryApplication;
 
 MemoryApplication.prototype.init = function() {
-    console.log(this.element);
+    this.print();
+
+    this.element.querySelector(".window-menu").addEventListener("click", this.menuClicked.bind(this));
     var g = new MemoryGame(this.element.querySelector(".window-content"), 4, 4);
     g.init();
 };
@@ -20,11 +22,19 @@ MemoryApplication.prototype.init = function() {
 MemoryApplication.prototype.print = function() {
     BasicWindow.prototype.print.call(this);
     console.log("printing memory");
-    //document.querySelector("#" + this.id).classList.add("memory-app");
     this.element.classList.add("memory-app");
 
-    /*this.element.querySelector(".window-title").appendChild(document.createTextNode(this.title));
-    this.element.querySelector(".window-icon").appendChild(document.createTextNode(this.icon));*/
+    var menu = this.element.querySelector(".window-menu");
+    var template = document.querySelector("#template-window-menu-alternative").content.cloneNode(true);
+    template.querySelector(".menu-alternative").appendChild(document.createTextNode("Settings"));
+    menu.appendChild(template);
+};
+
+MemoryApplication.prototype.menuClicked = function(event) {
+    if (event.target.tagName.toLowerCase() === "a") {
+        // open settings-window
+        console.log("should open settings-window");
+    }
 };
 
 module.exports = MemoryApplication;

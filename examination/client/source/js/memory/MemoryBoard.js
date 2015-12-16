@@ -30,7 +30,6 @@ MemoryBoard.prototype.printCards = function() {
         frag.appendChild(rowDiv);
     }
 
-    console.log(this.element);
     this.element.appendChild(frag);
 };
 
