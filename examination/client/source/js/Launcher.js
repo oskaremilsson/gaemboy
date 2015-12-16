@@ -22,8 +22,16 @@ Launcher.prototype.init = function() {
 Launcher.prototype.startApplication = function(event) {
     var newApp = false;
     var exitButton;
-    var newID = "win-" + this.desktop.serialNumber;
-    var margin = 10 * (this.desktop.serialNumber + 1 );
+
+    var margin = 10 * (this.desktop.serialNumber + 1);
+    var appOptions = {
+        id: "win-" + this.desktop.serialNumber,
+        x: margin,
+        y: margin,
+        zIndex: this.desktop.zIndex
+    };
+
+    //var newID = "win-" + this.desktop.serialNumber;
     this.desktop.serialNumber += 1;
 
     console.log(event.target);
@@ -37,13 +45,15 @@ Launcher.prototype.startApplication = function(event) {
 
     switch (value) {
         case "example": {
-            newApp = new ExA(newID, margin, margin, this.desktop.zIndex);
+            newApp = new ExA(appOptions);
             newApp.print();
 
             break;
         }
         case "memory": {
-            newApp = new MemoryApplication(newID, margin, margin, this.desktop.zIndex, "Memory", "memory");
+            appOptions.title = "Memory";
+            appOptions.icon = "memory";
+            newApp = new MemoryApplication(appOptions);
             newApp.print();
             newApp.init();
 

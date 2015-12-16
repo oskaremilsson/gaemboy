@@ -2,10 +2,10 @@
 var BasicWindow = require("./BasicWindow");
 var MemoryGame = require("./memory/Game");
 
-function MemoryApplication(id, x, y, zIndex, title, icon) {
-    BasicWindow.call(this, id, x, y, zIndex);
-    this.title = title;
-    this.icon = icon;
+function MemoryApplication(options) {
+    BasicWindow.call(this, options);
+    /*this.title = title;
+    this.icon = icon;*/
 }
 
 MemoryApplication.prototype = Object.create(BasicWindow.prototype);
@@ -23,8 +23,8 @@ MemoryApplication.prototype.print = function() {
     //document.querySelector("#" + this.id).classList.add("memory-app");
     this.element.classList.add("memory-app");
 
-    this.element.querySelector(".window-title").appendChild(document.createTextNode(this.title));
-    this.element.querySelector(".window-icon").appendChild(document.createTextNode(this.icon));
+    /*this.element.querySelector(".window-title").appendChild(document.createTextNode(this.title));
+    this.element.querySelector(".window-icon").appendChild(document.createTextNode(this.icon));*/
 };
 
 module.exports = MemoryApplication;

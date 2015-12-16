@@ -1,11 +1,13 @@
 "use strict";
 
-function BasicWindow(id, x, y, zIndex) {
-    this.id = id || "" + new Date().getTime();
+function BasicWindow(options) {
+    this.id = options.id || "" + new Date().getTime();
     this.element = undefined;
-    this.x = x || 10;
-    this.y = y || 10;
-    this.zIndex = zIndex || 0;
+    this.x = options.x || 10;
+    this.y = options.y || 10;
+    this.zIndex = options.zIndex || 0;
+    this.title = options.title || this.id;
+    this.icon = options.icon || "bug_report";
 }
 
 BasicWindow.prototype.destroy = function() {
@@ -28,7 +30,8 @@ BasicWindow.prototype.print = function () {
     var launcher = document.querySelector(".launcher");
     element.insertBefore(template, launcher);
     this.element = document.querySelector("#" + this.id);
-    console.log(this.element);
+    this.element.querySelector(".window-title").appendChild(document.createTextNode(this.title));
+    this.element.querySelector(".window-icon").appendChild(document.createTextNode(this.icon));
 };
 
 module.exports = BasicWindow;
