@@ -20,24 +20,36 @@ Launcher.prototype.init = function() {
 };
 
 Launcher.prototype.startApplication = function(event) {
+    var value;
+    var icon;
+    var title;
     var newApp = false;
-
     var margin = 10 * (this.desktop.serialNumber + 1);
+
+    console.log(event.target);
+    var element;
+    if (event.target.attributes["value"]) {
+        element = event.target;
+    }
+    else if (event.target.parentNode.attributes["value"]) {
+        //is the i-tag in the li
+        element = event.target.parentNode;
+    }
+
+    if (element) {
+        value = element.attributes["value"].value;
+        icon = element.querySelector("i").textContent;
+        title = element.querySelector(".tooltip").textContent;
+    }
+
     var appOptions = {
         id: "win-" + this.desktop.serialNumber,
         x: margin,
         y: margin,
-        zIndex: this.desktop.zIndex
+        tabIndex: this.desktop.serialNumber,
+        icon: icon,
+        title: title
     };
-
-    console.log(event.target);
-    var value;
-    if (event.target.attributes["value"]) {
-        value = event.target.attributes["value"].value;
-    }
-    else if (event.target.parentNode.attributes["value"]) {
-        value = event.target.parentNode.attributes["value"].value;
-    }
 
     switch (value) {
         case "example": {
@@ -48,8 +60,8 @@ Launcher.prototype.startApplication = function(event) {
         }
         case "memory":
         {
-            appOptions.title = "Memory";
-            appOptions.icon = "memory";
+            /*appOptions.title = "Memory";
+            appOptions.icon = icon;*/
             newApp = new MemoryApplication(appOptions);
             newApp.print();
             newApp.init();
@@ -64,25 +76,22 @@ Launcher.prototype.startApplication = function(event) {
         this.desktop.windows.push(newApp);
         this.addRunningApp(value, newApp);
         this.desktop.serialNumber += 1;
+        newApp.element.focus();
     }
 
     if (value) {
         var switchTo = value.split(":");
         if(switchTo[0] === "id") {
-            console.log("byter till:" + switchTo[1]);
             this.switchToWindow(switchTo[1]);
         }
     }
 };
 
 Launcher.prototype.switchToWindow = function(id) {
-    this.zIndex += 1;
-    var window;
-
-    //HITTA FÖNSTRET MED ID!!!
-
+    var window = document.querySelector("#" + id);
+    console.log(window);
     if (window) {
-        window.style.zIndex = this.desktop.zIndex;
+        window.focus();
     }
 };
 

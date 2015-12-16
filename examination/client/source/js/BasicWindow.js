@@ -5,7 +5,7 @@ function BasicWindow(options) {
     this.element = undefined;
     this.x = options.x || 10;
     this.y = options.y || 10;
-    this.zIndex = options.zIndex || 0;
+    this.tabIndex = options.tabIndex || 0;
     this.title = options.title || this.id;
     this.icon = options.icon || "bug_report";
 }
@@ -24,7 +24,7 @@ BasicWindow.prototype.print = function() {
     templateWindow.setAttribute("id", this.id);
     templateWindow.style.left = this.x + "px";
     templateWindow.style.top = this.y + "px";
-    templateWindow.style.zIndex = this.zIndex;
+    templateWindow.setAttribute("tabindex", this.tabIndex);
 
     var element = document.querySelector("#main-frame");
     var launcher = document.querySelector(".launcher");

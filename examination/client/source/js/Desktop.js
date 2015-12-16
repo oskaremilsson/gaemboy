@@ -11,12 +11,6 @@ function Desktop() {
     this.clickX = 0;
     this.clickY = 0;
     this.serialNumber = 0;
-
-    //variables to handle the "focused" window
-    this.lastFocusedWindow = undefined;
-    this.zIndex = 0;
-
-    //this.init();
 }
 
 Desktop.prototype.init = function() {
@@ -24,6 +18,7 @@ Desktop.prototype.init = function() {
     launch.init();
 
     document.addEventListener("mousedown", this.mouseDown.bind(this));
+    document.addEventListener("focus", function(event) {console.log(event.target);}, true);
 };
 
 Desktop.prototype.mouseUp = function() {
@@ -47,11 +42,11 @@ Desktop.prototype.mouseDown = function(event) {
         //clicked DOM is a window - do stuff
 
         //make sure the last active window is on top
-        if (this.lastFocusedWindow !== element.id) {
-            this.zIndex += 1;
-            element.style.zIndex = this.zIndex;
+        element.focus();
+        /*if (this.lastFocusedWindow !== element.id) {
+            element.focus();
             this.lastFocusedWindow = element.id;
-        }
+        }*/
 
         //find the window in window-array
         for (var i = 0; i < this.windows.length; i += 1) {
