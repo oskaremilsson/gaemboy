@@ -15,7 +15,7 @@ BasicWindow.prototype.destroy = function() {
     document.querySelector("#main-frame").removeChild(this.element);
 };
 
-BasicWindow.prototype.print = function () {
+BasicWindow.prototype.print = function() {
     // TODO: implement this
     console.log("printing");
     var template  = document.querySelector("#template-window").content.cloneNode(true);
@@ -32,6 +32,10 @@ BasicWindow.prototype.print = function () {
     this.element = document.querySelector("#" + this.id);
     this.element.querySelector(".window-title").appendChild(document.createTextNode(this.title));
     this.element.querySelector(".window-icon").appendChild(document.createTextNode(this.icon));
+};
+
+BasicWindow.prototype.minimize = function() {
+    this.element.classList.add("minimized");
 };
 
 module.exports = BasicWindow;

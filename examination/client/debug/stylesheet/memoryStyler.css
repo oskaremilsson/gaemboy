@@ -30,7 +30,6 @@
 	background: url(../image/memory/0.png);
 	margin: 5px;
 	background-size: 80px 80px;
-	visibility: visible;
 	opacity: 1;
 	transition: opacity 1s linear;
 }

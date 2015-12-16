@@ -21,7 +21,6 @@ Launcher.prototype.init = function() {
 
 Launcher.prototype.startApplication = function(event) {
     var newApp = false;
-    var exitButton;
 
     var margin = 10 * (this.desktop.serialNumber + 1);
     var appOptions = {
@@ -62,8 +61,8 @@ Launcher.prototype.startApplication = function(event) {
     }
 
     if (newApp) {
-        exitButton = document.querySelector("#" + newApp.id + " .exit-button ");
-        exitButton.addEventListener("click", this.desktop.destroyWindow.bind(this.desktop));
+        var buttons = document.querySelector("#" + newApp.id + " .window-buttons");
+        buttons.addEventListener("click", this.desktop.windowButtonClick.bind(this.desktop));
         this.desktop.windows.push(newApp);
     }
 };

@@ -83,8 +83,10 @@ Desktop.prototype.mouseMove = function(event) {
     this.activeWindow.element.style.top = this.activeWindow.y + "px";
 };
 
-Desktop.prototype.destroyWindow = function(event) {
-    console.log("destroying window");
+Desktop.prototype.windowButtonClick = function(event) {
+    console.log("clicked window-button");
+    var action = event.target.classList;
+
     var element = event.target;
 
     if (element.parentNode) {
@@ -94,6 +96,7 @@ Desktop.prototype.destroyWindow = function(event) {
         element = element.parentNode;
     }
 
+    //find what window got clicked
     var index = -1;
     for (var i = 0; i < this.windows.length; i += 1) {
         if (this.windows[i].id === element.id) {
@@ -102,8 +105,16 @@ Desktop.prototype.destroyWindow = function(event) {
     }
 
     if (index !== -1) {
-        this.windows[index].destroy();
-        this.windows.splice(index, 1);
+        if (action.contains("exit-button")) {
+            //close the app
+            this.windows[index].destroy();
+            this.windows.splice(index, 1);
+        }
+        else if (action.contains("minimize-button")) {
+            //minimize the app
+            this.windows[index].minimize();
+            console.log("minmize");
+        }
     }
 };
 

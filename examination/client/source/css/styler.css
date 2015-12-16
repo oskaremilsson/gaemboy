@@ -5,6 +5,11 @@
 	padding: 0;
 	overflow: hidden;
 	font-family: 'Muli', sans-serif;
+
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 }
 
 body {
@@ -46,6 +51,10 @@ body {
 	background: black;
 }
 
+.window .window-buttons {
+	float: right;
+}
+
 .button {
 	float: right;
 	width: 45px;
@@ -63,7 +72,18 @@ body {
 
 .exit-cross {
 	pointer-events: none;
-	transform: rotate(45deg);
+	font-size: 30px;
+}
+
+.minimize-button:hover {
+	background: #e5e5e5;
+	transition: background 0.5s;
+	cursor: pointer;
+	color: rgba(0,0,0,0.9);
+}
+
+.minimize-icon {
+	pointer-events: none;
 	font-size: 30px;
 }
 
@@ -73,6 +93,11 @@ body {
 
 .moving {
 	opacity: 0.6;
+	cursor: move;
+}
+
+.minimized {
+	visibility: hidden;
 }
 
 .launcher {
@@ -104,3 +129,7 @@ body {
 
 .material-icons.md-24 { font-size: 24px; }
 .material-icons.md-30 { font-size: 30px; }
+
+.no-pointer {
+	pointer-events: none;
+}
