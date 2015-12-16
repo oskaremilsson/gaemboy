@@ -62,6 +62,7 @@ Launcher.prototype.startApplication = function(event) {
 
     switch (value) {
         case "example": {
+            appOptions.maximizable = true;
             newApp = new ExA(appOptions);
             newApp.print();
 

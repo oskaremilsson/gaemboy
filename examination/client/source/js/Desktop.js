@@ -112,7 +112,12 @@ Desktop.prototype.windowButtonClick = function(event) {
         else if (action.contains("minimize-button")) {
             //minimize the app
             this.windows[index].minimize();
-            console.log("minmize");
+        }
+        else if (action.contains("maximize-button")) {
+            //maximize the app
+            if (this.windows[index].maximizable) {
+                this.windows[index].maximize();
+            }
         }
     }
 };

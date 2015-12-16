@@ -8,6 +8,7 @@ function BasicWindow(options) {
     this.tabIndex = options.tabIndex || 0;
     this.title = options.title || this.id;
     this.icon = options.icon || "bug_report";
+    this.maximizable = options.maximizable || false;
 }
 
 BasicWindow.prototype.destroy = function() {
@@ -32,10 +33,24 @@ BasicWindow.prototype.print = function() {
     this.element = document.querySelector("#" + this.id);
     this.element.querySelector(".window-title").appendChild(document.createTextNode(this.title));
     this.element.querySelector(".window-icon").appendChild(document.createTextNode(this.icon));
+
+    //add maximize-button
+    if (this.maximizable) {
+        var button = document.querySelector("#template-maximize-button").content.cloneNode(true);
+        var windowButtons = this.element.querySelector(".window-buttons");
+        var removeButton = this.element.querySelector(".minimize-button");
+        windowButtons.insertBefore(button, removeButton);
+    }
 };
 
 BasicWindow.prototype.minimize = function() {
     this.element.classList.add("minimized");
+};
+
+BasicWindow.prototype.maximize = function() {
+    this.element.classList.add("maximized");
+    this.element.style.top = "0px";
+    this.element.style.left = "0px";
 };
 
 module.exports = BasicWindow;

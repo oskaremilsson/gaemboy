@@ -78,6 +78,7 @@ body {
 	height: 30px;
 	text-align: center;
 	color: rgba(0,0,0,0.8);
+	padding-top: 5px;
 }
 
 .exit-button:hover {
@@ -87,21 +88,20 @@ body {
 	color: rgba(255,255,255,0.8);
 }
 
-.exit-cross {
-	pointer-events: none;
-	font-size: 30px;
-}
 
-.minimize-button:hover {
+.minimize-button:hover, .maximize-button:hover {
 	background: #e5e5e5;
 	transition: background 0.5s;
 	cursor: pointer;
 	color: rgba(0,0,0,0.9);
 }
 
-.minimize-icon {
+.exit-cross, .minimize-icon, .maximize-icon {
 	pointer-events: none;
-	font-size: 30px;
+}
+
+.minimize-icon {
+	margin-top: 15px;
 }
 
 .moving {
@@ -110,7 +110,12 @@ body {
 }
 
 .minimized {
-	visibility: hidden;
+	visibility: hidden !important;
+}
+
+.maximized {
+	width: 100% !important;
+	height: calc(100% - 41px) !important;
 }
 
 .launcher {
@@ -178,6 +183,9 @@ body {
 	background: rgba(255,255,255,0.2);
 }
 
+
+.material-icons.md-16 { font-size: 16px; }
+.material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
 .material-icons.md-30 { font-size: 30px; }
 
