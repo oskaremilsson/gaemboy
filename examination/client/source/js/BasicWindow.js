@@ -48,9 +48,18 @@ BasicWindow.prototype.minimize = function() {
 };
 
 BasicWindow.prototype.maximize = function() {
-    this.element.classList.add("maximized");
-    this.element.style.top = "0px";
-    this.element.style.left = "0px";
+    this.element.classList.toggle("maximized");
+    var icon = this.element.querySelector(".maximize-icon i");
+    if (!this.element.classList.contains("maximized")) {
+        this.element.style.left = this.x + "px";
+        this.element.style.top = this.y + "px";
+        icon.replaceChild(document.createTextNode("crop_din"), icon.firstChild);
+    }
+    else {
+        this.element.style.top = "0px";
+        this.element.style.left = "0px";
+        icon.replaceChild(document.createTextNode("filter_none"), icon.firstChild);
+    }
 };
 
 module.exports = BasicWindow;
