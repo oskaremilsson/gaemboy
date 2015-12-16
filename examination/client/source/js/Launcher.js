@@ -30,9 +30,6 @@ Launcher.prototype.startApplication = function(event) {
         zIndex: this.desktop.zIndex
     };
 
-    //var newID = "win-" + this.desktop.serialNumber;
-    this.desktop.serialNumber += 1;
-
     console.log(event.target);
     var value;
     if (event.target.attributes["value"]) {
@@ -49,7 +46,8 @@ Launcher.prototype.startApplication = function(event) {
 
             break;
         }
-        case "memory": {
+        case "memory":
+        {
             appOptions.title = "Memory";
             appOptions.icon = "memory";
             newApp = new MemoryApplication(appOptions);
@@ -64,7 +62,40 @@ Launcher.prototype.startApplication = function(event) {
         var buttons = document.querySelector("#" + newApp.id + " .window-buttons");
         buttons.addEventListener("click", this.desktop.windowButtonClick.bind(this.desktop));
         this.desktop.windows.push(newApp);
+        this.addRunningApp(value, newApp);
+        this.desktop.serialNumber += 1;
     }
+
+    if (value) {
+        var switchTo = value.split(":");
+        if(switchTo[0] === "id") {
+            console.log("byter till:" + switchTo[1]);
+            this.switchToWindow(switchTo[1]);
+        }
+    }
+};
+
+Launcher.prototype.switchToWindow = function(id) {
+    this.zIndex += 1;
+    var window;
+
+    //HITTA FÖNSTRET MED ID!!!
+
+    if (window) {
+        window.style.zIndex = this.desktop.zIndex;
+    }
+};
+
+Launcher.prototype.addRunningApp = function(type, app) {
+    //get the tooltip-container for the app and add it to the list
+    var container = document.querySelector("li[value='" + type + "'] .tooltip-container");
+
+    var template = document.querySelector("#template-tooltip").content.cloneNode(true);
+    template.querySelector(".tooltip").appendChild(document.createTextNode(app.title));
+    template.querySelector(".tooltip").setAttribute("value", "id:" + app.id);
+
+    container.appendChild(template);
+
 };
 
 module.exports = Launcher;

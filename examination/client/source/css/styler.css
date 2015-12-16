@@ -107,6 +107,11 @@ body {
 	width: 100%;
 	background: rgba(0,0,0,0.85);
 	z-index: 99999999;
+	overflow: visible;
+}
+
+.launcher ul {
+	overflow: visible;
 }
 
 .launcher li {
@@ -115,6 +120,7 @@ body {
 	display: inline-block;
 	text-align: center;
 	color: #ffffff;
+	overflow: visible;
 }
 
 .launcher li i {
@@ -125,6 +131,26 @@ body {
 	cursor: pointer;
 	background: rgba(255,255,255,0.1);
 	transition: all 0.5s;
+}
+
+.tooltip-container {
+	overflow: visible;
+	position: absolute;
+	bottom: 40px;
+	padding-bottom: 5px;
+}
+
+.launcher li:hover .tooltip-container .tooltip {
+	display: block;
+}
+
+.tooltip {
+	display: none;
+	background: rgba(0,0,0,0.5);
+	margin-left: 2px;
+	padding: 5px;
+
+	z-index: 1000;
 }
 
 .material-icons.md-24 { font-size: 24px; }
