@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="stylesheet/styler.css">
     <link rel="stylesheet" type="text/css" href="stylesheet/memoryStyler.css">
 
@@ -8,7 +9,8 @@
     <template id="template-window">
         <div class="window">
             <div class="window-top">
-                <span class="button exit-button"><span class="exit-cross">+</span></span>
+                <i class="material-icons md-30 window-icon"></i><span class="window-title"></span>
+                <span class="button exit-button"><span class="exit-cross"><i class="material-icons">close</i></span></span>
             </div>
             <div class="window-menu">
 
@@ -19,7 +21,6 @@
         </div>
     </template>
 
-
     <!-- END OF TEMPLATES -->
 </head>
 <body>
@@ -27,8 +28,8 @@
 
     <div class="launcher">
         <ul>
-            <li value="memory">Memory</li>
-            <li value="example">Exempel</li>
+            <li value="memory"><i class="material-icons md-30">memory</i></li>
+            <li value="example"><i class="material-icons md-30">bug_report</i></li>
         </ul>
     </div>
 </div>

@@ -1,10 +1,11 @@
 "use strict";
 
-function BasicWindow(id, x, y) {
+function BasicWindow(id, x, y, zIndex) {
     this.id = id || "" + new Date().getTime();
     this.element = undefined;
     this.x = x || 10;
     this.y = y || 10;
+    this.zIndex = zIndex || 0;
 }
 
 BasicWindow.prototype.destroy = function() {
@@ -21,6 +22,7 @@ BasicWindow.prototype.print = function () {
     templateWindow.setAttribute("id", this.id);
     templateWindow.style.left = this.x + "px";
     templateWindow.style.top = this.y + "px";
+    templateWindow.style.zIndex = this.zIndex;
 
     var element = document.querySelector("#main-frame");
     var launcher = document.querySelector(".launcher");

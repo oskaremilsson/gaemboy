@@ -14,7 +14,7 @@ function Desktop() {
 
     //variables to handle the "focused" window
     this.lastFocusedWindow = undefined;
-    this.zIndex = 1;
+    this.zIndex = 0;
 
     //this.init();
 }
@@ -48,8 +48,8 @@ Desktop.prototype.mouseDown = function(event) {
 
         //make sure the last active window is on top
         if (this.lastFocusedWindow !== element.id) {
-            element.style.zIndex = this.zIndex;
             this.zIndex += 1;
+            element.style.zIndex = this.zIndex;
             this.lastFocusedWindow = element.id;
         }
 

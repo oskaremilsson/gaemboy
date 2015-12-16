@@ -1,14 +1,15 @@
 .memory-app {
-	width: 500px;
-	height: 480px;
+	width: 380px;
+	height: 440px;
 }
 
 .memory-app .window-content {
 	padding-left: 10px;
 	padding-top: 10px;
+	background: rgba(255,255,255,0.8);
 }
 
-#main-board::after {
+.memory-app .window-content::after {
 	clear:both;
 	content: "";
 	display:block;
@@ -17,18 +18,18 @@
 .row {
 	display: block;
 	clear: both;
-	height: 100px;
+	height: 90px;
 	width: 100%;
 }
 
 .card {
 	display: inline-block;
 	float:left;
-	height: 100px;
-	width: 100px;
+	height: 80px;
+	width: 80px;
 	background: url(../image/memory/0.png);
-	margin: 10px;
-	background-size: 100px 100px;
+	margin: 5px;
+	background-size: 80px 80px;
 	visibility: visible;
 	opacity: 1;
 	transition: opacity 1s linear;
@@ -68,7 +69,7 @@
 
 
 .img {
-	background-size: 100px 100px;
+	background-size: 80px 80px;
 }
 
 .wrong {
@@ -79,9 +80,8 @@
 }
 
 .right {
-	visibility: hidden;
-	opacity: 0;
-	transition: visibility 0s 1s, opacity 1s linear;
+	opacity: 0.15;
+	transition: opacity 1s linear;
 }
 
 .pile {
