@@ -38,8 +38,17 @@ Launcher.prototype.startApplication = function(event) {
 
     if (element) {
         value = element.attributes["value"].value;
-        icon = element.querySelector("i").textContent;
-        title = element.querySelector(".tooltip").textContent;
+
+        if (value) {
+            var switchTo = value.split(":");
+            if(switchTo[0] === "id") {
+                this.switchToWindow(switchTo[1]);
+            }
+            else {
+                icon = element.querySelector("i").textContent;
+                title = element.querySelector(".tooltip-title").textContent;
+            }
+        }
     }
 
     var appOptions = {
@@ -60,12 +69,16 @@ Launcher.prototype.startApplication = function(event) {
         }
         case "memory":
         {
-            /*appOptions.title = "Memory";
-            appOptions.icon = icon;*/
             newApp = new MemoryApplication(appOptions);
             newApp.print();
             newApp.init();
 
+            break;
+        }
+        case "reset":
+        {
+            console.log("resetting");
+            this.desktop.clearDesktop();
             break;
         }
     }
@@ -78,13 +91,6 @@ Launcher.prototype.startApplication = function(event) {
         this.desktop.serialNumber += 1;
         newApp.element.focus();
     }
-
-    if (value) {
-        var switchTo = value.split(":");
-        if(switchTo[0] === "id") {
-            this.switchToWindow(switchTo[1]);
-        }
-    }
 };
 
 Launcher.prototype.switchToWindow = function(id) {
@@ -92,6 +98,7 @@ Launcher.prototype.switchToWindow = function(id) {
     console.log(window);
     if (window) {
         window.focus();
+        window.classList.toggle("minimized");
     }
 };
 
@@ -100,7 +107,7 @@ Launcher.prototype.addRunningApp = function(type, app) {
     var container = document.querySelector("li[value='" + type + "'] .tooltip-container");
 
     var template = document.querySelector("#template-tooltip").content.cloneNode(true);
-    template.querySelector(".tooltip").appendChild(document.createTextNode(app.title));
+    template.querySelector(".tooltip").appendChild(document.createTextNode(app.title + "(" + app.id + ")"));
     template.querySelector(".tooltip").setAttribute("value", "id:" + app.id);
 
     container.appendChild(template);

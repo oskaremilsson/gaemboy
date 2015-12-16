@@ -153,17 +153,29 @@ body {
 	padding-bottom: 5px;
 }
 
-.launcher li:hover .tooltip-container .tooltip {
+.launcher li:hover .tooltip-container .tooltip, .launcher li:hover .tooltip-container .tooltip-title {
 	display: block;
 }
 
-.tooltip {
+.tooltip, .tooltip-title{
 	display: none;
 	background: rgba(0,0,0,0.5);
 	margin-left: 2px;
 	padding: 5px;
-
 	z-index: 1000;
+	text-shadow: 1px 1px rgba(0,0,0,0.6);
+}
+
+.tooltip-title {
+	border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+
+.tooltip-title:hover {
+	cursor: default;
+}
+
+.tooltip:hover {
+	background: rgba(255,255,255,0.2);
 }
 
 .material-icons.md-24 { font-size: 24px; }

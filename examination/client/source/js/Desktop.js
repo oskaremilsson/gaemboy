@@ -101,6 +101,10 @@ Desktop.prototype.windowButtonClick = function(event) {
 
     if (index !== -1) {
         if (action.contains("exit-button")) {
+            //remove from "running-apps"
+            var windowTooltip = document.querySelector("[value='id:" + this.windows[index].id + "']");
+            windowTooltip.parentNode.removeChild(windowTooltip);
+
             //close the app
             this.windows[index].destroy();
             this.windows.splice(index, 1);
@@ -111,6 +115,17 @@ Desktop.prototype.windowButtonClick = function(event) {
             console.log("minmize");
         }
     }
+};
+
+Desktop.prototype.clearDesktop = function() {
+    for (var i = 0; i < this.windows.length; i += 1) {
+        this.windows[i].destroy();
+        //remove from "running-apps"
+        var windowTooltip = document.querySelector("[value='id:" + this.windows[i].id + "']");
+        windowTooltip.parentNode.removeChild(windowTooltip);
+    }
+    this.windows = [];
+    this.serialNumber = 0;
 };
 
 module.exports = Desktop;
