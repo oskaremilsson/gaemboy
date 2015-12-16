@@ -18,7 +18,7 @@ Desktop.prototype.init = function() {
     launch.init();
 
     document.addEventListener("mousedown", this.mouseDown.bind(this));
-    document.addEventListener("focus", function(event) {console.log(event.target);}, true);
+    document.addEventListener("keydown", this.keyDown.bind(this));
 };
 
 Desktop.prototype.mouseUp = function() {
@@ -40,13 +40,7 @@ Desktop.prototype.mouseDown = function(event) {
 
     if (element.classList.contains("window")) {
         //clicked DOM is a window - do stuff
-
-        //make sure the last active window is on top
         element.focus();
-        /*if (this.lastFocusedWindow !== element.id) {
-            element.focus();
-            this.lastFocusedWindow = element.id;
-        }*/
 
         //find the window in window-array
         for (var i = 0; i < this.windows.length; i += 1) {
@@ -133,6 +127,11 @@ Desktop.prototype.clearDesktop = function() {
     }
     this.windows = [];
     this.serialNumber = 0;
+};
+
+Desktop.prototype.keyDown = function(event) {
+    console.log(event.keyCode);
+    console.log(document.activeElement);
 };
 
 module.exports = Desktop;
