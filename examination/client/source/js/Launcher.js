@@ -114,11 +114,10 @@ Launcher.prototype.startApplication = function(event) {
 Launcher.prototype.switchToWindow = function(id) {
     var window = document.querySelector("#" + id);
     if (window) {
-        window.classList.toggle("minimized");
-
-        if (!window.classList.contains("minimized")) {
-            window.focus();
+        if (window.classList.contains("minimized")) {
+            window.classList.remove("minimized");
         }
+        window.focus();
     }
 };
 
