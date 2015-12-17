@@ -37,6 +37,10 @@ body {
 	background: #ccc;
 }
 
+.window .window-icon {
+	margin-top: 3px;
+}
+
 .window .window-title {
 	line-height: 30px;
 	position: absolute;
@@ -53,11 +57,46 @@ body {
 
 .window .window-menu a {
 	cursor: pointer;
+	font-size: 12px;
+	padding: 5px;
+}
+
+.window .window-menu a:hover {
+	background: rgba(25,121,202,0.9);
+	color: rgba(255,255,255,0.9);
 }
 
 .window .window-content {
 	height: 100%;
+	position: relative;
 	background: black;
+}
+
+.window .settings-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(255,255,255,0.7);
+	z-index: 999;
+}
+
+.window .settings {
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
+}
+
+.window .settings-form {
+	text-align: center;
+	display: block;
+	padding: 10px;
+	padding-top: 15px;
+	background: rgba(0,0,0,0.7);
+	margin-top: 50%;
+	border: 1px solid #f47023;
+	color: #ffffff;
 }
 
 .window .window-buttons {
@@ -168,6 +207,10 @@ body {
 	padding-bottom: 5px;
 }
 
+.tooltip-line {
+	display: inline-block;
+}
+
 .launcher li:hover .tooltip-container .tooltip, .launcher li:hover .tooltip-container .tooltip-title {
 	display: block;
 }
@@ -201,4 +244,12 @@ body {
 
 .no-pointer {
 	pointer-events: none;
+}
+
+.float-right {
+	float: right;
+}
+
+.float-left {
+	float: left;
 }

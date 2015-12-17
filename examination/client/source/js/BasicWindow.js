@@ -64,4 +64,11 @@ BasicWindow.prototype.maximize = function() {
     }
 };
 
+BasicWindow.prototype.clearContent = function() {
+    var content = this.element.querySelector(".window-content");
+    while (content.hasChildNodes()) {
+        content.removeChild(content.firstChild);
+    }
+};
+
 module.exports = BasicWindow;

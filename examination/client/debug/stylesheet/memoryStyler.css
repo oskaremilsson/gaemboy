@@ -100,3 +100,30 @@
 	margin-top: -10px;
 	transition: margin-top 0.2s ease-in;
 }
+
+.window .memory-settings {
+	width: 250px;
+	height: 200px;
+}
+
+.window .memory-gameover-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 999;
+	background: rgba(255,255,255,0.7);
+}
+
+.window .memory-gameover {
+	width: 200px;
+	margin: 0 auto;
+	margin-top: 40%;
+	text-align: center;
+	display: block;
+	padding: 10px;
+	background: rgba(0,0,0,0.7);
+	border: 1px solid #f47023;
+	color: #ffffff;
+}

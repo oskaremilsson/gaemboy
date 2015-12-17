@@ -9,7 +9,7 @@
     <template id="template-window">
         <div class="window">
             <div class="window-top">
-                <i class="material-icons md-30 window-icon no-pointer"></i><span class="window-title no-pointer"></span>
+                <i class="material-icons md-24 window-icon no-pointer"></i><span class="window-title no-pointer"></span>
                 <div class="window-buttons">
                     <span class="button exit-button"><span class="exit-cross"><i class="material-icons md-18">close</i></span></span>
                     <span class="button minimize-button"><span class="minimize-icon"><i class="material-icons md-18">remove</i></span></span>
@@ -21,7 +21,10 @@
     </template>
     <!--  -->
     <template id="template-tooltip">
-        <span class="tooltip"></span>
+        <div class="tooltip-line">
+            <span class="tooltip float-left"></span>
+            <i class="material-icons md-16 float-right">close</i>
+        </div>
     </template>
 
     <template id="template-maximize-button">
@@ -32,6 +35,35 @@
         <a class="menu-alternative"></a>
     </template>
 
+    <template id="template-settings">
+        <div class="settings-wrapper">
+            <div class="settings">
+            </div>
+        </div>
+    </template>
+
+    <template id="template-memory-settings">
+        <form class="settings-form">
+            <label>Choose board-size:
+                <select name="board-size">
+                    <option value="2x2">2x2</option>
+                    <option value="2x4">2x4</option>
+                    <option value="4x4" selected>4x4</option>
+                    <option value="4x2">4x2</option>
+                </select>
+            </label>
+            <input type="button" id="submit" value="Save" />
+        </form>
+    </template>
+
+    <template id="template-memory-gameover">
+        <div class="memory-gameover-wrapper">
+            <div class="memory-gameover">
+                <h1>You made it!</h1>
+                <h3>It took you <span class="memory-turns"></span> turns!</h3>
+            </div>
+        </div>
+    </template>
     <!-- END OF TEMPLATES -->
 </head>
 <body>
