@@ -29,7 +29,7 @@ Desktop.prototype.mouseUp = function() {
     window.removeEventListener("mousemove", this.mouseMoveFunc);
     window.removeEventListener("mouseup", this.mouseUpFunc);
     this.activeWindow.element.classList.remove("moving");
-    this.activeWindow = undefined;
+    //this.activeWindow = undefined;
 };
 
 Desktop.prototype.mouseDown = function(event) {
@@ -43,17 +43,10 @@ Desktop.prototype.mouseDown = function(event) {
 
     if (element.classList.contains("window")) {
         //clicked DOM is a window - do stuff
-        element.focus();
+        this.setFocus(element);
 
         this.zIndex += 1;
         element.style.zIndex = this.zIndex;
-
-        //find the window in window-array
-        for (var i = 0; i < this.windows.length; i += 1) {
-            if (this.windows[i].id === element.id) {
-                this.activeWindow = this.windows[i];
-            }
-        }
 
         //add the listeners to check for movement if click were in the window-top of window
         if (event.target.classList.contains("window-top")) {
@@ -158,8 +151,20 @@ Desktop.prototype.clearDesktop = function() {
 };
 
 Desktop.prototype.keyDown = function(event) {
-    console.log(event.keyCode);
-    console.log(document.activeElement);
+    if (document.activeElement.id === this.activeWindow.id) {
+        console.log("this.activeWindow has the Object for this window");
+        this.activeWindow.keyInput(event.keyCode);
+    }
+};
+
+Desktop.prototype.setFocus = function(element) {
+    element.focus();
+    //find the window in window-array
+    for (var i = 0; i < this.windows.length; i += 1) {
+        if (this.windows[i].id === element.id) {
+            this.activeWindow = this.windows[i];
+        }
+    }
 };
 
 module.exports = Desktop;

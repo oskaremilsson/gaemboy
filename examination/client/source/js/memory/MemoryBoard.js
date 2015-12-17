@@ -24,6 +24,7 @@ MemoryBoard.prototype.printCards = function() {
         for(var j = 0; j < this.x; j += 1) {
             cardDiv = document.createElement("div");
             cardDiv.classList.add("card-" + i + j, "card");
+            //cardDiv.setAttribute("tabindex", 0);
             rowDiv.appendChild(cardDiv);
         }
 

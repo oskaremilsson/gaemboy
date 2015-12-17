@@ -72,14 +72,18 @@ Game.prototype.removeEvents = function() {
 };
 
 Game.prototype.click = function(event) {
-    if (this.visibleCards.length < 2 && !event.target.classList.contains("disable")) {
-        if (event.target.classList.contains("card")) {
-            var yx = event.target.classList[0].split("-")[1];
+    this.turnCard(event.target);
+};
+
+Game.prototype.turnCard = function(element) {
+    if (this.visibleCards.length < 2 && !element.classList.contains("disable")) {
+        if (element.classList.contains("card")) {
+            var yx = element.classList[0].split("-")[1];
             var y = yx.charAt(0);
             var x = yx.charAt(1);
 
-            event.target.classList.add("img-" + this.board[y][x].imgNr);
-            event.target.classList.add("img");
+            element.classList.add("img-" + this.board[y][x].imgNr);
+            element.classList.add("img");
 
             this.visibleCards.push(this.board[y][x]);
 

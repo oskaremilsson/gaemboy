@@ -8,6 +8,7 @@ function MemoryApplication(options) {
     this.settingsOpen = false;
     this.game = undefined;
     this.boardSize = [4, 4];
+    this.markedCard = undefined;
 }
 
 MemoryApplication.prototype = Object.create(BasicWindow.prototype);
@@ -101,6 +102,118 @@ MemoryApplication.prototype.saveSettings = function() {
     var value = this.element.querySelector("select[name='board-size']").value;
     this.restart(value);
     this.settingsOpen = false;
+};
+
+MemoryApplication.prototype.keyInput = function(key) {
+    console.log("key in memory:" + key);
+    if (!this.markedCard) {
+        this.markedCard = this.element.querySelector(".card");
+        this.markedCard.classList.add("marked");
+    }
+    else {
+        //toogle the markedCard before changing markedCard
+        this.markedCard.classList.toggle("marked");
+        console.log(this.markedCard);
+        switch (key) {
+            case 39: {
+                this.keyRight();
+                break;
+            }
+            case 37: {
+                this.keyLeft();
+                break;
+            }
+            case 38: {
+                this.keyUp();
+                break;
+            }
+            case 40: {
+                this.keyDown();
+                break;
+            }
+            case 13: {
+                this.game.turnCard(this.markedCard);
+                break;
+            }
+        }
+
+        //this.markedCard = element;
+
+        //element.focus();
+        //console.log(document.activeElement);
+        //switch
+        this.markedCard.classList.toggle("marked");
+    }
+};
+
+MemoryApplication.prototype.keyRight = function() {
+    //find next card
+    if (this.markedCard.nextElementSibling) {
+        this.markedCard = this.markedCard.nextElementSibling;
+    }
+    else {
+        if (this.markedCard.parentNode.nextElementSibling) {
+            this.markedCard = this.markedCard.parentNode.nextElementSibling.firstElementChild;
+        }
+        else {
+            //restart from top
+            this.markedCard = this.element.querySelector(".card");
+        }
+    }
+};
+
+MemoryApplication.prototype.keyLeft = function() {
+    //find previous card
+    if (this.markedCard.previousElementSibling) {
+        this.markedCard = this.markedCard.previousElementSibling;
+    }
+    else {
+        if (this.markedCard.parentNode.previousElementSibling) {
+            this.markedCard = this.markedCard.parentNode.previousElementSibling.lastElementChild;
+        }
+        else {
+            //restart from bottom right
+            var rows = this.element.querySelectorAll(".row");
+            var lastRow = rows[rows.length - 1];
+            this.markedCard = lastRow.lastElementChild;
+        }
+    }
+};
+
+MemoryApplication.prototype.keyUp = function() {
+    //find next row and card
+    var row;
+    var rowY;
+
+    if (this.markedCard.parentNode.previousElementSibling) {
+        var id = this.markedCard.classList[0].slice(-2);
+        rowY = parseInt(id.charAt(0)) - 1;
+    }
+    else {
+        //begin from bottom
+        var rows = this.element.querySelectorAll(".row");
+        row = rows[rows.length - 1];
+        rowY = rows.length -1;
+    }
+    //find what x-position in the row the marked card is on
+    var cardX = this.markedCard.classList[0].slice(-1);
+    this.markedCard = this.element.querySelector(".card-" + rowY + cardX);
+};
+
+MemoryApplication.prototype.keyDown = function() {
+    //find next row and card
+    var rowY;
+
+    if (this.markedCard.parentNode.nextElementSibling) {
+        var id = this.markedCard.classList[0].slice(-2);
+        rowY = parseInt(id.charAt(0)) + 1;
+    }
+    else {
+        rowY = 0;
+    }
+    //find what x-position in the row the marked card is on
+    var cardX = this.markedCard.classList[0].slice(-1);
+    this.markedCard = this.element.querySelector(".card-" + rowY + cardX);
 };
 
 module.exports = MemoryApplication;

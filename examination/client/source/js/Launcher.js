@@ -109,7 +109,8 @@ Launcher.prototype.startApplication = function(event) {
         else {
             this.desktop.offsetY += 1;
         }
-        newApp.element.focus();
+
+        this.desktop.setFocus(newApp.element);
     }
 };
 
@@ -119,7 +120,7 @@ Launcher.prototype.switchToWindow = function(id) {
         if (window.classList.contains("minimized")) {
             window.classList.remove("minimized");
         }
-        window.focus();
+        this.desktop.setFocus(window);
         this.desktop.zIndex += 1;
         window.style.zIndex = this.desktop.zIndex;
     }

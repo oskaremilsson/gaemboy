@@ -73,4 +73,8 @@ BasicWindow.prototype.clearContent = function() {
     }
 };
 
+BasicWindow.prototype.keyInput = function(key) {
+    console.log(key);
+};
+
 module.exports = BasicWindow;
