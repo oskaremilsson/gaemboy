@@ -149,6 +149,8 @@ Desktop.prototype.clearDesktop = function() {
     }
     this.windows = [];
     this.serialNumber = 0;
+    this.offsetX = 0;
+    this.offsetY = 0;
 };
 
 Desktop.prototype.keyDown = function(event) {
