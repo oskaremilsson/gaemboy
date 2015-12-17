@@ -125,7 +125,7 @@ Launcher.prototype.addRunningApp = function(type, app) {
     //get the tooltip-container for the app and add it to the list
     console.log(type);
     var container = document.querySelector("li[value='" + type + "'] .tooltip-container");
-
+    console.log(container);
     var template = document.querySelector("#template-tooltip").content.cloneNode(true);
     template.querySelector(".tooltip").appendChild(document.createTextNode(app.title + "(" + app.id + ")"));
     template.querySelector(".tooltip").setAttribute("value", "id:" + app.id);

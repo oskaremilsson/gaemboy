@@ -201,7 +201,7 @@ body {
 }
 
 .tooltip-container {
-	overflow: visible;
+	overflow: hidden;
 	position: absolute;
 	bottom: 40px;
 	padding-bottom: 5px;
@@ -226,6 +226,7 @@ body {
 
 .tooltip-line {
 	background: rgba(0,0,0,0.5);
+	width: 100%;
 }
 
 .tooltip-title {
@@ -235,6 +236,7 @@ body {
 .tooltip-close {
 	margin-left: 0;
 	height: 20px;
+	overflow: hidden;
 }
 
 .tooltip-close:hover {
@@ -247,6 +249,12 @@ body {
 
 .tooltip:hover {
 	background: rgba(255,255,255,0.2);
+}
+
+.tooltip-line::after {
+	content: "";
+	clear: both;
+	display: block;
 }
 
 
