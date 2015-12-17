@@ -4,6 +4,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="stylesheet/styler.css">
     <link rel="stylesheet" type="text/css" href="stylesheet/memoryStyler.css">
+    <link rel="stylesheet" type="text/css" href="stylesheet/chatStyler.css">
     <title>One Badass Desktop</title>
     <!-- TEMPLATES -->
     <template id="template-window">
@@ -64,6 +65,21 @@
             </div>
         </div>
     </template>
+
+    <template id="template-chat-application">
+        <div class="chat-messages">
+            <ul>
+                <li><span class="chat-nickname">Kalle</span>: <span class="chat-message">Meddelande 1</span></li>
+                <li><span class="chat-nickname">Hans</span>: <span class="chat-message">UUID 987</span></li>
+            </ul>
+        </div>
+        <div id="chat-form">
+            <form>
+                <input type="text">
+                <input type="button" value="send">
+            </form>
+        </div>
+    </template>
     <!-- END OF TEMPLATES -->
 </head>
 <body>
@@ -83,6 +99,13 @@
                 <div class="tooltip-container">
                     <div class="tooltip-line">
                         <span class="tooltip-title">Memory</span>
+                    </div>
+                </div>
+            </li>
+            <li value="chat"><i class="material-icons md-30">chat</i>
+                <div class="tooltip-container">
+                    <div class="tooltip-line">
+                        <span class="tooltip-title">Shutapp</span>
                     </div>
                 </div>
             </li>

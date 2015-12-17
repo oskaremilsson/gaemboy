@@ -1,0 +1,10 @@
+.chat-app {
+	width: 400px;
+	height: 500px;
+}
+
+.chat-app .window-content {
+	padding-left: 10px;
+	padding-top: 10px;
+	background: rgba(255,255,255,0.8);
+}

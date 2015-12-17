@@ -1,6 +1,7 @@
 "use strict";
 var ExA = require("./ExampleApplication");
 var MemoryApplication = require("./MemoryApplication");
+var ChatApplication = require("./ChatApplication");
 
 function Launcher(desktop) {
     this.desktop = desktop;
@@ -82,6 +83,14 @@ Launcher.prototype.startApplication = function(event) {
         case "memory":
         {
             newApp = new MemoryApplication(appOptions);
+            newApp.init();
+
+            break;
+        }
+        case "chat":
+        {
+            appOptions.maximizable = true;
+            newApp = new ChatApplication(appOptions);
             newApp.init();
 
             break;
