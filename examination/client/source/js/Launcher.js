@@ -66,6 +66,7 @@ Launcher.prototype.startApplication = function(event) {
         x: marginX,
         y: marginY,
         tabIndex: this.desktop.serialNumber,
+        zIndex: this.desktop.zIndex,
         icon: icon,
         title: title
     };
@@ -99,6 +100,7 @@ Launcher.prototype.startApplication = function(event) {
         this.desktop.windows.push(newApp);
         this.addRunningApp(value, newApp);
         this.desktop.serialNumber += 1;
+        this.desktop.zIndex += 1;
         this.desktop.offsetX += 1;
 
         if (this.desktop.serialNumber % 15 === 0) {
@@ -118,6 +120,8 @@ Launcher.prototype.switchToWindow = function(id) {
             window.classList.remove("minimized");
         }
         window.focus();
+        this.desktop.zIndex += 1;
+        window.style.zIndex = this.desktop.zIndex;
     }
 };
 

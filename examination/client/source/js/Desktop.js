@@ -11,6 +11,7 @@ function Desktop() {
     this.clickX = 0;
     this.clickY = 0;
     this.serialNumber = 0;
+    this.zIndex = 0;
     this.offsetX = 1;
     this.offsetY = 1;
     this.launcher = new Launcher(this);
@@ -43,6 +44,9 @@ Desktop.prototype.mouseDown = function(event) {
     if (element.classList.contains("window")) {
         //clicked DOM is a window - do stuff
         element.focus();
+
+        this.zIndex += 1;
+        element.style.zIndex = this.zIndex;
 
         //find the window in window-array
         for (var i = 0; i < this.windows.length; i += 1) {

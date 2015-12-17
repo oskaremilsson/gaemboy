@@ -9,6 +9,7 @@ function BasicWindow(options) {
     this.title = options.title || this.id;
     this.icon = options.icon || "bug_report";
     this.maximizable = options.maximizable || false;
+    this.zIndex = options.zIndex;
 }
 
 BasicWindow.prototype.destroy = function() {
@@ -24,6 +25,7 @@ BasicWindow.prototype.print = function() {
     templateWindow.setAttribute("id", this.id);
     templateWindow.style.left = this.x + "px";
     templateWindow.style.top = this.y + "px";
+    templateWindow.style.zIndex = this.zIndex;
     templateWindow.setAttribute("tabindex", this.tabIndex);
 
     var element = document.querySelector("#main-frame");
