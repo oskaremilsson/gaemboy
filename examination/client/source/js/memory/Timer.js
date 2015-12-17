@@ -2,13 +2,11 @@
 
 /**
  * Timer constructor
- * @param element{Object}, element to print the timer to
  * @constructor
  */
-function Timer(element) {
-    this.element = element;
-    this.startTime = new Date().getTime();
-    this.interval = undefined;
+function Timer() {
+    this.startTime = undefined;
+    //this.interval = undefined;
 }
 
 /**
@@ -16,27 +14,26 @@ function Timer(element) {
  */
 Timer.prototype.start = function() {
     //call the run function on each interval
-    this.interval = setInterval(this.run.bind(this), 100);
+    //this.interval = setInterval(this.run.bind(this), 100);
+    this.startTime = new Date().getTime();
 };
 
 /**
  * Function to be executed each interval of the timer
  */
+/*
 Timer.prototype.run = function() {
     var now = new Date().getTime();
-
     //count the difference from start to now
     var diff = (now - this.startTime) / 1000;
-
-    this.print(diff.toFixed(1));
-};
+};*/
 
 /**
  * Function that stops the timer before its over
  * @returns {number}, the difference in seconds
  */
 Timer.prototype.stop = function() {
-    clearInterval(this.interval);
+    //clearInterval(this.interval);
     var now = new Date().getTime();
 
     return (now - this.startTime) / 1000;

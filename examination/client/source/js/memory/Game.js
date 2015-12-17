@@ -20,8 +20,8 @@ function Game(element, x, y) {
 
     //this.foundPile = document.querySelector("#found-pile");
 
-    //this.timer = new Timer(this.element.querySelector("h3"));
-    //this.timer.start();
+    this.timer = new Timer();
+    this.timer.start();
 
     this.totalTime = 0;
 
@@ -150,8 +150,10 @@ Game.prototype.turnBackCards = function() {
 
 Game.prototype.gameOver = function() {
     console.log("turns:" + this.turns);
+    this.totalTime = this.timer.stop();
     var template = document.querySelector("#template-memory-gameover").content.cloneNode(true);
     template.querySelector(".memory-turns").appendChild(document.createTextNode(this.turns));
+    template.querySelector(".memory-time").appendChild(document.createTextNode(this.totalTime));
 
     this.element.appendChild(template);
 };
