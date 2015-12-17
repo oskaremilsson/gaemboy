@@ -40,10 +40,19 @@ Launcher.prototype.startApplication = function(event) {
         value = element.attributes["value"].value;
 
         if (value) {
+
+            //this handles the "running-apps"-clicks. should be broken out!
             var switchTo = value.split(":");
-            if(switchTo[0] === "id") {
-                this.switchToWindow(switchTo[1]);
+            if (switchTo[0] === "id") {
+                if (element.classList.contains("tooltip-close")) {
+                    this.desktop.closeWindow(switchTo[1]);
+                }
+                else {
+                    this.switchToWindow(switchTo[1]);
+                }
             }
+            //end of running-apps handle
+
             else {
                 icon = element.querySelector("i").textContent;
                 title = element.querySelector(".tooltip-title").textContent;
@@ -95,7 +104,6 @@ Launcher.prototype.startApplication = function(event) {
 
 Launcher.prototype.switchToWindow = function(id) {
     var window = document.querySelector("#" + id);
-    console.log(window);
     if (window) {
         window.classList.toggle("minimized");
 
@@ -107,11 +115,13 @@ Launcher.prototype.switchToWindow = function(id) {
 
 Launcher.prototype.addRunningApp = function(type, app) {
     //get the tooltip-container for the app and add it to the list
+    console.log(type);
     var container = document.querySelector("li[value='" + type + "'] .tooltip-container");
 
     var template = document.querySelector("#template-tooltip").content.cloneNode(true);
     template.querySelector(".tooltip").appendChild(document.createTextNode(app.title + "(" + app.id + ")"));
     template.querySelector(".tooltip").setAttribute("value", "id:" + app.id);
+    template.querySelector(".tooltip-close").setAttribute("value", "id:" + app.id);
 
     container.appendChild(template);
 

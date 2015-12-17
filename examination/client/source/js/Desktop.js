@@ -11,11 +11,11 @@ function Desktop() {
     this.clickX = 0;
     this.clickY = 0;
     this.serialNumber = 0;
+    this.launcher = new Launcher(this);
 }
 
 Desktop.prototype.init = function() {
-    var launch = new Launcher(this);
-    launch.init();
+    this.launcher.init();
 
     document.addEventListener("mousedown", this.mouseDown.bind(this));
     document.addEventListener("keydown", this.keyDown.bind(this));
@@ -97,13 +97,7 @@ Desktop.prototype.windowButtonClick = function(event) {
 
     if (index !== -1) {
         if (action.contains("exit-button")) {
-            //remove from "running-apps"
-            var windowTooltip = document.querySelector("[value='id:" + this.windows[index].id + "']");
-            windowTooltip.parentNode.removeChild(windowTooltip);
-
-            //close the app
-            this.windows[index].destroy();
-            this.windows.splice(index, 1);
+            this.closeWindow(this.windows[index].id);
         }
         else if (action.contains("minimize-button")) {
             //minimize the app
@@ -114,6 +108,27 @@ Desktop.prototype.windowButtonClick = function(event) {
             if (this.windows[index].maximizable) {
                 this.windows[index].maximize();
             }
+        }
+    }
+};
+
+Desktop.prototype.closeWindow = function(id) {
+    var removed = false;
+    for (var i = 0; i < this.windows.length && !removed; i += 1) {
+        if (this.windows[i].id === id) {
+            //remove from "running-apps"
+            var clickedTooltip = document.querySelector("[value='id:" + this.windows[i].id + "']");
+            var container = clickedTooltip.parentNode;
+            while (!container.classList.contains("tooltip-container")) {
+                container = container.parentNode;
+            }
+
+            container.removeChild(clickedTooltip.parentNode);
+
+            //remove from window-list
+            this.windows[i].destroy();
+            this.windows.splice(i, 1);
+            removed = true;
         }
     }
 };

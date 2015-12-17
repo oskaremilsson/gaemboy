@@ -207,15 +207,16 @@ body {
 	padding-bottom: 5px;
 }
 
-.tooltip-line {
-	display: inline-block;
+.tooltip-close {
+	display: none;
 }
 
-.launcher li:hover .tooltip-container .tooltip, .launcher li:hover .tooltip-container .tooltip-title {
+.launcher li:hover .tooltip-container .tooltip, .launcher li:hover .tooltip-container .tooltip-title,
+.launcher li:hover .tooltip-container .tooltip-close {
 	display: block;
 }
 
-.tooltip, .tooltip-title{
+.tooltip, .tooltip-title, .tooltip-close {
 	display: none;
 	background: rgba(0,0,0,0.5);
 	margin-left: 2px;
@@ -226,6 +227,15 @@ body {
 
 .tooltip-title {
 	border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+
+.tooltip-close {
+	margin-left: 0;
+	height: 20px;
+}
+
+.tooltip-close:hover {
+	background: rgba(232,17,35,0.8);
 }
 
 .tooltip-title:hover {
