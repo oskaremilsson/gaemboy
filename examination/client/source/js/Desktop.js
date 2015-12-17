@@ -11,6 +11,8 @@ function Desktop() {
     this.clickX = 0;
     this.clickY = 0;
     this.serialNumber = 0;
+    this.offsetX = 1;
+    this.offsetY = 1;
     this.launcher = new Launcher(this);
 }
 

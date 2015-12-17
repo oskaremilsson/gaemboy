@@ -24,7 +24,8 @@ Launcher.prototype.startApplication = function(event) {
     var icon;
     var title;
     var newApp = false;
-    var margin = 10 * (this.desktop.serialNumber + 1);
+    var marginX = 10 * (this.desktop.offsetX);
+    var marginY = 10 * (this.desktop.offsetY);
 
     console.log(event.target);
     var element;
@@ -62,8 +63,8 @@ Launcher.prototype.startApplication = function(event) {
 
     var appOptions = {
         id: "win-" + this.desktop.serialNumber,
-        x: margin,
-        y: margin,
+        x: marginX,
+        y: marginY,
         tabIndex: this.desktop.serialNumber,
         icon: icon,
         title: title
@@ -98,6 +99,14 @@ Launcher.prototype.startApplication = function(event) {
         this.desktop.windows.push(newApp);
         this.addRunningApp(value, newApp);
         this.desktop.serialNumber += 1;
+        this.desktop.offsetX += 1;
+
+        if (this.desktop.serialNumber % 15 === 0) {
+            this.desktop.offsetY = 1;
+        }
+        else {
+            this.desktop.offsetY += 1;
+        }
         newApp.element.focus();
     }
 };
