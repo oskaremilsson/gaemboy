@@ -138,7 +138,12 @@ Desktop.prototype.clearDesktop = function() {
         this.windows[i].destroy();
         //remove from "running-apps"
         var windowTooltip = document.querySelector("[value='id:" + this.windows[i].id + "']");
-        windowTooltip.parentNode.removeChild(windowTooltip);
+        var container = windowTooltip.parentNode;
+        while (!container.classList.contains("tooltip-container")) {
+            container = container.parentNode;
+        }
+
+        container.removeChild(windowTooltip.parentNode);
     }
     this.windows = [];
     this.serialNumber = 0;

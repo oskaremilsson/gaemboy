@@ -218,11 +218,14 @@ body {
 
 .tooltip, .tooltip-title, .tooltip-close {
 	display: none;
-	background: rgba(0,0,0,0.5);
 	margin-left: 2px;
 	padding: 5px;
 	z-index: 1000;
 	text-shadow: 1px 1px rgba(0,0,0,0.6);
+}
+
+.tooltip-line {
+	background: rgba(0,0,0,0.5);
 }
 
 .tooltip-title {
