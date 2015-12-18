@@ -9,6 +9,9 @@ function ChatApplication(options) {
     this.username = "Kitty";
     this.server = "vhost3.lnu.se:20080/socket/";
     this.channel = "";
+
+    this.addFocusFunc = this.addFocus.bind(this);
+    this.removeFocusFunc = this.removeFocus.bind(this);
 }
 
 ChatApplication.prototype = Object.create(BasicWindow.prototype);
@@ -68,11 +71,22 @@ ChatApplication.prototype.menuClicked = function(event) {
 };
 
 ChatApplication.prototype.menuSettings = function() {
+    var i;
+    var inputList;
+
     if (!this.settingsOpen) {
         var template = document.querySelector("#template-settings").content.cloneNode(true);
         template.querySelector(".settings").classList.add("chat-settings");
 
         template = this.addSettings(template);
+
+        inputList =  template.querySelectorAll("input[type='text']");
+        console.log(inputList);
+        for (i = 0; i < inputList.length; i += 1) {
+            inputList[i].addEventListener("focus", this.addFocusFunc);
+            inputList[i].addEventListener("focusout", this.removeFocusFunc);
+        }
+
         this.element.querySelector(".window-content").appendChild(template);
         this.settingsOpen = true;
     }
@@ -114,6 +128,18 @@ ChatApplication.prototype.saveSettings = function() {
     this.chat = new Chat(this.element, this.server, this.channel, this.username);
     this.chat.init();
     this.settingsOpen = false;
+};
+
+ChatApplication.prototype.addFocus = function() {
+    if (!this.element.classList.contains("focused-window")) {
+        this.element.classList.add("focused-window");
+    }
+};
+
+ChatApplication.prototype.removeFocus = function() {
+    if (this.element.classList.contains("focused-window")) {
+        this.element.classList.remove("focused-window");
+    }
 };
 
 module.exports = ChatApplication;

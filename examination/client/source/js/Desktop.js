@@ -41,7 +41,6 @@ Desktop.prototype.mouseDown = function(event) {
         }
     }
 
-    console.log(element);
     if (element.classList.contains("window")) {
         //clicked DOM is a window - do stuff
         if (parseInt(element.style.zIndex) !== this.zIndex) {
