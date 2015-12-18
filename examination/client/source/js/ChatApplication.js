@@ -12,6 +12,7 @@ function ChatApplication(options) {
 
     this.addFocusFunc = this.addFocus.bind(this);
     this.removeFocusFunc = this.removeFocus.bind(this);
+    this.setFocusFunc = this.setFocus.bind(this);
 }
 
 ChatApplication.prototype = Object.create(BasicWindow.prototype);
@@ -84,7 +85,7 @@ ChatApplication.prototype.menuSettings = function() {
         template = this.addSettings(template);
 
         inputList =  template.querySelectorAll("input[type='text']");
-        console.log(inputList);
+
         for (i = 0; i < inputList.length; i += 1) {
             inputList[i].addEventListener("focus", this.addFocusFunc);
             inputList[i].addEventListener("focusout", this.removeFocusFunc);
@@ -131,11 +132,13 @@ ChatApplication.prototype.saveSettings = function() {
     this.chat = new Chat(this.element, this.server, this.channel, this.username);
     this.chat.init();
     this.settingsOpen = false;
+    this.element.focus();
 };
 
 ChatApplication.prototype.addFocus = function() {
     if (!this.element.classList.contains("focused-window")) {
         this.element.classList.add("focused-window");
+        console.log("adding focus-class");
     }
 };
 
@@ -143,6 +146,14 @@ ChatApplication.prototype.removeFocus = function() {
     if (this.element.classList.contains("focused-window")) {
         this.element.classList.remove("focused-window");
     }
+};
+
+ChatApplication.prototype.setFocus = function() {
+    console.log("set focus");
+    console.log(this.element.classList);
+    this.element.classList.remove("focused-window");
+    console.log(this.element.classList);
+    this.element.focus();
 };
 
 module.exports = ChatApplication;
