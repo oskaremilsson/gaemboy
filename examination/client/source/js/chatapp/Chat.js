@@ -3,7 +3,7 @@
 function Chat(element, server, channel) {
     this.element = element;
     this.server = server;
-    this.channel = channel || "dragonslayer_96";
+    this.channel = channel || "";
     this.socket = undefined;
     this.key = "eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd";
     this.username = "Kitty";

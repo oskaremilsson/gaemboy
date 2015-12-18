@@ -13,7 +13,7 @@ ChatApplication.prototype.constructor =  ChatApplication;
 ChatApplication.prototype.init = function(){
     this.print();
 
-    this.chat = new Chat(this.element, "vhost3.lnu.se:20080/socket/");
+    this.chat = new Chat(this.element, "vhost3.lnu.se:20080/socket/", "dragonslayer_96");
     this.chat.init();
 };
 
