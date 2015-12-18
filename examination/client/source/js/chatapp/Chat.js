@@ -18,6 +18,9 @@ Chat.prototype.init = function() {
     this.socket.addEventListener("message", this.newMessageFromServer.bind(this));
 
     this.element.querySelector(".chat-sendButton").addEventListener("click", this.formSubmit.bind(this));
+    this.element.querySelector("form").addEventListener("focusout", this.toggleFocus.bind(this));
+    this.element.querySelector(".chat-inputField").addEventListener("focus", this.toggleFocus.bind(this));
+    this.element.querySelector(".chat-sendButton").addEventListener("focus", this.toggleFocus.bind(this));
 };
 
 Chat.prototype.connectToServer = function() {
@@ -67,6 +70,10 @@ Chat.prototype.printNewMessage = function(data) {
     this.element.querySelector(".chat-message-list ul").appendChild(template);
     var container = this.element.querySelector(".chat-message-list");
     container.scrollTop = container.scrollHeight;
+};
+
+Chat.prototype.toggleFocus = function() {
+    this.element.classList.toggle("focused-window");
 };
 
 module.exports = Chat;

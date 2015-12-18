@@ -108,7 +108,7 @@ body {
 	z-index: 999;
 }
 
-.window:focus .window-top {
+.window:focus .window-top, .focused-window .window-top{
 	background: #d0e1f8;
 }
 

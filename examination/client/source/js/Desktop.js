@@ -35,12 +35,13 @@ Desktop.prototype.mouseUp = function() {
 Desktop.prototype.mouseDown = function(event) {
     var element = event.target;
     //get the clicked-windows "main-div"
-    if (element.parentNode.id) {
-        while (element.parentNode.id !== "main-frame") {
+    if (element.parentNode) {
+        while (!element.parentNode.classList.contains("main-frame")) {
             element = element.parentNode;
         }
     }
 
+    console.log(element);
     if (element.classList.contains("window")) {
         //clicked DOM is a window - do stuff
         this.setFocus(element);
@@ -92,6 +93,8 @@ Desktop.prototype.windowButtonClick = function(event) {
     }
 
     if (index !== -1) {
+        this.setFocus(this.windows[index].element);
+
         if (action.contains("exit-button")) {
             this.closeWindow(this.windows[index].id);
         }
@@ -102,7 +105,6 @@ Desktop.prototype.windowButtonClick = function(event) {
         else if (action.contains("maximize-button")) {
             //maximize the app
             if (this.windows[index].maximizable) {
-                this.setFocus(this.windows[index].element);
                 this.windows[index].maximize();
             }
         }
@@ -162,7 +164,7 @@ Desktop.prototype.setFocus = function(element) {
         if (this.windows[i].id === element.id) {
             this.activeWindow = this.windows[i];
             this.zIndex += 1;
-            this.activeWindow.element.style.zIndex = this.zIndex;
+            element.style.zIndex = this.zIndex;
         }
     }
 };
