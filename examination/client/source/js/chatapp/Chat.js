@@ -36,6 +36,20 @@ Chat.prototype.print = function() {
     //print the chat-template to this.element
     var template = document.querySelector("#template-chat-application").content.cloneNode(true);
     this.element.querySelector(".window-content").appendChild(template);
+
+    //print info
+    var info = document.querySelector("#template-window-menu-info").content.cloneNode(true);
+    var infoNode = document.createTextNode("#" + this.channel.slice(0,10) + "/" + this.username.slice(0,10));
+    info.querySelector(".menu-info").appendChild(infoNode);
+
+    var menuInfo = this.element.querySelector(".menu-info");
+    var menu = this.element.querySelector(".window-menu");
+    if (menuInfo) {
+        menu.replaceChild(info, menuInfo);
+    }
+    else {
+        menu.appendChild(info);
+    }
 };
 
 Chat.prototype.connectToServer = function() {
@@ -60,8 +74,12 @@ Chat.prototype.newMessageFromServer = function(event) {
     if (data.type === "message") {
         //add timestamp to data-object
         data.timestamp = new Date().toLocaleDateString("sv-se", this.timeStampOptions);
-        this.printNewMessage(data);
-        this.saveNewMessage(data);
+        if (data.channel) {
+            if (data.channel === this.channel) {
+                this.printNewMessage(data);
+                this.saveNewMessage(data);
+            }
+        }
     }
 };
 

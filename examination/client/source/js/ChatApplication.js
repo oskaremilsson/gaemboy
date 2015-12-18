@@ -60,11 +60,6 @@ ChatApplication.prototype.menuClicked = function(event) {
                 break;
             }
             case "clear history": {
-                /*if (this.settingsOpen) {
-                    var settings = document.querySelector(".settings-wrapper");
-                    this.element.querySelector(".window-content").removeChild(settings);
-                    this.settingsOpen = false;
-                }*/
                 this.chat.clearHistory();
                 break;
             }

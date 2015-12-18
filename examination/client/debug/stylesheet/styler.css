@@ -66,6 +66,10 @@ body {
 	color: rgba(255,255,255,0.9);
 }
 
+.window .menu-info {
+	float:right;
+}
+
 .window .window-content {
 	position: relative;
 	background: black;
