@@ -74,6 +74,12 @@ Chat.prototype.setOffline = function() {
     this.element.querySelector(".window-icon").classList.add("chat-offline");
     this.online = false;
     console.log("offline");
+
+    var data = {
+        username: "GlaDos",
+        data: "Could not connect to server... You can still read your chat history"
+    };
+    this.printNewMessage(data);
 };
 
 Chat.prototype.setOnline = function() {
