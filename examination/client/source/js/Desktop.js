@@ -45,9 +45,6 @@ Desktop.prototype.mouseDown = function(event) {
         //clicked DOM is a window - do stuff
         this.setFocus(element);
 
-        this.zIndex += 1;
-        element.style.zIndex = this.zIndex;
-
         //add the listeners to check for movement if click were in the window-top of window
         if (event.target.classList.contains("window-top")) {
             this.clickX = event.clientX - this.activeWindow.x;
@@ -105,6 +102,7 @@ Desktop.prototype.windowButtonClick = function(event) {
         else if (action.contains("maximize-button")) {
             //maximize the app
             if (this.windows[index].maximizable) {
+                this.setFocus(this.windows[index].element);
                 this.windows[index].maximize();
             }
         }
@@ -163,6 +161,8 @@ Desktop.prototype.setFocus = function(element) {
     for (var i = 0; i < this.windows.length; i += 1) {
         if (this.windows[i].id === element.id) {
             this.activeWindow = this.windows[i];
+            this.zIndex += 1;
+            this.activeWindow.element.style.zIndex = this.zIndex;
         }
     }
 };
