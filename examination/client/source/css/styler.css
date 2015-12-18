@@ -199,6 +199,10 @@ body {
 	transition: all 0.5s;
 }
 
+.launcher li:hover .launch-icon {
+	color: #f47023;
+}
+
 .tooltip-container {
 	overflow: hidden;
 	position: absolute;
@@ -217,7 +221,6 @@ body {
 
 .tooltip, .tooltip-title, .tooltip-close {
 	display: none;
-	margin-left: 2px;
 	padding: 5px;
 	z-index: 1000;
 	text-shadow: 1px 1px rgba(0,0,0,0.6);
