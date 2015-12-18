@@ -6,7 +6,7 @@ function ChatApplication(options) {
     BasicWindow.call(this, options);
     this.chat = undefined;
     this.settingsOpen = false;
-    this.username = "Kitty";
+    this.username = "Anonymous";
     this.server = "vhost3.lnu.se:20080/socket/";
     this.channel = "";
 
@@ -43,6 +43,9 @@ ChatApplication.prototype.print = function() {
 
     menu.appendChild(alt1);
     menu.appendChild(alt2);
+
+    //print the settings
+    this.menuSettings();
 };
 
 ChatApplication.prototype.destroy = function() {
