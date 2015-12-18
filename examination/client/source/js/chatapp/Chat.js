@@ -4,7 +4,7 @@ function Chat(element, server, channel, username) {
     this.element = element;
     this.server = server;
     this.channel = channel || "";
-    this.username = username || "Anon";
+    this.username = username;
     this.socket = undefined;
     this.key = "eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd";
     this.online = false;

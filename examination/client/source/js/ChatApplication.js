@@ -12,13 +12,15 @@ function ChatApplication(options) {
 
     this.addFocusFunc = this.addFocus.bind(this);
     this.removeFocusFunc = this.removeFocus.bind(this);
-    this.setFocusFunc = this.setFocus.bind(this);
 }
 
 ChatApplication.prototype = Object.create(BasicWindow.prototype);
 ChatApplication.prototype.constructor =  ChatApplication;
 
 ChatApplication.prototype.init = function(){
+    if (localStorage.getItem("username")) {
+        this.username = localStorage.getItem("username");
+    }
     this.print();
 
     this.element.querySelector(".window-menu").addEventListener("click", this.menuClicked.bind(this));
@@ -50,7 +52,9 @@ ChatApplication.prototype.print = function() {
 };
 
 ChatApplication.prototype.destroy = function() {
-    this.chat.socket.close();
+    if (this.chat) {
+        this.chat.socket.close();
+    }
     document.querySelector("#main-frame").removeChild(this.element);
 };
 
@@ -135,10 +139,14 @@ ChatApplication.prototype.saveSettings = function(event) {
 
     //start the new chat
     console.log("start 'new' chat with param");
+    if (this.username === "") {
+        this.username = "User";
+    }
     this.chat = new Chat(this.element, this.server, this.channel, this.username);
     this.chat.init();
     this.settingsOpen = false;
     this.setFocus();
+    localStorage.setItem("username", this.username);
 };
 
 ChatApplication.prototype.addFocus = function() {
@@ -155,10 +163,7 @@ ChatApplication.prototype.removeFocus = function() {
 };
 
 ChatApplication.prototype.setFocus = function() {
-    console.log("set focus");
-    console.log(this.element.classList);
     this.element.classList.remove("focused-window");
-    console.log(this.element.classList);
     this.element.focus();
 };
 
