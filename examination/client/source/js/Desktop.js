@@ -44,7 +44,9 @@ Desktop.prototype.mouseDown = function(event) {
     console.log(element);
     if (element.classList.contains("window")) {
         //clicked DOM is a window - do stuff
-        this.setFocus(element);
+        if (parseInt(element.style.zIndex) !== this.zIndex) {
+            this.setFocus(element);
+        }
 
         //add the listeners to check for movement if click were in the window-top of window
         if (event.target.classList.contains("window-top")) {
@@ -148,6 +150,7 @@ Desktop.prototype.clearDesktop = function() {
     this.serialNumber = 0;
     this.offsetX = 1;
     this.offsetY = 1;
+    this.zIndex = 0;
 };
 
 Desktop.prototype.keyDown = function(event) {
