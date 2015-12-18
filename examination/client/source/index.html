@@ -10,7 +10,7 @@
     <template id="template-window">
         <div class="window">
             <div class="window-top">
-                <i class="material-icons md-24 window-icon no-pointer"></i><span class="window-title no-pointer"></span>
+                <i class="material-icons md-24 window-icon no-pointer"></i><span class="window-title no-pointer"></span><span class="window-title-extra no-pointer"></span>
                 <div class="window-buttons">
                     <span class="button exit-button"><span class="exit-cross"><i class="material-icons md-18">close</i></span></span>
                     <span class="button minimize-button"><span class="minimize-icon"><i class="material-icons md-18">remove</i></span></span>
@@ -82,6 +82,18 @@
 
     <template id="template-chat-message-line">
         <li><span class="chat-username"><span class="chat-tooltip-time"></span></span>: <span class="chat-message"></span></li>
+    </template>
+
+    <template id="template-chat-settings">
+        <form class="settings-form">
+            <label>Username: <input type="text" name="username">
+            </label><br>
+            <label>Server: <input type="text" name="server">
+            </label><br>
+            <label>Channel: <input type="text" name="channel">
+            </label><br>
+            <label><input type="button" value="Save" /></label>
+        </form>
     </template>
     <!-- END OF TEMPLATES -->
 </head>

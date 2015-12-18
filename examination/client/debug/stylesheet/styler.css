@@ -89,12 +89,7 @@ body {
 }
 
 .window .settings-form {
-	text-align: center;
-	display: block;
-	padding: 10px;
-	padding-top: 15px;
 	background: rgba(0,0,0,0.7);
-	margin-top: 50%;
 	border: 1px solid #f47023;
 	color: #ffffff;
 }

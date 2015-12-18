@@ -1,12 +1,12 @@
 "use strict";
 
-function Chat(element, server, channel) {
+function Chat(element, server, channel, username) {
     this.element = element;
     this.server = server;
     this.channel = channel || "";
+    this.username = username;
     this.socket = undefined;
     this.key = "eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd";
-    this.username = "Kitty";
     this.online = false;
     this.messages = [];
     this.timeStampOptions = {
@@ -17,6 +17,8 @@ function Chat(element, server, channel) {
 
 Chat.prototype.init = function() {
     console.log("inits the chat");
+    this.print();
+
     this.readStoredMessages();
     this.connectToServer();
     //add listeners
@@ -28,6 +30,12 @@ Chat.prototype.init = function() {
     this.element.querySelector(".chat-inputField").addEventListener("focus", this.toggleFocus.bind(this));
     this.element.querySelector(".chat-inputField").addEventListener("input", this.checkInput.bind(this));
     this.element.querySelector(".chat-sendButton").addEventListener("focus", this.toggleFocus.bind(this));
+};
+
+Chat.prototype.print = function() {
+    //print the chat-template to this.element
+    var template = document.querySelector("#template-chat-application").content.cloneNode(true);
+    this.element.querySelector(".window-content").appendChild(template);
 };
 
 Chat.prototype.connectToServer = function() {
@@ -128,6 +136,16 @@ Chat.prototype.checkInput = function(event) {
     }
     else {
         this.element.querySelector(".chat-sendButton").setAttribute("disabled", "disabled");
+    }
+};
+
+Chat.prototype.clearHistory = function() {
+    localStorage.removeItem("chat-" + this.channel);
+    this.messages = [];
+
+    var listElement = this.element.querySelector("ul");
+    while (listElement.hasChildNodes()) {
+        listElement.removeChild(listElement.firstChild);
     }
 };
 

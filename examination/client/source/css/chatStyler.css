@@ -71,3 +71,17 @@
 	-moz-user-select: initial;
 	-ms-user-select: initial;
 }
+
+.window .chat-settings {
+	width: 300px;
+	height: 200px;
+}
+
+.window .chat-settings .settings-form {
+	text-align: right;
+	display: block;
+	padding: 10px;
+	padding-top: 15px;
+	padding-right: 20px;
+	margin-top: 10px;
+}
