@@ -46,15 +46,18 @@ Chat.prototype.newMessageFromServer = function(event) {
 Chat.prototype.formSubmit = function() {
     if (this.online) {
         var input = this.element.querySelector(".chat-inputField").value;
-        var msg = {
-            "type": "message",
-            "data": input,
-            "username": this.username,
-            "channel": this.channel,
-            "key": this.key
-        };
 
-        this.socket.send(JSON.stringify(msg));
+        if (input.length > 1) {
+            var msg = {
+                "type": "message",
+                "data": input,
+                "username": this.username,
+                "channel": this.channel,
+                "key": this.key
+            };
+
+            this.socket.send(JSON.stringify(msg));
+        }
     }
 };
 
