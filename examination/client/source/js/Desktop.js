@@ -35,7 +35,7 @@ Desktop.prototype.mouseUp = function() {
 Desktop.prototype.mouseDown = function(event) {
     var element = event.target;
     //get the clicked-windows "main-div"
-    if (element.parentNode) {
+    if (element.parentNode.classList) {
         while (!element.parentNode.classList.contains("main-frame")) {
             element = element.parentNode;
         }
