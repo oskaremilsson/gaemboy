@@ -20,6 +20,7 @@ Chat.prototype.init = function() {
     this.element.querySelector(".chat-sendButton").addEventListener("click", this.formSubmit.bind(this));
     this.element.querySelector("form").addEventListener("focusout", this.toggleFocus.bind(this));
     this.element.querySelector(".chat-inputField").addEventListener("focus", this.toggleFocus.bind(this));
+    this.element.querySelector(".chat-inputField").addEventListener("input", this.checkInput.bind(this));
     this.element.querySelector(".chat-sendButton").addEventListener("focus", this.toggleFocus.bind(this));
 };
 
@@ -47,7 +48,7 @@ Chat.prototype.formSubmit = function() {
     if (this.online) {
         var input = this.element.querySelector(".chat-inputField").value;
 
-        if (input.length > 1) {
+        if (input.length > 0) {
             var msg = {
                 "type": "message",
                 "data": input,
@@ -77,6 +78,16 @@ Chat.prototype.printNewMessage = function(data) {
 
 Chat.prototype.toggleFocus = function() {
     this.element.classList.toggle("focused-window");
+};
+
+Chat.prototype.checkInput = function(event) {
+    console.log(event.target.value);
+    if (event.target.value.length > 0) {
+        this.element.querySelector(".chat-sendButton").removeAttribute("disabled");
+    }
+    else {
+        this.element.querySelector(".chat-sendButton").setAttribute("disabled", "disabled");
+    }
 };
 
 module.exports = Chat;
