@@ -84,7 +84,7 @@ MemoryApplication.prototype.menuSettings = function() {
         this.settingsOpen = true;
     }
     else {
-        var settings = document.querySelector(".settings-wrapper");
+        var settings = this.element.querySelector(".settings-wrapper");
         this.element.querySelector(".window-content").removeChild(settings);
         this.settingsOpen = false;
     }
