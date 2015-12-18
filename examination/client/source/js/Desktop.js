@@ -50,13 +50,15 @@ Desktop.prototype.mouseDown = function(event) {
 
         //add the listeners to check for movement if click were in the window-top of window
         if (event.target.classList.contains("window-top")) {
-            this.clickX = event.clientX - this.activeWindow.x;
-            this.clickY = event.clientY - this.activeWindow.y;
-            element.classList.add("moving");
+            if (!event.target.parentNode.classList.contains("maximized")) {
+                this.clickX = event.clientX - this.activeWindow.x;
+                this.clickY = event.clientY - this.activeWindow.y;
+                element.classList.add("moving");
 
-            console.log("adding mousemove-listener");
-            window.addEventListener("mousemove", this.mouseMoveFunc);
-            window.addEventListener("mouseup", this.mouseUpFunc);
+                console.log("adding mousemove-listener");
+                window.addEventListener("mousemove", this.mouseMoveFunc);
+                window.addEventListener("mouseup", this.mouseUpFunc);
+            }
         }
     }
 

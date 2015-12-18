@@ -39,7 +39,14 @@ Chat.prototype.print = function() {
 
     //print info
     var info = document.querySelector("#template-window-menu-info").content.cloneNode(true);
-    var infoNode = document.createTextNode("#" + this.channel.slice(0,10) + "/" + this.username.slice(0,10));
+    var channelInfo = "";
+    if (this.channel === "") {
+         channelInfo = "Non-specified";
+    }
+    else {
+        channelInfo = this.channel;
+    }
+    var infoNode = document.createTextNode("#" + channelInfo.slice(0,18) + "/" + this.username.slice(0,10));
     info.querySelector(".menu-info").appendChild(infoNode);
 
     var menuInfo = this.element.querySelector(".menu-info");
@@ -55,16 +62,25 @@ Chat.prototype.print = function() {
 Chat.prototype.connectToServer = function() {
     this.element.querySelector(".window-icon").classList.remove("chat-offline");
     this.element.querySelector(".window-icon").classList.add("chat-connecting");
+
     this.socket = new WebSocket("ws://" + this.server, "charcords");
 
     this.socket.addEventListener("open", this.setOnline.bind(this));
+    this.socket.addEventListener("error", this.setOffline.bind(this));
+};
+
+Chat.prototype.setOffline = function() {
+    this.element.querySelector(".window-icon").classList.remove("chat-connecting");
+    this.element.querySelector(".window-icon").classList.add("chat-offline");
+    this.online = false;
+    console.log("offline");
 };
 
 Chat.prototype.setOnline = function() {
     //this.socket.send(JSON.stringify(this.data));
     console.log("online = true");
     this.online = true;
-    this.element.querySelector(".window-icon").classList.remove("chat-connection");
+    this.element.querySelector(".window-icon").classList.remove("chat-connecting");
     this.element.querySelector(".window-icon").classList.add("chat-online");
 };
 
@@ -74,11 +90,12 @@ Chat.prototype.newMessageFromServer = function(event) {
     if (data.type === "message") {
         //add timestamp to data-object
         data.timestamp = new Date().toLocaleDateString("sv-se", this.timeStampOptions);
-        if (data.channel) {
-            if (data.channel === this.channel) {
-                this.printNewMessage(data);
-                this.saveNewMessage(data);
-            }
+        if (!data.channel) {
+            data.channel = "";
+        }
+        if (data.channel === this.channel) {
+            this.printNewMessage(data);
+            this.saveNewMessage(data);
         }
     }
 };
@@ -105,7 +122,6 @@ Chat.prototype.formSubmit = function(event) {
 };
 
 Chat.prototype.printNewMessage = function(data) {
-    console.log(data);
     var template = document.querySelector("#template-chat-message-line").content.cloneNode(true);
     var usernameNode = document.createTextNode(data.username);
     var messageNode = document.createTextNode(data.data);

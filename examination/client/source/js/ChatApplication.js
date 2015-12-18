@@ -8,7 +8,7 @@ function ChatApplication(options) {
     this.settingsOpen = false;
     this.username = "Kitty";
     this.server = "vhost3.lnu.se:20080/socket/";
-    this.channel = "dragonslayer_96";
+    this.channel = "";
 }
 
 ChatApplication.prototype = Object.create(BasicWindow.prototype);
@@ -99,10 +99,13 @@ ChatApplication.prototype.saveSettings = function() {
     this.chat.socket.close();
 
     var form = this.element.querySelector(".settings-form");
-    console.log(this.element);
+
     this.username = form.querySelector("input[name='username']").value;
     this.server = form.querySelector("input[name='server']").value;
     this.channel = form.querySelector("input[name='channel']").value;
+
+    this.element.querySelector(".window-icon").classList.remove("chat-online", "chat-connecting", "chat-offline");
+    this.element.querySelector(".window-icon").classList.add("chat-offline");
 
     this.clearContent();
 
