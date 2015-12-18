@@ -9,6 +9,10 @@ function Chat(element, server, channel) {
     this.username = "Kitty";
     this.online = false;
     this.messages = [];
+    this.timeStampOptions = {
+        year: "numeric", month: "numeric",
+        day: "numeric", hour: "2-digit", minute: "2-digit"
+    };
 }
 
 Chat.prototype.init = function() {
@@ -45,6 +49,8 @@ Chat.prototype.newMessageFromServer = function(event) {
     console.log(event.data);
     var data = JSON.parse(event.data);
     if (data.type === "message") {
+        //add timestamp to data-object
+        data.timestamp = new Date().toLocaleDateString("sv-se", this.timeStampOptions);
         this.printNewMessage(data);
         this.saveNewMessage(data);
     }
@@ -65,6 +71,7 @@ Chat.prototype.formSubmit = function() {
 
             this.socket.send(JSON.stringify(msg));
             this.element.querySelector("form").reset();
+            this.element.querySelector(".chat-sendButton").setAttribute("disabled", "disabled");
         }
     }
 };
@@ -74,9 +81,13 @@ Chat.prototype.printNewMessage = function(data) {
     var template = document.querySelector("#template-chat-message-line").content.cloneNode(true);
     var usernameNode = document.createTextNode(data.username);
     var messageNode = document.createTextNode(data.data);
+    var timeNode = document.createTextNode(data.timestamp);
 
-    template.querySelector(".chat-nickname").appendChild(usernameNode);
+    template.querySelector(".chat-username").appendChild(usernameNode);
     template.querySelector(".chat-message").appendChild(messageNode);
+    if (data.timestamp) {
+        template.querySelector(".chat-tooltip-time").appendChild(timeNode);
+    }
 
     this.element.querySelector(".chat-message-list ul").appendChild(template);
     var container = this.element.querySelector(".chat-message-list");
@@ -86,7 +97,8 @@ Chat.prototype.printNewMessage = function(data) {
 Chat.prototype.saveNewMessage = function(data) {
     var newMsg = {
         username: data.username,
-        data: data.data
+        data: data.data,
+        timestamp: data.timestamp
     };
     this.messages.push(newMsg);
     localStorage.setItem("chat-" + this.channel, JSON.stringify(this.messages));
