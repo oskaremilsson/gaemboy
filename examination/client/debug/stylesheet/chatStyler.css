@@ -34,3 +34,15 @@
 .chat-app .chat-message-list ul li {
 	padding-top: 5px;
 }
+
+.chat-offline {
+	color: red;
+}
+
+.chat-connecting {
+	color: orange;
+}
+
+.chat-online {
+	color: green;
+}

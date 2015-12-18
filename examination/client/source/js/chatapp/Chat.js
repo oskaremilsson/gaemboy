@@ -5,14 +5,15 @@ function Chat(element, server, channel) {
     this.server = server;
     this.channel = channel || "dragonslayer_96";
     this.socket = undefined;
-    //this.data = undefined;
     this.key = "eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd";
     this.username = "Kitty";
     this.online = false;
+    this.messages = [];
 }
 
 Chat.prototype.init = function() {
     console.log("inits the chat");
+    this.readStoredMessages();
     this.connectToServer();
     //add listeners
     this.socket.addEventListener("message", this.newMessageFromServer.bind(this));
@@ -25,6 +26,8 @@ Chat.prototype.init = function() {
 };
 
 Chat.prototype.connectToServer = function() {
+    this.element.querySelector(".window-icon").classList.remove("chat-offline");
+    this.element.querySelector(".window-icon").classList.add("chat-connecting");
     this.socket = new WebSocket("ws://" + this.server, "charcords");
 
     this.socket.addEventListener("open", this.setOnline.bind(this));
@@ -34,6 +37,8 @@ Chat.prototype.setOnline = function() {
     //this.socket.send(JSON.stringify(this.data));
     console.log("online = true");
     this.online = true;
+    this.element.querySelector(".window-icon").classList.remove("chat-connection");
+    this.element.querySelector(".window-icon").classList.add("chat-online");
 };
 
 Chat.prototype.newMessageFromServer = function(event) {
@@ -41,6 +46,7 @@ Chat.prototype.newMessageFromServer = function(event) {
     var data = JSON.parse(event.data);
     if (data.type === "message") {
         this.printNewMessage(data);
+        this.saveNewMessage(data);
     }
 };
 
@@ -58,6 +64,7 @@ Chat.prototype.formSubmit = function() {
             };
 
             this.socket.send(JSON.stringify(msg));
+            this.element.querySelector("form").reset();
         }
     }
 };
@@ -74,6 +81,26 @@ Chat.prototype.printNewMessage = function(data) {
     this.element.querySelector(".chat-message-list ul").appendChild(template);
     var container = this.element.querySelector(".chat-message-list");
     container.scrollTop = container.scrollHeight;
+};
+
+Chat.prototype.saveNewMessage = function(data) {
+    var newMsg = {
+        username: data.username,
+        data: data.data
+    };
+    this.messages.push(newMsg);
+    localStorage.setItem("chat-" + this.channel, JSON.stringify(this.messages));
+};
+
+Chat.prototype.readStoredMessages = function() {
+    if (localStorage.getItem("chat-" + this.channel)) {
+        var messages = localStorage.getItem("chat-" + this.channel);
+        this.messages = JSON.parse(messages);
+
+        for (var i = 0; i < this.messages.length; i += 1) {
+            this.printNewMessage(this.messages[i]);
+        }
+    }
 };
 
 Chat.prototype.toggleFocus = function() {

@@ -20,8 +20,9 @@ ChatApplication.prototype.init = function(){
 ChatApplication.prototype.print = function() {
     BasicWindow.prototype.print.call(this);
     console.log("printing chat");
-    document.querySelector("#" + this.id).classList.add("chat-app");
-
+    //document.querySelector("#" + this.id).classList.add("chat-app");
+    this.element.classList.add("chat-app");
+    this.element.querySelector(".window-icon").classList.add("chat-offline");
     //print the chat-template to this.element
     var template = document.querySelector("#template-chat-application").content.cloneNode(true);
     this.element.querySelector(".window-content").appendChild(template);
