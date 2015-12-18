@@ -139,6 +139,10 @@ Chat.prototype.printNewMessage = function(data) {
         template.querySelector(".chat-tooltip-time").appendChild(timeNode);
     }
 
+    if (this.username === data.username) {
+        template.querySelector("li").classList.add("chat-message-is-me");
+    }
+
     this.element.querySelector(".chat-message-list ul").appendChild(template);
     var container = this.element.querySelector(".chat-message-list");
     container.scrollTop = container.scrollHeight;

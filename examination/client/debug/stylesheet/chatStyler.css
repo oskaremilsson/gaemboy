@@ -34,6 +34,7 @@
 
 .chat-app .chat-message-list ul li {
 	padding-top: 5px;
+	width: 100%;
 }
 
 .chat-offline {
@@ -64,6 +65,7 @@
 
 .chat-app .chat-username {
 	cursor: default;
+	font-weight: bold;
 }
 
 .chat-app .chat-message {
@@ -90,4 +92,9 @@
 .window .chat-settings .settings-form input[type="button"] {
 	margin-right: 5px;
 	margin-top: 10px;
+}
+
+.chat-app .chat-message-is-me {
+	text-align: right;
+	width: 50%;
 }
