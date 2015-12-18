@@ -23,6 +23,7 @@ Chat.prototype.init = function() {
     this.socket.addEventListener("message", this.newMessageFromServer.bind(this));
 
     this.element.querySelector(".chat-sendButton").addEventListener("click", this.formSubmit.bind(this));
+    this.element.querySelector("form").addEventListener("submit", this.formSubmit.bind(this));
     this.element.querySelector("form").addEventListener("focusout", this.toggleFocus.bind(this));
     this.element.querySelector(".chat-inputField").addEventListener("focus", this.toggleFocus.bind(this));
     this.element.querySelector(".chat-inputField").addEventListener("input", this.checkInput.bind(this));
@@ -56,7 +57,8 @@ Chat.prototype.newMessageFromServer = function(event) {
     }
 };
 
-Chat.prototype.formSubmit = function() {
+Chat.prototype.formSubmit = function(event) {
+    event.preventDefault();
     if (this.online) {
         var input = this.element.querySelector(".chat-inputField").value;
 

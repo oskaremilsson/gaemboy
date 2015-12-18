@@ -58,4 +58,16 @@
 
 .chat-app li .chat-username:hover .chat-tooltip-time {
 	display: block;
+	cursor: default;
+}
+
+.chat-app .chat-username {
+	cursor: default;
+}
+
+.chat-app .chat-message {
+	user-select: initial;
+	-webkit-user-select: initial;
+	-moz-user-select: initial;
+	-ms-user-select: initial;
 }
