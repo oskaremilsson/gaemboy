@@ -68,18 +68,21 @@
     </template>
 
     <template id="template-chat-application">
-        <div class="chat-messages">
+        <div class="chat-message-list">
             <ul>
                 <li><span class="chat-nickname">Kalle</span>: <span class="chat-message">Meddelande 1</span></li>
-                <li><span class="chat-nickname">Hans</span>: <span class="chat-message">UUID 987</span></li>
             </ul>
         </div>
-        <div id="chat-form">
+        <div class="chat-form">
             <form>
-                <input type="text">
-                <input type="button" value="send">
+                <input class="chat-inputField" type="text">
+                <input class="chat-sendButton" type="button" value="send">
             </form>
         </div>
+    </template>
+
+    <template id="template-chat-message-line">
+        <li><span class="chat-nickname"></span>: <span class="chat-message"></span></li>
     </template>
     <!-- END OF TEMPLATES -->
 </head>

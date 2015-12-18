@@ -13,7 +13,7 @@ ChatApplication.prototype.constructor =  ChatApplication;
 ChatApplication.prototype.init = function(){
     this.print();
 
-    this.chat = new Chat(this.element);
+    this.chat = new Chat(this.element, "vhost3.lnu.se:20080/socket/");
     this.chat.init();
 };
 
@@ -25,6 +25,11 @@ ChatApplication.prototype.print = function() {
     //print the chat-template to this.element
     var template = document.querySelector("#template-chat-application").content.cloneNode(true);
     this.element.querySelector(".window-content").appendChild(template);
+};
+
+ChatApplication.prototype.destroy = function() {
+    this.chat.socket.close();
+    document.querySelector("#main-frame").removeChild(this.element);
 };
 
 module.exports = ChatApplication;
