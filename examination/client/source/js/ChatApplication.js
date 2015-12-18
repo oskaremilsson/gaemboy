@@ -6,7 +6,7 @@ function ChatApplication(options) {
     BasicWindow.call(this, options);
     this.chat = undefined;
     this.settingsOpen = false;
-    this.username = "Anonymous";
+    this.username = "";
     this.server = "vhost3.lnu.se:20080/socket/";
     this.channel = "";
 
@@ -22,8 +22,8 @@ ChatApplication.prototype.init = function(){
     this.print();
 
     this.element.querySelector(".window-menu").addEventListener("click", this.menuClicked.bind(this));
-    this.chat = new Chat(this.element, this.server, this.channel, this.username);
-    this.chat.init();
+    //this.chat = new Chat(this.element, this.server, this.channel, this.username);
+    //this.chat.init();
 };
 
 ChatApplication.prototype.print = function() {
@@ -108,13 +108,19 @@ ChatApplication.prototype.addSettings = function(element) {
     template.querySelector("input[name='server']").setAttribute("value", this.server);
     template.querySelector("input[name='channel']").setAttribute("value", this.channel);
 
+
+    template.querySelector("input[type='button']").addEventListener("click" , this.saveSettings.bind(this));
+
+    console.log(template.querySelector("form"));
     element.querySelector(".settings").appendChild(template);
-    element.querySelector("input[type='button']").addEventListener("click" , this.saveSettings.bind(this));
     return element;
 };
 
-ChatApplication.prototype.saveSettings = function() {
-    this.chat.socket.close();
+ChatApplication.prototype.saveSettings = function(event) {
+    console.log(event);
+    if (this.chat) {
+        this.chat.socket.close();
+    }
 
     var form = this.element.querySelector(".settings-form");
 
@@ -132,7 +138,7 @@ ChatApplication.prototype.saveSettings = function() {
     this.chat = new Chat(this.element, this.server, this.channel, this.username);
     this.chat.init();
     this.settingsOpen = false;
-    this.element.focus();
+    this.setFocus();
 };
 
 ChatApplication.prototype.addFocus = function() {

@@ -1,6 +1,7 @@
 .chat-app {
 	width: 400px;
-	height: 200px;
+	/* debug height: height: 200px;*/
+	height: 500px;
 }
 
 .chat-app .window-content {
@@ -83,5 +84,10 @@
 	padding: 10px;
 	padding-top: 15px;
 	padding-right: 20px;
+	margin-top: 10px;
+}
+
+.window .chat-settings .settings-form input[type="button"] {
+	margin-right: 5px;
 	margin-top: 10px;
 }
