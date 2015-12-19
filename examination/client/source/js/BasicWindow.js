@@ -57,12 +57,14 @@ BasicWindow.prototype.maximize = function() {
         this.element.style.left = this.x + "px";
         this.element.style.top = this.y + "px";
         icon.replaceChild(document.createTextNode("crop_din"), icon.firstChild);
+        this.element.querySelector(".maximize-button").setAttribute("title", "Maximize");
     }
     else {
         this.element.classList.remove("reset-window");
         this.element.style.top = "0px";
         this.element.style.left = "0px";
         icon.replaceChild(document.createTextNode("filter_none"), icon.firstChild);
+        this.element.querySelector(".maximize-button").setAttribute("title", "Resize");
     }
 };
 
