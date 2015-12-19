@@ -131,12 +131,11 @@ Chat.prototype.printNewMessage = function(data) {
     var template = document.querySelector("#template-chat-message-line").content.cloneNode(true);
     var usernameNode = document.createTextNode(data.username);
     var messageNode = document.createTextNode(data.data);
-    var timeNode = document.createTextNode(data.timestamp);
 
     template.querySelector(".chat-username").appendChild(usernameNode);
     template.querySelector(".chat-message").appendChild(messageNode);
     if (data.timestamp) {
-        template.querySelector(".chat-tooltip-time").appendChild(timeNode);
+        template.querySelector(".chat-message-line").setAttribute("title", data.timestamp);
     }
 
     if (this.username === data.username) {
