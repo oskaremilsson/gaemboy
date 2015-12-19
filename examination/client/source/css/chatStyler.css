@@ -28,13 +28,13 @@
 }
 
 .chat-app .chat-message-list ul {
-	padding-left: 5px;
 	padding-bottom: 5px;
 }
 
 .chat-app .chat-message-list ul li {
 	padding-top: 5px;
-	width: 100%;
+	display: block;
+	word-break:break-all; /* wrap extended text*/
 }
 
 .chat-offline {
@@ -53,9 +53,13 @@
 	display: none;
 	padding: 2px;
 	margin-top: 3px;
-	float: left;
+	float: right;
 	font-size: 9px;
 	color: #333;
+}
+
+.chat-bubble-me .chat-tooltip-time {
+	float: left;
 }
 
 .chat-app li .chat-username:hover .chat-tooltip-time {
@@ -94,7 +98,27 @@
 	margin-top: 10px;
 }
 
-.chat-app .chat-message-is-me {
+.chat-app .chat-bubble-me {
 	text-align: right;
-	width: 50%;
+	width: 100%;
+}
+
+.chat-app .chat-message-line {
+	display: inline-block;
+	padding: 5px;
+	max-width: 65%;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.3)
+}
+
+.chat-app .chat-bubble .chat-message-line {
+	background: blue;
+	border-bottom-right-radius: 8px;
+	border-top-right-radius: 8px;
+}
+
+.chat-app .chat-bubble-me .chat-message-line {
+	background: red;
+	text-align: right;
+	border-bottom-left-radius: 8px;
+	border-top-left-radius: 8px;
 }

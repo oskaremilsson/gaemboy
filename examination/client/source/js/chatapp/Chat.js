@@ -140,7 +140,10 @@ Chat.prototype.printNewMessage = function(data) {
     }
 
     if (this.username === data.username) {
-        template.querySelector("li").classList.add("chat-message-is-me");
+        template.querySelector("li").classList.add("chat-bubble-me");
+    }
+    else {
+        template.querySelector("li").classList.add("chat-bubble");
     }
 
     this.element.querySelector(".chat-message-list ul").appendChild(template);
