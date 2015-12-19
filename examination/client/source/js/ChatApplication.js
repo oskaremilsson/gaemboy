@@ -71,7 +71,9 @@ ChatApplication.prototype.menuClicked = function(event) {
                 break;
             }
             case "clear history": {
-                this.chat.clearHistory();
+                if (this.chat) {
+                    this.chat.clearHistory();
+                }
                 break;
             }
         }
