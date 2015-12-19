@@ -34,7 +34,6 @@
 .chat-app .chat-message-list ul li {
 	padding-top: 5px;
 	display: block;
-	word-break:break-all; /* wrap extended text*/
 }
 
 .chat-offline {
@@ -109,17 +108,38 @@
 	text-align: left;
 	padding: 5px;
 	max-width: 65%;
-	box-shadow: 0 2px 5px rgba(0,0,0,0.3)
 }
 
 .chat-app .chat-bubble .chat-message-line {
-	background: blue;
-	border-bottom-right-radius: 8px;
-	border-top-right-radius: 8px;
+	background: #7fc2df;
+	border-radius: 8px;
+	margin-left: 3px;
 }
 
 .chat-app .chat-bubble-me .chat-message-line {
-	background: red;
-	border-bottom-left-radius: 8px;
-	border-top-left-radius: 8px;
+	background: #86e47c;
+	border-radius: 8px;
+	margin-right: 3px;
+}
+
+.chat-app .chat-bubble::after {
+	display:block;
+	content: "";
+	background: url(../image/chat-bubble-speak.png);
+	background-size: 20px 10px;
+	height: 10px;
+	width: 20px;
+	margin-top: -5px;
+}
+
+.chat-app .chat-bubble-me::after {
+	display:block;
+	content: "";
+	background: url(../image/chat-bubble-me-speak.png);
+	background-size: 20px 10px;
+	height: 10px;
+	width: 20px;
+	margin-top: -5px;
+	position: absolute;
+	right: 0;
 }
