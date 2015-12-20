@@ -204,6 +204,10 @@ body {
 	color: #f47023;
 }
 
+.launcher .tetris-icon {
+	transform: rotate(-90deg);
+}
+
 .tooltip-container {
 	overflow: hidden;
 	position: absolute;
