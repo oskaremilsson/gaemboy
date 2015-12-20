@@ -136,10 +136,9 @@ Chat.prototype.printNewMessage = function(data) {
     }
 
     var template = document.querySelector("#template-chat-message-line").content.cloneNode(true);
-    var usernameNode = document.createTextNode(data.username);
+    var usernameNode = document.createTextNode(data.username + ": ");
     var messageNode = document.createTextNode(data.data);
 
-    template.querySelector(".chat-username").appendChild(usernameNode);
     template.querySelector(".chat-message").appendChild(messageNode);
     if (data.timestamp) {
         template.querySelector(".chat-message-line").setAttribute("title", data.timestamp);
@@ -150,6 +149,7 @@ Chat.prototype.printNewMessage = function(data) {
     }
     else {
         template.querySelector("li").classList.add("chat-bubble");
+        template.querySelector(".chat-username").appendChild(usernameNode);
     }
 
     this.element.querySelector(".chat-message-list ul").appendChild(template);
