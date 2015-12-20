@@ -65,13 +65,27 @@ Desktop.prototype.mouseDown = function(event) {
 
 Desktop.prototype.mouseMove = function(event) {
     console.log("trying to move window");
-    this.activeWindow.x = event.clientX - this.clickX;
-    this.activeWindow.y = event.clientY - this.clickY;
+    var newX = event.clientX - this.clickX;
+    var newY = event.clientY - this.clickY;
+
+    console.log(this.activeWindow.element.offsetWidth);
+    var newMiddleX = newX + parseInt(this.activeWindow.element.offsetWidth) / 2;
+    var newMiddleY = newY + parseInt(this.activeWindow.element.offsetHeight) / 2;
+
+    var windowW = window.innerWidth;
+    var windowH = window.innerHeight;
+
+    console.log(newMiddleX + "<" + windowW + "&&" + newMiddleX + "> 0 && " + newMiddleY + "<" + windowH + "&&" + newY + "> 0");
+
+    if (newMiddleX < windowW && newMiddleX > 0 && newMiddleY < windowH && newY > 0) {
+        this.activeWindow.x = event.clientX - this.clickX;
+        this.activeWindow.y = event.clientY - this.clickY;
 
 
-    this.activeWindow.element.classList.remove("reset-window");
-    this.activeWindow.element.style.left = this.activeWindow.x + "px";
-    this.activeWindow.element.style.top = this.activeWindow.y + "px";
+        this.activeWindow.element.classList.remove("reset-window");
+        this.activeWindow.element.style.left = this.activeWindow.x + "px";
+        this.activeWindow.element.style.top = this.activeWindow.y + "px";
+    }
 };
 
 Desktop.prototype.windowButtonClick = function(event) {

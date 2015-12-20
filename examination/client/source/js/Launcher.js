@@ -119,6 +119,37 @@ Launcher.prototype.startApplication = function(event) {
         }
 
         this.desktop.setFocus(newApp.element);
+        this.checkBounds(newApp);
+    }
+};
+
+Launcher.prototype.checkBounds = function(app) {
+    var windowW = window.innerWidth;
+    var windowH = window.innerHeight;
+
+    console.log(app.y + "+" + parseInt(app.element.offsetHeight));
+    var appRight = app.x + parseInt(app.element.offsetWidth);
+    var appBottom = app.y + parseInt(app.element.offsetHeight);
+
+    console.log(windowW + "," + windowH);
+
+    //check if the app-window is out of bounds and get it into bounds
+    if (appRight > windowW || app.x < 0) {
+        console.log("out of x bounds. fixing");
+        //reset the offset
+        this.desktop.offsetX = 1;
+
+        //set new positions
+        app.x = 10 * (this.desktop.offsetX);
+        app.element.style.left = app.x + "px";
+    }
+    else if (appBottom > windowH || app.y < 0) {
+        //reset the offset
+        this.desktop.offsetY = 1;
+
+        //set new positions
+        app.y = 10 * (this.desktop.offsetY);
+        app.element.style.top = app.y + "px";
     }
 };
 
