@@ -128,6 +128,12 @@ Chat.prototype.formSubmit = function(event) {
 };
 
 Chat.prototype.printNewMessage = function(data) {
+    var container = this.element.querySelector(".chat-message-list");
+    var scrolled = false;
+    if (container.scrollTop !== (container.scrollHeight - container.offsetHeight)) {
+        scrolled = true;
+    }
+
     var template = document.querySelector("#template-chat-message-line").content.cloneNode(true);
     var usernameNode = document.createTextNode(data.username);
     var messageNode = document.createTextNode(data.data);
@@ -146,8 +152,10 @@ Chat.prototype.printNewMessage = function(data) {
     }
 
     this.element.querySelector(".chat-message-list ul").appendChild(template);
-    var container = this.element.querySelector(".chat-message-list");
-    container.scrollTop = container.scrollHeight;
+
+    if (!scrolled) {
+        container.scrollTop = container.scrollHeight;
+    }
 };
 
 Chat.prototype.saveNewMessage = function(data) {
