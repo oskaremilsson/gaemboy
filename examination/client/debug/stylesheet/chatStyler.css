@@ -32,9 +32,18 @@
 .chat-app .chat-form .chat-sendButton {
 	top: 0;
 	position: absolute;
-	width: 41px;
-	height: 43px;
+	width: 39px;
+	height: 41px;
 	margin: 2px;
+	border-radius: 50%;
+	border: 2px solid #f47023;
+	background-color: #dde6f4;
+	font-weight: bold;
+}
+
+.chat-app .chat-form .chat-sendButton:disabled {
+	border: 2px solid #cccccc;
+	font-weight: normal;
 }
 
 .chat-app .chat-message-list {
