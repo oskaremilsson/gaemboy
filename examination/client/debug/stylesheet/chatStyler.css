@@ -101,6 +101,15 @@
 	-ms-user-select: initial;
 }
 
+.chat-app .chat-message a {
+	word-wrap: break-word;
+	color: #000000;
+}
+
+.chat-app .chat-message a:hover {
+	color: #c47523;
+}
+
 .window .chat-settings {
 	width: 300px;
 	height: 200px;

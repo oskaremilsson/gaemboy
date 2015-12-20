@@ -242,11 +242,13 @@ Chat.prototype.parseMessageWithLinks = function(text) {
             aTag = document.createElement("a");
             aTag.setAttribute("href", "//" + link);
             aTag.setAttribute("target", "_blank");
-            linkNode = document.createTextNode(link + " ");
+            linkNode = document.createTextNode(link);
 
             aTag.appendChild(linkNode);
+            textNode = document.createTextNode(" ");
 
             frag.appendChild(aTag);
+            frag.appendChild(textNode);
 
             link = undefined;
         }
