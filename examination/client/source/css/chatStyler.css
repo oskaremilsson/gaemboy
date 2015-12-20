@@ -103,11 +103,11 @@
 
 .chat-app .chat-message a {
 	word-wrap: break-word;
-	color: #000000;
+	color: rgba(0,0,0,1);
 }
 
 .chat-app .chat-message a:hover {
-	color: #c47523;
+	color: rgba(0,0,0,0.5);
 }
 
 .window .chat-settings {
