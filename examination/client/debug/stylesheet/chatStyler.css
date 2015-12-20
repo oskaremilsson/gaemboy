@@ -147,3 +147,10 @@
 	margin-top: -5px;
 	margin-left: calc(100% - 20px);
 }
+
+.chat-app .chat-history-separator {
+	width: 100%;
+	text-align: center;
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+	font-size: 12px;
+}

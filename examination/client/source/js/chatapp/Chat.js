@@ -178,6 +178,14 @@ Chat.prototype.readStoredMessages = function() {
         for (var i = 0; i < this.messages.length; i += 1) {
             this.printNewMessage(this.messages[i]);
         }
+
+        //add end-of-history separator
+        if (this.messages.length > 0) {
+            var separator = document.querySelector("#template-chat-history-separator").content.cloneNode(true);
+            this.element.querySelector(".chat-message-list ul").appendChild(separator);
+            var container = this.element.querySelector(".chat-message-list");
+            container.scrollTop = container.scrollHeight;
+        }
     }
 };
 
