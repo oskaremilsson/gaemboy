@@ -13,6 +13,7 @@ function Chat(element, server, channel, username) {
         year: "numeric", month: "numeric",
         day: "numeric", hour: "2-digit", minute: "2-digit"
     };
+    this.shifted = false;
 }
 
 Chat.prototype.init = function() {
@@ -29,6 +30,9 @@ Chat.prototype.init = function() {
     this.element.querySelector("form").addEventListener("focusout", this.toggleFocus.bind(this));
     this.element.querySelector(".chat-inputField").addEventListener("focus", this.toggleFocus.bind(this));
     this.element.querySelector(".chat-inputField").addEventListener("input", this.checkInput.bind(this));
+
+    //this.element.querySelector(".chat-inputField").addEventListener("keydown", this.checkKey.bind(this));
+    //this.element.querySelector(".chat-inputField").addEventListener("keyup", this.checkKey.bind(this));
     this.element.querySelector(".chat-sendButton").addEventListener("focus", this.toggleFocus.bind(this));
 };
 
@@ -107,11 +111,13 @@ Chat.prototype.newMessageFromServer = function(event) {
 };
 
 Chat.prototype.formSubmit = function(event) {
-    event.preventDefault();
+    if (event) {
+        event.preventDefault();
+    }
     if (this.online) {
         var input = this.element.querySelector(".chat-inputField").value;
 
-        if (input.length > 0) {
+        if (input.length > 1) {
             var msg = {
                 "type": "message",
                 "data": input,
@@ -121,8 +127,8 @@ Chat.prototype.formSubmit = function(event) {
             };
 
             this.socket.send(JSON.stringify(msg));
-            this.element.querySelector("form").reset();
             this.element.querySelector(".chat-sendButton").setAttribute("disabled", "disabled");
+            this.element.querySelector("form").reset();
         }
     }
 };
@@ -194,14 +200,37 @@ Chat.prototype.toggleFocus = function() {
 };
 
 Chat.prototype.checkInput = function(event) {
-    console.log(event.target.value);
-    if (event.target.value.length > 0) {
+    var input = event.target.value;
+    console.log(input.charCodeAt(input.length  -1));
+    if (input.length > 0) {
         this.element.querySelector(".chat-sendButton").removeAttribute("disabled");
     }
     else {
         this.element.querySelector(".chat-sendButton").setAttribute("disabled", "disabled");
     }
+
+    //check if the last char was enter
+    if (input.charCodeAt(input.length  -1) === 10) {
+        this.formSubmit();
+    }
+
+    if (input.charCodeAt(0) === 10) {
+        //first char is enter, reset form and disable send-button
+        this.element.querySelector("form").reset();
+        this.element.querySelector(".chat-sendButton").setAttribute("disabled", "disabled");
+    }
 };
+
+/*Chat.prototype.checkKey = function(event) {
+    if (event.keyCode === 16 && !this.shifted) {
+        console.log("shift");
+        this.shifted = true;
+    }
+    else {
+        this.shifted = false;
+        console.log(this.shifted);
+    }
+};*/
 
 Chat.prototype.clearHistory = function() {
     localStorage.removeItem("chat-" + this.channel);

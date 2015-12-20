@@ -11,20 +11,34 @@
 
 .chat-app .chat-form {
 	bottom: 3px;
-	height: 30px;
+	height: 45px;
 	width: 100%;
 	position: absolute;
-	border-top: 1px solid rgba(0,0,0,0.3);
 	background: rgba(255,255,255,0.95);
 }
 
 .chat-app .chat-form .chat-inputField {
-	width: calc(100% - 50px);
-	height: 28px;
+	resize: none;
+	width: calc(100% - 56px);
+	margin: 2px;
+	height: 37px;
+	border: 1px solid black;
+	border-radius: 5px;
+	overflow: auto;
+	padding: 2px;
+	font-size: 16px;
+}
+
+.chat-app .chat-form .chat-sendButton {
+	top: 0;
+	position: absolute;
+	width: 44px;
+	height: 43px;
+	margin: 2px;
 }
 
 .chat-app .chat-message-list {
-	height: calc(100% - 30px);
+	height: calc(100% - 45px);
 	overflow: auto;
 }
 
@@ -113,6 +127,8 @@
 	text-align: left;
 	padding: 5px;
 	max-width: 65%;
+	min-width: 12px;
+	min-height: 15px;
 }
 
 .chat-app .chat-bubble .chat-message-line {
