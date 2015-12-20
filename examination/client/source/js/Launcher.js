@@ -110,13 +110,7 @@ Launcher.prototype.startApplication = function(event) {
         this.addRunningApp(value, newApp);
         this.desktop.serialNumber += 1;
         this.desktop.offsetX += 1;
-
-        if (this.desktop.serialNumber % 15 === 0) {
-            this.desktop.offsetY = 1;
-        }
-        else {
-            this.desktop.offsetY += 1;
-        }
+        this.desktop.offsetY += 1;
 
         this.desktop.setFocus(newApp.element);
         this.checkBounds(newApp);
