@@ -130,6 +130,7 @@ Chat.prototype.formSubmit = function(event) {
 Chat.prototype.printNewMessage = function(data) {
     var container = this.element.querySelector(".chat-message-list");
     var scrolled = false;
+    //check if the user has scrolled up
     if (container.scrollTop !== (container.scrollHeight - container.offsetHeight)) {
         scrolled = true;
     }
@@ -154,6 +155,7 @@ Chat.prototype.printNewMessage = function(data) {
     this.element.querySelector(".chat-message-list ul").appendChild(template);
 
     if (!scrolled) {
+        //If user was at bottom, auto-scroll down to the new bottom
         container.scrollTop = container.scrollHeight;
     }
 };
