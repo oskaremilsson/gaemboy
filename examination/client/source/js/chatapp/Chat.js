@@ -143,7 +143,8 @@ Chat.prototype.printNewMessage = function(data) {
 
     var template = document.querySelector("#template-chat-message-line").content.cloneNode(true);
     var usernameNode = document.createTextNode(data.username + ": ");
-    var messageNode = document.createTextNode(data.data);
+    //var messageNode = document.createTextNode(data.data);
+    var messageNode = this.parseMessageWithLinks(data.data);
 
     template.querySelector(".chat-message").appendChild(messageNode);
     if (data.timestamp) {
@@ -221,16 +222,42 @@ Chat.prototype.checkInput = function(event) {
     }
 };
 
-/*Chat.prototype.checkKey = function(event) {
-    if (event.keyCode === 16 && !this.shifted) {
-        console.log("shift");
-        this.shifted = true;
+Chat.prototype.parseMessageWithLinks = function(text) {
+    var frag = document.createDocumentFragment();
+    var link;
+    var aTag;
+    var linkNode;
+    var textNode;
+    var words = text.split(" ");
+
+    for (var i = 0; i < words.length; i++) {
+        if (words[i].slice(0, 7) === "http://") {
+            link = words[i].slice(7);
+        }
+        else if(words[i].slice(0, 8) === "https://") {
+            link = words[i].slice(7);
+        }
+
+        if (link) {
+            aTag = document.createElement("a");
+            aTag.setAttribute("href", "//" + link);
+            aTag.setAttribute("target", "_blank");
+            linkNode = document.createTextNode(link + " ");
+
+            aTag.appendChild(linkNode);
+
+            frag.appendChild(aTag);
+
+            link = undefined;
+        }
+        else {
+            textNode = document.createTextNode(words[i] + " ");
+            frag.appendChild(textNode);
+        }
     }
-    else {
-        this.shifted = false;
-        console.log(this.shifted);
-    }
-};*/
+
+    return frag;
+};
 
 Chat.prototype.clearHistory = function() {
     localStorage.removeItem("chat-" + this.channel);
