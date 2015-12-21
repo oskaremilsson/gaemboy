@@ -9,3 +9,7 @@
 .tetris-app .tetris-grid-body .tetris-block-part {
 	background: red;
 }
+
+.tetris-app .tetris-grid-body .tetris-falling-block-part {
+	background: green;
+}

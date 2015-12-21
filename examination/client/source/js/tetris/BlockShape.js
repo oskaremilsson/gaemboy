@@ -7,6 +7,10 @@ function BlockShape(shapes) {
             [0, 1],
             [0, 1],
             [1, 1]
+        ],
+        [
+            [1, 0],
+            [1, 1, 1]
         ]
     ];
     this.rotation = 0;
