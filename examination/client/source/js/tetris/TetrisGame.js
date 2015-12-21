@@ -30,14 +30,20 @@ TetrisGame.prototype.fallBlock = function() {
     else {
         window.clearInterval(this.fallingBlockInterval);
         this.landFallingBlock();
-
-        //add new block (should be new function
-        this.Jblock = new BlockShape();
-        this.fallingBlock = this.Jblock;
-        this.fallingBlockInterval = window.setInterval(this.fallBlock.bind(this), 500);
+        this.dropNewBlock();
     }
 
     this.render();
+};
+
+TetrisGame.prototype.dropNewBlock = function() {
+    this.Jblock = new BlockShape();
+    this.fallingBlock = this.Jblock;
+    this.fallingBlockInterval = window.setInterval(this.fallBlock.bind(this), 500);
+
+    if (this.isCollision()) {
+        console.log("Game over");
+    }
 };
 
 TetrisGame.prototype.landFallingBlock = function() {
@@ -96,6 +102,30 @@ TetrisGame.prototype.renderFallingBlock = function() {
             }
         }
     }
+};
+
+TetrisGame.prototype.isCollision = function() {
+    var collision = false;
+
+    var shape = this.fallingBlock.shapes[this.fallingBlock.rotation];
+
+    for (var row = 0; row < shape.length; row += 1) {
+        for (var col = 0; col < shape[row].length; col += 1) {
+            if (shape[row][col] !== 0) {
+                if (row + this.fallingBlock.topLeft.row >= this.field.length) {
+                    //this block would be below the playing field
+                    collision = true;
+                }
+                //console.log(this.field[row + potentialTopLeft.row][col + potentialTopLeft.col]);
+                else if (this.field[row + this.fallingBlock.topLeft.row][col + this.fallingBlock.topLeft.col] !== 0) {
+                    //the space is taken
+                    collision = true;
+                }
+            }
+        }
+    }
+
+    return collision;
 };
 
 TetrisGame.prototype.isFallable = function() {
