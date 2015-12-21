@@ -38,12 +38,19 @@ TetrisApplication.prototype.keyInput = function(key) {
     }
     else if (key === 38) {
         //up
-        this.game.rotateFallingBlock(-1);
+        this.game.rotateFallingBlock(1);
     }
     else if (key === 40) {
         //down
         this.game.fallBlock();
     }
+};
+
+TetrisApplication.prototype.destroy = function() {
+    if (this.game.fallingBlockInterval) {
+        window.clearInterval(this.game.fallingBlockInterval);
+    }
+    document.querySelector("#main-frame").removeChild(this.element);
 };
 
 module.exports = TetrisApplication;

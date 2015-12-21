@@ -106,7 +106,7 @@ TetrisGame.prototype.isFallable = function() {
         row: this.fallingBlock.topLeft.row + 1,
         col: this.fallingBlock.topLeft.col
     };
-    console.log(this.field);
+
     for (var row = 0; row < shape.length; row += 1) {
         for (var col = 0; col < shape[row].length; col += 1) {
             if (shape[row][col] !== 0) {
@@ -129,13 +129,45 @@ TetrisGame.prototype.isFallable = function() {
 };
 
 TetrisGame.prototype.moveFallingBlock = function(dir) {
-    this.fallingBlock.topLeft.col += dir;
+    if (this.isMovable(dir)) {
+        this.fallingBlock.topLeft.col += dir;
+    }
 
     this.render();
 };
 
+TetrisGame.prototype.isMovable = function(dir) {
+    var movable = true;
+    var shape = this.fallingBlock.shapes[this.fallingBlock.rotation];
+    var potentialTopLeft = {
+            row: this.fallingBlock.topLeft.row,
+            col: this.fallingBlock.topLeft.col + dir
+        };
+
+    for (var row = 0; row < shape.length; row += 1) {
+        for (var col = 0; col < shape[row].length; col += 1) {
+            if (shape[row][col] !== 0) {
+                if (col + potentialTopLeft.col < 0) {
+                    //this block would be to the left of the playing field
+                    movable = false;
+                }
+                if (col + potentialTopLeft.col >= this.field[0].length) {
+                    //this block would be to the right of the playing field
+                    movable = false;
+                }
+                if (this.field[row + potentialTopLeft.row][col + potentialTopLeft.col] !== 0) {
+                    //the space is taken
+                    movable = false;
+                }
+            }
+        }
+    }
+
+    return movable;
+};
+
 TetrisGame.prototype.rotateFallingBlock = function(dir) {
-    var newRotation = this.fallingBlock.rotation += dir;
+    var newRotation = this.fallingBlock.rotation + dir;
     if (newRotation > 3) {
         newRotation = 0;
     }
