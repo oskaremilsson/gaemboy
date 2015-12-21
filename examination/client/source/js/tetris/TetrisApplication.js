@@ -1,5 +1,6 @@
 "use strict";
 var BasicWindow = require("../BasicWindow");
+var TetrisGame = require("./TetrisGame");
 
 function TetrisApplication(options) {
     BasicWindow.call(this, options);
@@ -13,7 +14,8 @@ TetrisApplication.prototype.constructor =  TetrisApplication;
 TetrisApplication.prototype.init = function() {
     this.print();
 
-
+    this.game = new TetrisGame(this.element);
+    this.game.init();
 };
 
 TetrisApplication.prototype.print = function() {

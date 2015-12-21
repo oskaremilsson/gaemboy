@@ -1,0 +1,11 @@
+.tetris-app .tetris-grid-body td{
+	displey:block;
+	width: 10px;
+	height: 10px;
+	border: 1px solid red;
+	background: blue;
+}
+
+.tetris-app .tetris-grid-body .tetris-block-part {
+	background: red;
+}
