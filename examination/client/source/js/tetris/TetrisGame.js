@@ -31,9 +31,30 @@ TetrisGame.prototype.fallBlock = function() {
     }
     else {
         window.clearInterval(this.fallingBlockInterval);
+        this.landFallingBlock();
+
+        //add new block (should be new function
+        this.Jblock = new BlockShape();
+        this.fallingBlock = this.Jblock;
+        this.fallingBlockInterval = window.setInterval(this.fallBlock.bind(this), 500);
     }
 
     this.render();
+};
+
+TetrisGame.prototype.landFallingBlock = function() {
+    this.clearFallingBlock();
+    var shape = this.fallingBlock.shapes[this.fallingBlock.rotation];
+
+    for (var row = 0; row < shape.length; row += 1) {
+        for (var col = 0; col < shape[row].length; col += 1) {
+            if (shape[row][col] !== 0) {
+                this.field[row + this.fallingBlock.topLeft.row][col + this.fallingBlock.topLeft.col] = shape[row][col];
+            }
+        }
+    }
+
+    console.log(this.field);
 };
 
 TetrisGame.prototype.render = function() {

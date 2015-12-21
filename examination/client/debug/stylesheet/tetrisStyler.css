@@ -6,10 +6,10 @@
 	background: blue;
 }
 
-.tetris-app .tetris-grid-body .tetris-block-part {
-	background: red;
-}
-
 .tetris-app .tetris-grid-body .tetris-falling-block-part {
 	background: green;
+}
+
+.tetris-app .tetris-grid-body .tetris-block-part {
+	background: rgba(255,0,0,0.6);
 }
