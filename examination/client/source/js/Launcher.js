@@ -2,6 +2,7 @@
 var ExA = require("./ExampleApplication");
 var MemoryApplication = require("./memory/MemoryApplication");
 var ChatApplication = require("./chatapp/ChatApplication");
+var TetrisApplication = require("./tetris/TetrisApplication");
 
 function Launcher(desktop) {
     this.desktop = desktop;
@@ -67,7 +68,9 @@ Launcher.prototype.startApplication = function(event) {
         tabIndex: this.desktop.serialNumber,
         zIndex: this.desktop.zIndex,
         icon: icon,
-        title: title
+        title: title,
+        maximizable: false,
+        keyActivated: false
     };
 
     switch (value) {
@@ -91,6 +94,14 @@ Launcher.prototype.startApplication = function(event) {
         {
             appOptions.maximizable = true;
             newApp = new ChatApplication(appOptions);
+            newApp.init();
+
+            break;
+        }
+        case "tetris":
+        {
+            appOptions.keyActivated = true;
+            newApp = new TetrisApplication(appOptions);
             newApp.init();
 
             break;
