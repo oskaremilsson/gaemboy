@@ -10,6 +10,7 @@ function TetrisGame(element) {
     this.Jblock = new BlockShape();
     this.fallingBlock = this.Jblock;
     this.field = [];
+    this.alive = true;
 
     this.fallingBlockInterval = undefined;
 }
@@ -23,7 +24,6 @@ TetrisGame.prototype.init = function() {
 };
 
 TetrisGame.prototype.fallBlock = function() {
-    console.log("fall one row");
     if (this.isFallable()) {
         this.fallingBlock.topLeft.row += 1;
     }
@@ -43,6 +43,8 @@ TetrisGame.prototype.dropNewBlock = function() {
 
     if (this.isCollision()) {
         console.log("Game over");
+        this.alive = false;
+        window.clearInterval(this.fallingBlockInterval);
     }
 };
 
@@ -57,8 +59,6 @@ TetrisGame.prototype.landFallingBlock = function() {
             }
         }
     }
-
-    console.log(this.field);
 };
 
 TetrisGame.prototype.render = function() {
@@ -262,7 +262,7 @@ TetrisGame.prototype.initField = function() {
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 1, 0, 0, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ];
 };
