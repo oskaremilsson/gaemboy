@@ -28,6 +28,22 @@ TetrisApplication.prototype.print = function() {
 
 TetrisApplication.prototype.keyInput = function(key) {
     console.log(key);
+    if (key === 37) {
+        //left
+        this.game.moveFallingBlock(-1);
+    }
+    else if (key === 39) {
+        //right
+        this.game.moveFallingBlock(1);
+    }
+    else if (key === 38) {
+        //up
+        this.game.rotateFallingBlock(-1);
+    }
+    else if (key === 40) {
+        //up
+        this.game.rotateFallingBlock(1);
+    }
 };
 
 module.exports = TetrisApplication;

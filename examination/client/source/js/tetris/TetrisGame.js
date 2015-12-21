@@ -24,8 +24,6 @@ TetrisGame.prototype.init = function() {
 
 TetrisGame.prototype.fallBlock = function() {
     console.log("fall one row");
-    this.clearFallingBlock();
-
     if (this.isFallable()) {
         this.fallingBlock.topLeft.row += 1;
     }
@@ -58,6 +56,8 @@ TetrisGame.prototype.landFallingBlock = function() {
 };
 
 TetrisGame.prototype.render = function() {
+    this.clearFallingBlock();
+
     // Change the classes to render the blocks to user
     var trs = this.element.querySelectorAll("tr");
     var tds;
@@ -126,6 +126,26 @@ TetrisGame.prototype.isFallable = function() {
     }
 
     return fallable;
+};
+
+TetrisGame.prototype.moveFallingBlock = function(dir) {
+    this.fallingBlock.topLeft.col += dir;
+
+    this.render();
+};
+
+TetrisGame.prototype.rotateFallingBlock = function(dir) {
+    var newRotation = this.fallingBlock.rotation += dir;
+    if (newRotation > 3) {
+        newRotation = 0;
+    }
+    else if (newRotation < 0) {
+        newRotation = 3;
+    }
+
+    this.fallingBlock.rotation = newRotation;
+
+    this.render();
 };
 
 TetrisGame.prototype.clearFallingBlock = function() {
