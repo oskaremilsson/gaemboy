@@ -1,7 +1,7 @@
 "use strict";
 var ExA = require("./ExampleApplication");
-var MemoryApplication = require("./MemoryApplication");
-var ChatApplication = require("./ChatApplication");
+var MemoryApplication = require("./memory/MemoryApplication");
+var ChatApplication = require("./chatapp/ChatApplication");
 
 function Launcher(desktop) {
     this.desktop = desktop;

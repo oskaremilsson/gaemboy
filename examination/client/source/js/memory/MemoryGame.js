@@ -5,7 +5,7 @@ var MemoryBoard = require("./MemoryBoard");
 var MemoryCard = require("./MemoryCard");
 var Timer = require("./Timer");
 
-function Game(element, x, y) {
+function MemoryGame(element, x, y) {
     this.element = element;
     this.x = parseInt(x);
     this.y = parseInt(y);
@@ -29,7 +29,7 @@ function Game(element, x, y) {
     this.addEvents();
 }
 
-Game.prototype.init = function() {
+MemoryGame.prototype.init = function() {
     var i = 0;
     this.board = [];
     if (this.x > this.y) {
@@ -52,7 +52,7 @@ Game.prototype.init = function() {
     }
 };
 
-Game.prototype.shuffleImages = function() {
+MemoryGame.prototype.shuffleImages = function() {
     var temp;
     var rand;
     for (var i = 0; i < this.images.length; i += 1) {
@@ -63,19 +63,19 @@ Game.prototype.shuffleImages = function() {
     }
 };
 
-Game.prototype.addEvents = function() {
+MemoryGame.prototype.addEvents = function() {
     this.element.addEventListener("click", this.clickFunc);
 };
 
-Game.prototype.removeEvents = function() {
+MemoryGame.prototype.removeEvents = function() {
     this.element.removeEventListener("click", this.clickFunc);
 };
 
-Game.prototype.click = function(event) {
+MemoryGame.prototype.click = function(event) {
     this.turnCard(event.target);
 };
 
-Game.prototype.turnCard = function(element) {
+MemoryGame.prototype.turnCard = function(element) {
     if (this.visibleCards.length < 2 && !element.classList.contains("disable")) {
         if (element.classList.contains("card")) {
             var yx = element.classList[0].split("-")[1];
@@ -97,7 +97,7 @@ Game.prototype.turnCard = function(element) {
     }
 };
 
-Game.prototype.checkIfCorrect = function() {
+MemoryGame.prototype.checkIfCorrect = function() {
     this.turns += 1;
     console.log(this.visibleCards);
     if (this.visibleCards[0].imgNr === this.visibleCards[1].imgNr) {
@@ -127,7 +127,7 @@ Game.prototype.checkIfCorrect = function() {
     }
 };
 
-Game.prototype.changePlayer = function() {
+MemoryGame.prototype.changePlayer = function() {
     if(this.activePlayer === this.nrOfPlayers - 1) {
         this.activePlayer = 0;
     }
@@ -136,7 +136,7 @@ Game.prototype.changePlayer = function() {
     }
 };
 
-Game.prototype.turnBackCards = function() {
+MemoryGame.prototype.turnBackCards = function() {
     var tempCard;
     for (var i = 0; i < this.visibleCards.length; i += 1) {
         tempCard = this.visibleCards[i];
@@ -148,7 +148,7 @@ Game.prototype.turnBackCards = function() {
     this.visibleCards = [];
 };
 
-Game.prototype.gameOver = function() {
+MemoryGame.prototype.gameOver = function() {
     console.log("turns:" + this.turns);
     this.totalTime = this.timer.stop();
     var template = document.querySelector("#template-memory-gameover").content.cloneNode(true);
@@ -158,4 +158,4 @@ Game.prototype.gameOver = function() {
     this.element.appendChild(template);
 };
 
-module.exports = Game;
+module.exports = MemoryGame;

@@ -1,6 +1,6 @@
 "use strict";
-var BasicWindow = require("./BasicWindow");
-var Chat = require("./chatapp/Chat");
+var BasicWindow = require("../BasicWindow");
+var Chat = require("./Chat");
 
 function ChatApplication(options) {
     BasicWindow.call(this, options);

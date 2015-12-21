@@ -1,6 +1,6 @@
 "use strict";
-var BasicWindow = require("./BasicWindow");
-var MemoryGame = require("./memory/Game");
+var BasicWindow = require("../BasicWindow");
+var MemoryGame = require("./MemoryGame");
 
 function MemoryApplication(options) {
     BasicWindow.call(this, options);
