@@ -41,8 +41,8 @@ TetrisApplication.prototype.keyInput = function(key) {
         this.game.rotateFallingBlock(-1);
     }
     else if (key === 40) {
-        //up
-        this.game.rotateFallingBlock(1);
+        //down
+        this.game.fallBlock();
     }
 };
 
