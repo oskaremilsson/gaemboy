@@ -170,8 +170,9 @@ Desktop.prototype.clearDesktop = function() {
 
 Desktop.prototype.keyDown = function(event) {
     if (document.activeElement.id === this.activeWindow.id) {
-        console.log("this.activeWindow has the Object for this window");
-        this.activeWindow.keyInput(event.keyCode);
+        if (this.activeWindow.keyActivated) {
+            this.activeWindow.keyInput(event.keyCode);
+        }
     }
 };
 

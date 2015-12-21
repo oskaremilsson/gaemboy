@@ -15,4 +15,8 @@ ExampleApplication.prototype.print = function() {
 
 };
 
+ExampleApplication.prototype.keyInput = function(key) {
+    console.log(key);
+};
+
 module.exports = ExampleApplication;

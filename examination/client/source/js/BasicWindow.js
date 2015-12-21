@@ -9,16 +9,15 @@ function BasicWindow(options) {
     this.title = options.title || this.id;
     this.icon = options.icon || "bug_report";
     this.maximizable = options.maximizable || false;
+    this.keyActivated = options.keyActivated || false;
     this.zIndex = options.zIndex;
 }
 
 BasicWindow.prototype.destroy = function() {
-    // TODO: implement destroy
     document.querySelector("#main-frame").removeChild(this.element);
 };
 
 BasicWindow.prototype.print = function() {
-    // TODO: implement this
     console.log("printing");
     var template  = document.querySelector("#template-window").content.cloneNode(true);
     var templateWindow = template.querySelector("div");
@@ -75,8 +74,9 @@ BasicWindow.prototype.clearContent = function() {
     }
 };
 
+/*
 BasicWindow.prototype.keyInput = function(key) {
     console.log(key);
-};
+};*/
 
 module.exports = BasicWindow;

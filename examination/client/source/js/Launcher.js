@@ -5,7 +5,6 @@ var ChatApplication = require("./chatapp/ChatApplication");
 
 function Launcher(desktop) {
     this.desktop = desktop;
-    //this.startApplication("memory");
 }
 
 Launcher.prototype.init = function() {
@@ -14,7 +13,6 @@ Launcher.prototype.init = function() {
     console.log(appList);
     for (var i = 0; i < appList.length; i += 1) {
         iTag = appList[i].querySelector("i");
-        //iTag.addEventListener("click", this.startApplication.bind(this));
         appList[i].addEventListener("click", this.startApplication.bind(this), true);
     }
 
@@ -75,6 +73,7 @@ Launcher.prototype.startApplication = function(event) {
     switch (value) {
         case "example": {
             appOptions.maximizable = true;
+            appOptions.keyActivated = true;
             newApp = new ExA(appOptions);
             newApp.print();
 
@@ -82,6 +81,7 @@ Launcher.prototype.startApplication = function(event) {
         }
         case "memory":
         {
+            appOptions.keyActivated = true;
             newApp = new MemoryApplication(appOptions);
             newApp.init();
 
