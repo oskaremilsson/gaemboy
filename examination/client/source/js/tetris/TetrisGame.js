@@ -45,7 +45,7 @@ TetrisGame.prototype.fallBlock = function() {
 };
 
 TetrisGame.prototype.dropNewBlock = function() {
-    var shape = Math.floor(Math.random()*6);
+    var shape = Math.floor(Math.random()*7);
 
     switch (shape) {
         case 0: {

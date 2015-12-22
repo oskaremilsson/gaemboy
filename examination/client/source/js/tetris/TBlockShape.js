@@ -24,7 +24,7 @@ function TBlockShape() {
     this.rotation = 0;
     this.topLeft = {
         row: 0,
-        col: 5
+        col: 4
     };
 }
 
