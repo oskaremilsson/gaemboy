@@ -11,6 +11,9 @@ function TetrisGame(element) {
     this.fallingBlock = this.Jblock;
     this.field = [];
     this.alive = true;
+    this.fullRows = [];
+    this.basePoints = 100;
+    this.points = 0;
 
     this.fallingBlockInterval = undefined;
 }
@@ -59,10 +62,20 @@ TetrisGame.prototype.landFallingBlock = function() {
             }
         }
     }
+
+    this.findFullRows();
+
+    if (this.fullRows.length > 0) {
+        this.eraseFullRows();
+        this.points += this.countRowPoints();
+        this.fullRows = [];
+        console.log(this.points);
+    }
 };
 
 TetrisGame.prototype.render = function() {
     this.clearFallingBlock();
+    this.clearField();
 
     // Change the classes to render the blocks to user
     var trs = this.element.querySelectorAll("tr");
@@ -217,9 +230,53 @@ TetrisGame.prototype.clearFallingBlock = function() {
     for (var row = 0; row < this.field.length; row += 1) {
         tds = trs[row].querySelectorAll("td");
         for (var col = 0; col < this.field[row].length; col += 1) {
-                tds[col].classList.remove("tetris-falling-block-part");
+            tds[col].classList.remove("tetris-falling-block-part");
+        }
+    }
+};
+
+TetrisGame.prototype.clearField = function() {
+    //clear field
+    var trs = this.element.querySelectorAll("tr");
+    var tds;
+    for (var row = 0; row < this.field.length; row += 1) {
+        tds = trs[row].querySelectorAll("td");
+        for (var col = 0; col < this.field[row].length; col += 1) {
+            tds[col].classList.remove("tetris-block-part");
+        }
+    }
+};
+
+TetrisGame.prototype.findFullRows = function() {
+    //find full rows
+    var full = false;
+    for (var row = 0; row < this.field.length; row += 1) {
+        for (var col = 0; col < this.field[row].length - 1; col += 1) {
+            if(this.field[row].indexOf(0) === -1) {
+                //row is full
+                full = true;
             }
         }
+        if (full) {
+            this.fullRows.push(row);
+            full = false;
+        }
+    }
+};
+
+TetrisGame.prototype.eraseFullRows = function() {
+    for (var i = 0; i < this.fullRows.length; i += 1) {
+        //remove the full row from field
+        this.field.splice(this.fullRows[i], 1);
+
+        //add a new empty on top of field
+        var newRow = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        this.field.unshift(newRow);
+    }
+};
+
+TetrisGame.prototype.countRowPoints = function() {
+    return this.basePoints + ((this.fullRows.length - 1) * this.basePoints) * 1.2;
 };
 
 TetrisGame.prototype.print = function() {
