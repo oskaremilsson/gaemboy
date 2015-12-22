@@ -1,7 +1,25 @@
+.tetris-app {
+	width: 400px;
+	height: 460px;
+}
+
+.tetris-app .window-content {
+	background: rgba(255,255,255,0.8);
+}
+
+.tetris-app table {
+	margin-left:10px;
+	margin-top: 10px;
+}
+
+.tetris-app .tetris-grid-body {
+	width: 300px;
+	height: 500px;
+}
+
 .tetris-app .tetris-grid-body td{
-	displey:block;
-	width: 10px;
-	height: 10px;
+	width: 20px;
+	height: 20px;
 	border: 1px solid red;
 	background: blue;
 }
