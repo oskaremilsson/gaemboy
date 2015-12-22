@@ -1,6 +1,6 @@
 "use strict";
 
-function BlockShape() {
+function JBlockShape() {
     this.shapes = [
         [
             [0, 1],
@@ -28,4 +28,4 @@ function BlockShape() {
     };
 }
 
-module.exports = BlockShape;
+module.exports = JBlockShape;

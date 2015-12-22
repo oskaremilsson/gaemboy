@@ -1,5 +1,11 @@
 "use strict";
-var BlockShape = require("./BlockShape");
+var JBlockShape = require("./JBlockShape");
+var LBlockShape = require("./LBlockShape");
+var SBlockShape = require("./SBlockShape");
+var ZBlockShape = require("./ZBlockShape");
+var IBlockShape = require("./IBlockShape");
+var SquareBlockShape = require("./SquareBlockShape");
+var TBlockShape = require("./TBlockShape");
 /**
  * To create this module I have read the following guide:
  * http://gamedevelopment.tutsplus.com/tutorials/implementing-tetris-collision-detection--gamedev-852
@@ -7,8 +13,7 @@ var BlockShape = require("./BlockShape");
 
 function TetrisGame(element) {
     this.element = element;
-    this.Jblock = new BlockShape();
-    this.fallingBlock = this.Jblock;
+    this.fallingBlock = undefined;
     this.field = [];
     this.alive = true;
     this.fullRows = [];
@@ -22,6 +27,7 @@ TetrisGame.prototype.init = function() {
     this.initField();
 
     this.print();
+    this.dropNewBlock();
     this.render();
     this.fallingBlockInterval = window.setInterval(this.fallBlock.bind(this), 500);
 };
@@ -40,8 +46,40 @@ TetrisGame.prototype.fallBlock = function() {
 };
 
 TetrisGame.prototype.dropNewBlock = function() {
-    this.Jblock = new BlockShape();
-    this.fallingBlock = this.Jblock;
+    var shape = Math.floor(Math.random()*6);
+    console.log(shape);
+
+    switch (shape) {
+        case 0: {
+            this.fallingBlock = new JBlockShape();
+            break;
+        }
+        case 1: {
+            this.fallingBlock = new LBlockShape();
+            break;
+        }
+        case 2: {
+            this.fallingBlock = new SBlockShape();
+            break;
+        }
+        case 3: {
+            this.fallingBlock = new ZBlockShape();
+            break;
+        }
+        case 4: {
+            this.fallingBlock = new IBlockShape();
+            break;
+        }
+        case 5: {
+            this.fallingBlock = new SquareBlockShape();
+            break;
+        }
+        case 6: {
+            this.fallingBlock = new TBlockShape();
+        break;
+        }
+    }
+
     this.fallingBlockInterval = window.setInterval(this.fallBlock.bind(this), 500);
 
     if (this.isCollision()) {
@@ -83,7 +121,7 @@ TetrisGame.prototype.render = function() {
     for (var row = 0; row < this.field.length; row += 1) {
         tds = trs[row].querySelectorAll("td");
         for (var col = 0; col < this.field[row].length; col += 1) {
-            if (this.field[row][col] === 1) {
+            if (this.field[row][col] !== 0) {
                 //should render class for block here
                 tds[col].classList.add("tetris-block-part");
             }
@@ -210,17 +248,56 @@ TetrisGame.prototype.isMovable = function(dir) {
 };
 
 TetrisGame.prototype.rotateFallingBlock = function(dir) {
-    var newRotation = this.fallingBlock.rotation + dir;
-    if (newRotation > 3) {
-        newRotation = 0;
-    }
-    else if (newRotation < 0) {
-        newRotation = 3;
+    if (this.isRotatable(dir)) {
+        var newRotation = this.fallingBlock.rotation + dir;
+        if (newRotation > 3) {
+            newRotation = 0;
+        }
+        else if (newRotation < 0) {
+            newRotation = 3;
+        }
+
+        this.fallingBlock.rotation = newRotation;
+
+        this.render();
     }
 
-    this.fallingBlock.rotation = newRotation;
+};
 
-    this.render();
+TetrisGame.prototype.isRotatable = function(dir) {
+    var rotatable = true;
+
+    var potentialRotation = this.fallingBlock.rotation + dir;
+    if (potentialRotation > 3) {
+        potentialRotation = 0;
+    }
+    else if (potentialRotation < 0) {
+        potentialRotation = 3;
+    }
+    //create potential shape
+    var potentialShape = this.fallingBlock.shapes[potentialRotation];
+
+
+    for (var row = 0; row < potentialShape.length; row += 1) {
+        for (var col = 0; col < potentialShape[row].length; col += 1) {
+            if (potentialShape[row][col] !== 0) {
+                if (col + this.fallingBlock.topLeft.col < 0) {
+                    //this block would be to the left of the playing field
+                    rotatable = false;
+                }
+                if (col + this.fallingBlock.topLeft.col >= this.field[0].length) {
+                    //this block would be to the right of the playing field
+                    rotatable = false;
+                }
+                if (this.field[row + this.fallingBlock.topLeft.row][col + this.fallingBlock.topLeft.col] !== 0) {
+                    //the space is taken
+                    rotatable = false;
+                }
+            }
+        }
+    }
+
+    return rotatable;
 };
 
 TetrisGame.prototype.clearFallingBlock = function() {
