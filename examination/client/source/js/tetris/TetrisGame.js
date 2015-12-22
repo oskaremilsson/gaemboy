@@ -29,7 +29,6 @@ TetrisGame.prototype.init = function() {
     this.print();
     this.dropNewBlock();
     this.render();
-    this.fallingBlockInterval = window.setInterval(this.fallBlock.bind(this), 500);
 };
 
 TetrisGame.prototype.fallBlock = function() {
@@ -47,7 +46,6 @@ TetrisGame.prototype.fallBlock = function() {
 
 TetrisGame.prototype.dropNewBlock = function() {
     var shape = Math.floor(Math.random()*6);
-    console.log(shape);
 
     switch (shape) {
         case 0: {
@@ -84,6 +82,7 @@ TetrisGame.prototype.dropNewBlock = function() {
 
     if (this.isCollision()) {
         console.log("Game over");
+        this.element.querySelector(".tetris-grid-body").classList.add("game-over");
         this.alive = false;
         window.clearInterval(this.fallingBlockInterval);
     }
