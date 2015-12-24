@@ -18,6 +18,8 @@ function TetrisGame(element) {
     this.alive = false;
     this.fullRows = [];
     this.basePoints = 100;
+    this.fallSpeed = 600;
+    this.rowCount = 0;
     this.points = 0;
     this.nextBlock = undefined;
 
@@ -31,6 +33,10 @@ TetrisGame.prototype.init = function() {
 
 TetrisGame.prototype.start = function() {
     this.alive = true;
+    this.points = 0;
+    this.fallSpeed = 600;
+    this.rowCount = 0;
+    this.renderPoints();
     this.element.querySelector(".tetris-grid-body").classList.remove("game-over");
     this.initField();
     this.clearField();
@@ -106,7 +112,12 @@ TetrisGame.prototype.dropNewBlock = function() {
     this.clearNextBlock();
     this.newNextBlock();
 
-    this.fallingBlockInterval = window.setInterval(this.fallBlock.bind(this), 500);
+    if (this.rowCount % 10 === 0 && this.fallSpeed > 150) {
+        this.fallSpeed -= 20;
+    }
+
+    console.log(this.fallSpeed);
+    this.fallingBlockInterval = window.setInterval(this.fallBlock.bind(this), this.fallSpeed);
 
     if (this.isCollision()) {
         console.log("Game over");
@@ -133,8 +144,9 @@ TetrisGame.prototype.landFallingBlock = function() {
     if (this.fullRows.length > 0) {
         this.eraseFullRows();
         this.points += this.countRowPoints();
+        this.rowCount += this.fullRows.length;
         this.fullRows = [];
-        console.log(this.points);
+        this.renderPoints();
     }
 };
 
@@ -157,6 +169,13 @@ TetrisGame.prototype.render = function() {
 
     this.renderFallingBlock();
     this.renderNextBlock();
+};
+
+TetrisGame.prototype.renderPoints = function() {
+    var elem = this.element.querySelector(".tetris-side-container .points");
+    var pointNode = document.createTextNode(this.points);
+
+    elem.replaceChild(pointNode, elem.firstChild);
 };
 
 TetrisGame.prototype.renderFallingBlock = function() {
@@ -199,8 +218,6 @@ TetrisGame.prototype.renderNextBlock = function() {
         for (col = 0; col < shape[row].length; col += 1) {
             if (shape[row][col] !== 0) {
                 //draw block at position corresponding to the shapes position
-                //var y = row + this.fallingBlock.topLeft.row;
-                //var x = col + this.fallingBlock.topLeft.col;
                 tds[row][col].classList.add("tetris-falling-block-part", "color-" + shape[row][col]);
             }
         }
@@ -414,7 +431,6 @@ TetrisGame.prototype.countRowPoints = function() {
 };
 
 TetrisGame.prototype.print = function() {
-    console.log("print field");
     //print the chat-template to this.element
     var template = document.querySelector("#template-tetris-application").content.cloneNode(true);
 
