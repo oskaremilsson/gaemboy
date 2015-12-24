@@ -1,6 +1,6 @@
 .tetris-app {
 	width: 400px;
-	height: 460px;
+	height: 450px;
 }
 
 .tetris-app .window-content {
@@ -8,8 +8,8 @@
 }
 
 .tetris-app table {
-	margin-left:10px;
-	margin-top: 10px;
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
 .tetris-app .tetris-grid-body {
@@ -18,42 +18,52 @@
 }
 
 .tetris-app .tetris-grid-body td{
-	width: 20px;
-	height: 20px;
-	border: 1px solid red;
+	width: 25px;
+	height: 25px;
 	background: #000000;
 }
 
 .tetris-app .tetris-grid-body .color-1 {
-	background: green;
+	background: url(../image/tetris/block-1.png);
 }
 
 .tetris-app .tetris-grid-body .color-2 {
-	background: yellow;
+	background: url(../image/tetris/block-2.png);
 }
 
 .tetris-app .tetris-grid-body .color-3 {
-	background: orange;
+	background: url(../image/tetris/block-3.png);
 }
 
 .tetris-app .tetris-grid-body .color-4 {
-	background: purple;
+	background: url(../image/tetris/block-4.png);
 }
 
 .tetris-app .tetris-grid-body .color-5 {
-	background: gray;
+	background: url(../image/tetris/block-5.png);
 }
 
 .tetris-app .tetris-grid-body .color-6 {
-	background: pink;
+	background: url(../image/tetris/block-6.png);
 }
 
 .tetris-app .tetris-grid-body .color-7 {
-	background: red;
+	background: url(../image/tetris/block-7.png);
 }
 
 .tetris-app .tetris-grid-body .tetris-block-part {
-	background: rgba(255,0,0,0.6);
+	background: url(../image/tetris/block.png);
+}
+
+.tetris-app .tetris-grid-body .color-1,
+.tetris-app .tetris-grid-body .color-2,
+.tetris-app .tetris-grid-body .color-3,
+.tetris-app .tetris-grid-body .color-4,
+.tetris-app .tetris-grid-body .color-5,
+.tetris-app .tetris-grid-body .color-6,
+.tetris-app .tetris-grid-body .color-7,
+.tetris-app .tetris-grid-body .tetris-block-part {
+	background-size: 25px 25px;
 }
 
 .tetris-app .game-over {
