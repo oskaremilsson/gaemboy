@@ -15,7 +15,7 @@ function TetrisGame(element) {
     this.element = element;
     this.fallingBlock = undefined;
     this.field = [];
-    this.alive = true;
+    this.alive = false;
     this.fullRows = [];
     this.basePoints = 100;
     this.points = 0;
@@ -27,8 +27,6 @@ TetrisGame.prototype.init = function() {
     this.initField();
 
     this.print();
-    this.dropNewBlock();
-    this.render();
 };
 
 TetrisGame.prototype.fallBlock = function() {

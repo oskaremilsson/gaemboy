@@ -48,6 +48,10 @@ TetrisApplication.prototype.keyInput = function(key) {
             this.game.fallBlockToBottom();
         }
     }
+    else {
+        this.game.alive = true;
+        this.game.dropNewBlock();
+    }
 };
 
 TetrisApplication.prototype.destroy = function() {
