@@ -102,6 +102,8 @@ TetrisGame.prototype.newNextBlock = function() {
 
 TetrisGame.prototype.dropNewBlock = function() {
     this.fallingBlock = this.nextBlock;
+
+    this.clearNextBlock();
     this.newNextBlock();
 
     this.fallingBlockInterval = window.setInterval(this.fallBlock.bind(this), 500);
@@ -141,10 +143,10 @@ TetrisGame.prototype.render = function() {
     this.clearField();
 
     // Change the classes to render the blocks to user
-    var trs = this.element.querySelectorAll("tr");
+    var trs = this.element.querySelectorAll(".tetris-grid tr");
     var tds;
     for (var row = 0; row < this.field.length; row += 1) {
-        tds = trs[row].querySelectorAll("td");
+        tds = trs[row].querySelectorAll(".tetris-grid td");
         for (var col = 0; col < this.field[row].length; col += 1) {
             if (this.field[row][col] !== 0) {
                 //should render class for block here
@@ -154,6 +156,7 @@ TetrisGame.prototype.render = function() {
     }
 
     this.renderFallingBlock();
+    this.renderNextBlock();
 };
 
 TetrisGame.prototype.renderFallingBlock = function() {
@@ -161,10 +164,10 @@ TetrisGame.prototype.renderFallingBlock = function() {
     var col;
 
     //get the nodes
-    var trs = this.element.querySelectorAll("tr");
+    var trs = this.element.querySelectorAll(".tetris-grid tr");
     var tds = [];
     for (row = 0; row < this.field.length; row += 1) {
-        tds.push(trs[row].querySelectorAll("td"));
+        tds.push(trs[row].querySelectorAll(".tetris-grid td"));
     }
 
     var shape = this.fallingBlock.shapes[this.fallingBlock.rotation];
@@ -176,6 +179,43 @@ TetrisGame.prototype.renderFallingBlock = function() {
                 var x = col + this.fallingBlock.topLeft.col;
                 tds[y][x].classList.add("tetris-falling-block-part", "color-" + shape[row][col]);
             }
+        }
+    }
+};
+
+TetrisGame.prototype.renderNextBlock = function() {
+    var row;
+    var col;
+
+    //get the nodes
+    var trs = this.element.querySelectorAll(".tetris-next-block tbody tr");
+    var tds = [];
+    for (row = 0; row < trs.length; row += 1) {
+        tds.push(trs[row].querySelectorAll("td"));
+    }
+
+    var shape = this.nextBlock.shapes[this.nextBlock.rotation];
+    for (row = 0; row < shape.length; row += 1) {
+        for (col = 0; col < shape[row].length; col += 1) {
+            if (shape[row][col] !== 0) {
+                //draw block at position corresponding to the shapes position
+                //var y = row + this.fallingBlock.topLeft.row;
+                //var x = col + this.fallingBlock.topLeft.col;
+                tds[row][col].classList.add("tetris-falling-block-part", "color-" + shape[row][col]);
+            }
+        }
+    }
+};
+
+TetrisGame.prototype.clearNextBlock = function() {
+    //clear field
+    console.log("clearing nextblock");
+    var trs = this.element.querySelectorAll(".tetris-next-block tbody tr");
+    var tds;
+    for (var row = 0; row < trs.length; row += 1) {
+        tds = trs[row].querySelectorAll("td");
+        for (var col = 0; col < tds.length; col += 1) {
+            tds[col].setAttribute("class", "");
         }
     }
 };
@@ -329,18 +369,6 @@ TetrisGame.prototype.isRotatable = function(dir) {
     return rotatable;
 };
 
-TetrisGame.prototype.clearFallingBlock = function() {
-    //clear from last falling-block
-    var trs = this.element.querySelectorAll("tr");
-    var tds;
-    for (var row = 0; row < this.field.length; row += 1) {
-        tds = trs[row].querySelectorAll("td");
-        for (var col = 0; col < this.field[row].length; col += 1) {
-            tds[col].classList.remove("tetris-falling-block-part");
-        }
-    }
-};
-
 TetrisGame.prototype.clearField = function() {
     //clear field
     var trs = this.element.querySelectorAll("tr");
@@ -348,7 +376,6 @@ TetrisGame.prototype.clearField = function() {
     for (var row = 0; row < this.field.length; row += 1) {
         tds = trs[row].querySelectorAll("td");
         for (var col = 0; col < this.field[row].length; col += 1) {
-            //tds[col].classList.remove("tetris-block-part");
             tds[col].setAttribute("class", "");
         }
     }
