@@ -32,6 +32,10 @@ TetrisGame.prototype.init = function() {
 };
 
 TetrisGame.prototype.start = function() {
+    if (this.fallingBlockInterval) {
+        window.clearInterval(this.fallingBlockInterval);
+    }
+
     this.alive = true;
     this.points = 0;
     this.fallSpeed = 600;
@@ -42,6 +46,7 @@ TetrisGame.prototype.start = function() {
     this.clearField();
     this.newNextBlock();
     this.dropNewBlock();
+    this.render();
 };
 
 TetrisGame.prototype.fallBlock = function() {
@@ -112,8 +117,8 @@ TetrisGame.prototype.dropNewBlock = function() {
     this.clearNextBlock();
     this.newNextBlock();
 
-    if (this.rowCount % 10 === 0 && this.fallSpeed > 150) {
-        this.fallSpeed -= 10;
+    if (this.rowCount % 5 === 0 && this.fallSpeed > 150) {
+        this.fallSpeed -= 20;
     }
 
     console.log(this.fallSpeed);
@@ -144,7 +149,6 @@ TetrisGame.prototype.landFallingBlock = function() {
     if (this.fullRows.length > 0) {
         this.eraseFullRows();
         this.points += this.countRowPoints();
-        this.rowCount += this.fullRows.length;
         this.fullRows = [];
         this.renderPoints();
     }
@@ -410,6 +414,7 @@ TetrisGame.prototype.findFullRows = function() {
         }
         if (full) {
             this.fullRows.push(row);
+            this.rowCount += 1;
             full = false;
         }
     }

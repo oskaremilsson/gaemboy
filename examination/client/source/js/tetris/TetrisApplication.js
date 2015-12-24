@@ -16,6 +16,8 @@ TetrisApplication.prototype.init = function() {
 
     this.game = new TetrisGame(this.element);
     this.game.init();
+
+    this.element.querySelector(".window-menu").addEventListener("click", this.menuClicked.bind(this));
 };
 
 TetrisApplication.prototype.print = function() {
@@ -24,6 +26,31 @@ TetrisApplication.prototype.print = function() {
     this.element.classList.add("tetris-app");
     this.element.querySelector("i").classList.add("tetris-icon");
 
+    //add the menu
+    var menu = this.element.querySelector(".window-menu");
+    var alt = document.querySelector("#template-window-menu-alternative").content;
+    var alt1 = alt.cloneNode(true);
+    alt1.querySelector(".menu-alternative").appendChild(document.createTextNode("New Game"));
+    menu.appendChild(alt1);
+};
+
+TetrisApplication.prototype.menuClicked = function(event) {
+    var target;
+    if (event.target.tagName.toLowerCase() === "a") {
+        target = event.target.textContent.toLowerCase();
+    }
+
+    if (target) {
+        switch (target) {
+            case "new game": {
+                if (this.game) {
+                    this.game.start();
+                }
+
+                break;
+            }
+        }
+    }
 };
 
 TetrisApplication.prototype.keyInput = function(key) {
