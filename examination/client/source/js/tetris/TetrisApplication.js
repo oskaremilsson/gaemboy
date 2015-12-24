@@ -44,6 +44,9 @@ TetrisApplication.prototype.keyInput = function(key) {
             //down
             this.game.fallBlock();
         }
+        else if (key === 32) {
+            this.game.fallBlockToBottom();
+        }
     }
 };
 

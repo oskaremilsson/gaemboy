@@ -44,37 +44,51 @@ TetrisGame.prototype.fallBlock = function() {
     this.render();
 };
 
+TetrisGame.prototype.fallBlockToBottom = function() {
+    while (this.isFallable()) {
+        this.fallingBlock.topLeft.row += 1;
+    }
+
+    this.render();
+};
+
 TetrisGame.prototype.dropNewBlock = function() {
-    var shape = Math.floor(Math.random()*7);
+    var shape = Math.floor(Math.random() * 7);
 
     switch (shape) {
         case 0: {
             this.fallingBlock = new JBlockShape();
             break;
         }
+
         case 1: {
             this.fallingBlock = new LBlockShape();
             break;
         }
+
         case 2: {
             this.fallingBlock = new SBlockShape();
             break;
         }
+
         case 3: {
             this.fallingBlock = new ZBlockShape();
             break;
         }
+
         case 4: {
             this.fallingBlock = new IBlockShape();
             break;
         }
+
         case 5: {
             this.fallingBlock = new SquareBlockShape();
             break;
         }
+
         case 6: {
             this.fallingBlock = new TBlockShape();
-        break;
+            break;
         }
     }
 
