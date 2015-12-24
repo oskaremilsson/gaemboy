@@ -15,26 +15,27 @@
 .tetris-app .tetris-grid {
 	float: left;
 	border-right: 2px solid #f47023;
+	background: url(../image/tetris/tetris_bg.jpg);
+	background-size: 250px 400px !important;
 }
 
 .tetris-app .tetris-side-container {
 	float: right;
 	width: 148px;
-	height: 450px;
+	height: 400px;
 	display: block;
-	background: #000000;
+	background: url(../image/tetris/tetris_container_bg.jpg);
 	text-align: center;
 }
 
 .tetris-app .tetris-grid-body {
-	width: 300px;
-	height: 500px;
+	width: 251px;
+	height: 400px;
 }
 
 .tetris-app .tetris-grid-body td{
 	width: 25px;
 	height: 25px;
-	background: #000000;
 }
 
 .tetris-app .tetris-next-block {
@@ -47,7 +48,6 @@
 .tetris-app .tetris-next-block td{
 	width: 25px;
 	height: 25px;
-	background: #000000;
 }
 
 .tetris-app .tetris-grid-body .color-1,
@@ -100,9 +100,11 @@
 }
 
 .tetris-app h3 {
+	margin-top: 5px;
 	color: #ffffff;
 }
 
 .tetris-app .points {
+	margin-top: 15px;
 	color: #ffffff;
 }
