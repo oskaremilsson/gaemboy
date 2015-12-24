@@ -21,11 +21,35 @@
 	width: 20px;
 	height: 20px;
 	border: 1px solid red;
-	background: blue;
+	background: #000000;
 }
 
-.tetris-app .tetris-grid-body .tetris-falling-block-part {
+.tetris-app .tetris-grid-body .color-1 {
 	background: green;
+}
+
+.tetris-app .tetris-grid-body .color-2 {
+	background: yellow;
+}
+
+.tetris-app .tetris-grid-body .color-3 {
+	background: orange;
+}
+
+.tetris-app .tetris-grid-body .color-4 {
+	background: purple;
+}
+
+.tetris-app .tetris-grid-body .color-5 {
+	background: gray;
+}
+
+.tetris-app .tetris-grid-body .color-6 {
+	background: pink;
+}
+
+.tetris-app .tetris-grid-body .color-7 {
+	background: red;
 }
 
 .tetris-app .tetris-grid-body .tetris-block-part {

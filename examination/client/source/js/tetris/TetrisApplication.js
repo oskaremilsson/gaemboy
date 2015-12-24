@@ -49,8 +49,9 @@ TetrisApplication.prototype.keyInput = function(key) {
         }
     }
     else {
-        this.game.alive = true;
-        this.game.dropNewBlock();
+        if (key === 13) {
+            this.game.start();
+        }
     }
 };
 

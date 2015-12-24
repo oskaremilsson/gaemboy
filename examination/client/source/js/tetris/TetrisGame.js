@@ -25,8 +25,15 @@ function TetrisGame(element) {
 
 TetrisGame.prototype.init = function() {
     this.initField();
-
     this.print();
+};
+
+TetrisGame.prototype.start = function() {
+    this.alive = true;
+    this.element.querySelector(".tetris-grid-body").classList.remove("game-over");
+    this.initField();
+    this.clearField();
+    this.dropNewBlock();
 };
 
 TetrisGame.prototype.fallBlock = function() {
@@ -101,7 +108,7 @@ TetrisGame.prototype.dropNewBlock = function() {
 };
 
 TetrisGame.prototype.landFallingBlock = function() {
-    this.clearFallingBlock();
+    //this.clearFallingBlock();
     var shape = this.fallingBlock.shapes[this.fallingBlock.rotation];
 
     for (var row = 0; row < shape.length; row += 1) {
@@ -123,7 +130,7 @@ TetrisGame.prototype.landFallingBlock = function() {
 };
 
 TetrisGame.prototype.render = function() {
-    this.clearFallingBlock();
+    //this.clearFallingBlock();
     this.clearField();
 
     // Change the classes to render the blocks to user
@@ -160,7 +167,7 @@ TetrisGame.prototype.renderFallingBlock = function() {
                 //draw block at position corresponding to the shapes position
                 var y = row + this.fallingBlock.topLeft.row;
                 var x = col + this.fallingBlock.topLeft.col;
-                tds[y][x].classList.add("tetris-falling-block-part");
+                tds[y][x].classList.add("tetris-falling-block-part", "color-" + shape[row][col]);
             }
         }
     }
@@ -178,6 +185,7 @@ TetrisGame.prototype.isCollision = function() {
                     //this block would be below the playing field
                     collision = true;
                 }
+
                 //console.log(this.field[row + potentialTopLeft.row][col + potentialTopLeft.col]);
                 else if (this.field[row + this.fallingBlock.topLeft.row][col + this.fallingBlock.topLeft.col] !== 0) {
                     //the space is taken
@@ -285,6 +293,7 @@ TetrisGame.prototype.isRotatable = function(dir) {
     else if (potentialRotation < 0) {
         potentialRotation = 3;
     }
+
     //create potential shape
     var potentialShape = this.fallingBlock.shapes[potentialRotation];
 
@@ -296,10 +305,12 @@ TetrisGame.prototype.isRotatable = function(dir) {
                     //this block would be to the left of the playing field
                     rotatable = false;
                 }
+
                 if (col + this.fallingBlock.topLeft.col >= this.field[0].length) {
                     //this block would be to the right of the playing field
                     rotatable = false;
                 }
+
                 if (this.field[row + this.fallingBlock.topLeft.row][col + this.fallingBlock.topLeft.col] !== 0) {
                     //the space is taken
                     rotatable = false;
@@ -330,7 +341,8 @@ TetrisGame.prototype.clearField = function() {
     for (var row = 0; row < this.field.length; row += 1) {
         tds = trs[row].querySelectorAll("td");
         for (var col = 0; col < this.field[row].length; col += 1) {
-            tds[col].classList.remove("tetris-block-part");
+            //tds[col].classList.remove("tetris-block-part");
+            tds[col].setAttribute("class", "");
         }
     }
 };
@@ -368,6 +380,7 @@ TetrisGame.prototype.countRowPoints = function() {
 };
 
 TetrisGame.prototype.print = function() {
+    console.log("print field");
     //print the chat-template to this.element
     var template = document.querySelector("#template-tetris-application").content.cloneNode(true);
 
