@@ -113,7 +113,7 @@ TetrisGame.prototype.dropNewBlock = function() {
     this.newNextBlock();
 
     if (this.rowCount % 10 === 0 && this.fallSpeed > 150) {
-        this.fallSpeed -= 20;
+        this.fallSpeed -= 10;
     }
 
     console.log(this.fallSpeed);
