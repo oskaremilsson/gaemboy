@@ -19,6 +19,7 @@ function TetrisGame(element) {
     this.fullRows = [];
     this.basePoints = 100;
     this.points = 0;
+    this.nextBlock = undefined;
 
     this.fallingBlockInterval = undefined;
 }
@@ -33,6 +34,7 @@ TetrisGame.prototype.start = function() {
     this.element.querySelector(".tetris-grid-body").classList.remove("game-over");
     this.initField();
     this.clearField();
+    this.newNextBlock();
     this.dropNewBlock();
 };
 
@@ -57,45 +59,50 @@ TetrisGame.prototype.fallBlockToBottom = function() {
     this.render();
 };
 
-TetrisGame.prototype.dropNewBlock = function() {
+TetrisGame.prototype.newNextBlock = function() {
     var shape = Math.floor(Math.random() * 7);
 
     switch (shape) {
         case 0: {
-            this.fallingBlock = new JBlockShape();
+            this.nextBlock = new JBlockShape();
             break;
         }
 
         case 1: {
-            this.fallingBlock = new LBlockShape();
+            this.nextBlock = new LBlockShape();
             break;
         }
 
         case 2: {
-            this.fallingBlock = new SBlockShape();
+            this.nextBlock = new SBlockShape();
             break;
         }
 
         case 3: {
-            this.fallingBlock = new ZBlockShape();
+            this.nextBlock = new ZBlockShape();
             break;
         }
 
         case 4: {
-            this.fallingBlock = new IBlockShape();
+            this.nextBlock = new IBlockShape();
             break;
         }
 
         case 5: {
-            this.fallingBlock = new SquareBlockShape();
+            this.nextBlock = new SquareBlockShape();
             break;
         }
 
         case 6: {
-            this.fallingBlock = new TBlockShape();
+            this.nextBlock = new TBlockShape();
             break;
         }
     }
+};
+
+TetrisGame.prototype.dropNewBlock = function() {
+    this.fallingBlock = this.nextBlock;
+    this.newNextBlock();
 
     this.fallingBlockInterval = window.setInterval(this.fallBlock.bind(this), 500);
 
