@@ -19,6 +19,7 @@ function TetrisGame(element) {
     this.fullRows = [];
     this.basePoints = 100;
     this.fallSpeed = 600;
+    this.level = 1;
     this.rowCount = 0;
     this.points = 0;
     this.nextBlock = undefined;
@@ -37,6 +38,7 @@ TetrisGame.prototype.start = function() {
     }
 
     this.alive = true;
+    this.level = 1;
     this.points = 0;
     this.fallSpeed = 600;
     this.rowCount = 0;
@@ -117,10 +119,6 @@ TetrisGame.prototype.dropNewBlock = function() {
     this.clearNextBlock();
     this.newNextBlock();
 
-    if (this.rowCount % 5 === 0 && this.fallSpeed > 150) {
-        this.fallSpeed -= 20;
-    }
-
     console.log(this.fallSpeed);
     this.fallingBlockInterval = window.setInterval(this.fallBlock.bind(this), this.fallSpeed);
 
@@ -176,10 +174,13 @@ TetrisGame.prototype.render = function() {
 };
 
 TetrisGame.prototype.renderPoints = function() {
-    var elem = this.element.querySelector(".tetris-side-container .points");
+    var pointsElem = this.element.querySelector(".tetris-side-container .points");
+    var levelElem = this.element.querySelector(".tetris-side-container .level");
     var pointNode = document.createTextNode(this.points);
+    var levelNode = document.createTextNode(this.level);
 
-    elem.replaceChild(pointNode, elem.firstChild);
+    pointsElem.replaceChild(pointNode, pointsElem.firstChild);
+    levelElem.replaceChild(levelNode, levelElem.firstChild);
 };
 
 TetrisGame.prototype.renderFallingBlock = function() {
@@ -415,6 +416,12 @@ TetrisGame.prototype.findFullRows = function() {
         if (full) {
             this.fullRows.push(row);
             this.rowCount += 1;
+
+            if (this.rowCount % 5 === 0 && this.fallSpeed > 150) {
+                this.fallSpeed -= 25;
+                this.level += 1;
+            }
+
             full = false;
         }
     }

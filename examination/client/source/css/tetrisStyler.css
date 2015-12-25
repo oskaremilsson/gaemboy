@@ -102,9 +102,19 @@
 .tetris-app h3 {
 	margin-top: 5px;
 	color: #ffffff;
+	font-family: 'Bad Script', cursive;
 }
 
 .tetris-app .points {
-	margin-top: 15px;
+	margin-top: 5px;
 	color: #ffffff;
+	text-shadow: 0 0 10px rgba(26, 0, 0, 0.61);
+	font-family: 'Lobster', cursive;
+}
+
+.tetris-app .level {
+	margin-top: 5px;
+	color: #ffffff;
+	text-shadow: 0 0 10px rgba(26, 0, 0, 0.61);
+	font-family: 'Lobster', cursive;
 }
