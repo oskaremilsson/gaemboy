@@ -85,15 +85,18 @@ You are free to add functionality not described above. Added functionality could
 * Added functionality to the "chat protocol". Discuss with others in the course and agree upon added functionality to add to the sent messages.
 * Use the messages to play memory against an opponent. Perferably using a seperate channel.
 
-My added feautures:
+My added features:
 * Send-button only clickable if text
 * Enter sends message
 * Auto-scroll to bottom when new message
 * Don't auto-scroll to bottom if you have scrolled up to read old messages
 
+#### Disclaimer
+All students working on this assignment uses the same server and can read all messages sent by you. You should at all times mind your language. The channels are monitored and abuse will not be tolerated.
+
 ## Tetris (My added application)
 
-### Feautures
+### Features
 * All the standard blocks and format
 * Play with the keyboard
 * Points scale when removing many rows with the same block
@@ -102,9 +105,6 @@ My added feautures:
 * Faster speed the more you play
 * New Game-alternative in menu
 * View next block 
-
-#### Disclaimer
-All students working on this assignment uses the same server and can read all messages sent by you. You should at all times mind your language. The channels are monitored and abuse will not be tolerated.
 
 ## Hints and recommendations
 Hints and recommendations below are only suggestions and nothing you need to abide by.
