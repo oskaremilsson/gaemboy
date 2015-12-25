@@ -105,14 +105,20 @@
 	font-family: 'Bad Script', cursive;
 }
 
-.tetris-app .points {
+.tetris-app .tetris-points {
 	margin-top: 5px;
 	color: #ffffff;
 	text-shadow: 0 0 10px rgba(26, 0, 0, 0.61);
 	font-family: 'Lobster', cursive;
 }
 
-.tetris-app .level {
+.tetris-app .new-highscore {
+	transform: scale(1.5);
+	text-shadow: 0 0 9px rgba(247, 255, 25, 0.4);
+	color: rgba(204, 255, 0, 1);
+}
+
+.tetris-app .tetris-level {
 	margin-top: 5px;
 	color: #ffffff;
 	text-shadow: 0 0 10px rgba(26, 0, 0, 0.61);

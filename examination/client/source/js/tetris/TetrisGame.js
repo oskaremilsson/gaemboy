@@ -22,6 +22,7 @@ function TetrisGame(element) {
     this.level = 1;
     this.rowCount = 0;
     this.points = 0;
+    this.highScore = 0;
     this.nextBlock = undefined;
 
     this.fallingBlockInterval = undefined;
@@ -42,13 +43,27 @@ TetrisGame.prototype.start = function() {
     this.points = 0;
     this.fallSpeed = 600;
     this.rowCount = 0;
-    this.renderPoints();
+    this.readHighScore();
     this.element.querySelector(".tetris-grid-body").classList.remove("game-over");
+    this.element.querySelector(".tetris-points").classList.remove("new-highscore");
     this.initField();
     this.clearField();
+    this.renderPoints();
     this.newNextBlock();
     this.dropNewBlock();
     this.render();
+};
+
+TetrisGame.prototype.readHighScore = function() {
+    if (localStorage.getItem("tetris-hs")) {
+        this.highScore = localStorage.getItem("tetris-hs");
+    }
+};
+
+TetrisGame.prototype.saveHighScore = function() {
+    if (this.points > this.highScore) {
+        localStorage.setItem("tetris-hs", this.points);
+    }
 };
 
 TetrisGame.prototype.fallBlock = function() {
@@ -124,6 +139,7 @@ TetrisGame.prototype.dropNewBlock = function() {
 
     if (this.isCollision()) {
         console.log("Game over");
+        this.saveHighScore();
         this.element.querySelector(".tetris-grid-body").classList.add("game-over");
         this.alive = false;
         window.clearInterval(this.fallingBlockInterval);
@@ -147,6 +163,11 @@ TetrisGame.prototype.landFallingBlock = function() {
     if (this.fullRows.length > 0) {
         this.eraseFullRows();
         this.points += this.countRowPoints();
+
+        if (this.points > this.highScore) {
+            this.element.querySelector(".tetris-points").classList.add("new-highscore");
+        }
+
         this.fullRows = [];
         this.renderPoints();
     }
@@ -174,8 +195,8 @@ TetrisGame.prototype.render = function() {
 };
 
 TetrisGame.prototype.renderPoints = function() {
-    var pointsElem = this.element.querySelector(".tetris-side-container .points");
-    var levelElem = this.element.querySelector(".tetris-side-container .level");
+    var pointsElem = this.element.querySelector(".tetris-side-container .tetris-points");
+    var levelElem = this.element.querySelector(".tetris-side-container .tetris-level");
     var pointNode = document.createTextNode(this.points);
     var levelNode = document.createTextNode(this.level);
 
