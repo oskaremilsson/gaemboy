@@ -6,30 +6,30 @@ In this examination assignment you are supposed to build what we call a "Persona
 Please check that your application meets the requirements below before submitting your final version.
 
 ### Functional requirements PWD:
-* The application should be a single page application.
-* The user shall be able to open multiple windows within the application.
-* The user shall be able to drag and move the windows in the document.
-* The user shall be able to open and close new windows of the desired application by clicking or double clicking an icon at the desktop.
-* The icon used to open the window should be represented in the upper bar of the window.
-* Windows should get focus when clicked/dragged.
-* The window with focus shall be on top of all other windows.
+* ~~The application should be a single page application.~~
+* ~~The user shall be able to open multiple windows within the application.~~
+* ~~The user shall be able to drag and move the windows in the document.~~
+* ~~The user shall be able to open and close new windows of the desired application by clicking or double clicking an icon at the desktop.~~
+* ~~The icon used to open the window should be represented in the upper bar of the window.~~
+* ~~Windows should get focus when clicked/dragged.~~
+* ~~The window with focus shall be on top of all other windows.~~
 
 The following three applications should at least be included in the desktop application:
-* A memory-game
-* A chat connected to a central chat channel using websockets
-* One, by you, designed and decided application
+* ~~A memory-game~~
+* ~~A chat connected to a central chat channel using websockets~~
+* ~~One, by you, designed and decided application (Tetris)~~
 
 ### Non functional requirements PWD:
-* The application shall be visually appealing
-* The code shall be organized in appropriate modules
+* ~~The application shall be visually appealing~~
+* ~~The code shall be organized in appropriate modules~~
 
 ## The memory game application
 See [exercise/memory/README.md](https://github.com/1dv022/exercise/blob/memory/exercise/memory/README.md) for a description of this application.
 
 ### Functional requirements, Memory application:
-* The user should be able to open and play multiple memory games simultaneously.
-* The user should be able to play the game using only the keyboard.
-* One, by you decided, extended feature
+* ~~The user should be able to open and play multiple memory games simultaneously.~~
+* ~~The user should be able to play the game using only the keyboard.~~
+* ~~One, by you decided, extended feature (settings)~~
 
 ## The chat application
 The chat application shall be connected to other students chats via a web socket-server.
@@ -68,22 +68,40 @@ The web socket server will send a "heartbeat" message to keep the connection ope
 Your application can simply ignore those messages completly.
 
 ### Functional requirements, Chat application:
-* The user should be able to have several chat applications running at the same time.
-* When the user opens the application for the first time the user should be asked to write his/her username.
-* The username should remain the same the next time the user starts a chat application or the PWD is restarted.
-* The user should be able to send chat messages using a textarea.
-* The user should be able to see at least the 20 latest messages since the chat applications was opened.
-* One, by you decided, extended feature.
+* ~~The user should be able to have several chat applications running at the same time.~~
+* ~~When the user opens the application for the first time the user should be asked to write his/her username.~~
+* ~~The username should remain the same the next time the user starts a chat application or the PWD is restarted.~~
+* ~~The user should be able to send chat messages using a textarea.~~
+* ~~The user should be able to see at least the 20 latest messages since the chat applications was opened.~~
+* ~~One, by you decided, extended feature.(see below)~~
 
 You are free to add functionality not described above. Added functionality could be:
-* Ability to choose which channel to listen to.
-* Caching message history.
+* ~~Ability to choose which channel to listen to.~~
+* ~~Caching message history.~~
 * Added support for emojis.
 * Added support for writing code.
-* Ability to change username.
+* ~~Ability to change username.~~
 * Encrypted messages on a special channel to allow secret communication.
 * Added functionality to the "chat protocol". Discuss with others in the course and agree upon added functionality to add to the sent messages.
 * Use the messages to play memory against an opponent. Perferably using a seperate channel.
+
+My added feautures:
+* Send-button only clickable if text
+* Enter sends message
+* Auto-scroll to bottom when new message
+* Don't auto-scroll to bottom if you have scrolled up to read old messages
+
+## Tetris (My added application)
+
+### Feautures
+* All the standard blocks and format
+* Play with the keyboard
+* Points scale when removing many rows with the same block
+* Auto drop on space-press
+* Faster drop on down-arrow-press
+* Faster speed the more you play
+* New Game-alternative in menu
+* View next block 
 
 #### Disclaimer
 All students working on this assignment uses the same server and can read all messages sent by you. You should at all times mind your language. The channels are monitored and abuse will not be tolerated.
