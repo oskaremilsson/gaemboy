@@ -38,7 +38,7 @@ TetrisGame.prototype.init = function() {
 
 TetrisGame.prototype.pauseGame = function() {
     //paus the game
-    if (this.fallingBlockInterval) {
+    if (this.fallingBlockInterval && this.alive) {
         window.clearInterval(this.fallingBlockInterval);
         this.paused = true;
         this.element.querySelector(".tetris-paused").classList.remove("hide");
