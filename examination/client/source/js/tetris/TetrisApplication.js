@@ -55,32 +55,34 @@ TetrisApplication.prototype.menuClicked = function(event) {
 
 TetrisApplication.prototype.keyInput = function(key) {
     if (this.game.alive) {
-        if (key === 37) {
-            //left
-            this.game.moveFallingBlock(-1);
-        }
-        else if (key === 39) {
-            //right
-            this.game.moveFallingBlock(1);
-        }
-        else if (key === 38) {
-            //up
-            this.game.rotateFallingBlock(1);
-        }
-        else if (key === 40) {
-            //down
-            this.game.fallBlock();
-        }
-        else if (key === 32) {
-            this.game.fallBlockToBottom();
-        }
-        else if (key === 13) {
-            //play/pause
-            if (this.game.paused) {
-                this.game.resumeGame();
+        if (!this.game.paused) {
+            if (key === 37) {
+                //left
+                this.game.moveFallingBlock(-1);
             }
-            else {
+            else if (key === 39) {
+                //right
+                this.game.moveFallingBlock(1);
+            }
+            else if (key === 38) {
+                //up
+                this.game.rotateFallingBlock(1);
+            }
+            else if (key === 40) {
+                //down
+                this.game.fallBlock();
+            }
+            else if (key === 32) {
+                this.game.fallBlockToBottom();
+            }
+            else if (key === 13) {
+                //enter: play/pause
                 this.game.pauseGame();
+            }
+        }
+        else {
+            if (key === 13) {
+                this.game.resumeGame();
             }
         }
     }
