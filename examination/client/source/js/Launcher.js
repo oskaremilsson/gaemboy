@@ -27,18 +27,17 @@ Launcher.prototype.startApplication = function(event) {
     var marginX = 10 * (this.desktop.offsetX);
     var marginY = 10 * (this.desktop.offsetY);
 
-    console.log(event.target);
     var element;
-    if (event.target.attributes["value"]) {
+    if (event.target.getAttribute("value")) {
         element = event.target;
     }
-    else if (event.target.parentNode.attributes["value"]) {
+    else if (event.target.parentNode.getAttribute("value")) {
         //is the i-tag in the li
         element = event.target.parentNode;
     }
 
     if (element) {
-        value = element.attributes["value"].value;
+        value = element.getAttribute("value");
 
         if (value) {
 

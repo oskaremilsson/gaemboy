@@ -439,7 +439,7 @@ TetrisGame.prototype.findFullRows = function() {
             this.rowCount += 1;
 
             if (this.rowCount % 5 === 0 && this.fallSpeed > 150) {
-                this.fallSpeed -= 25;
+                this.fallSpeed -= 35;
                 this.level += 1;
             }
 
