@@ -31,6 +31,7 @@ TetrisApplication.prototype.print = function() {
     var alt = document.querySelector("#template-window-menu-alternative").content;
     var alt1 = alt.cloneNode(true);
     alt1.querySelector(".menu-alternative").appendChild(document.createTextNode("New Game"));
+
     menu.appendChild(alt1);
 };
 

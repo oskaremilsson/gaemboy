@@ -105,6 +105,11 @@
 	font-family: 'Bad Script', cursive;
 }
 
+.tetris-app h4 {
+	color: #f47023;
+	font-family: 'Bad Script', cursive;
+}
+
 .tetris-app .tetris-points {
 	margin-top: 5px;
 	color: #ffffff;
@@ -133,4 +138,18 @@
 	height: 100%;
 	color: #f47023;
 	background-color: #000000;
+}
+
+.tetris-app .tetris-splash-screen {
+	position: absolute;
+	width: 250px;
+	height: 400px;
+	text-align: center;
+	background: rgba(0,0,0,0.9);
+	color: #ffffff;
+	padding-top: 50px;
+}
+
+.tetris-app .tetris-splash-screen li {
+	margin-top: 5px;
 }

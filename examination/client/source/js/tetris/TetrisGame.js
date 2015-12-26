@@ -67,6 +67,7 @@ TetrisGame.prototype.start = function() {
     this.element.querySelector(".tetris-points").classList.remove("new-highscore");
     this.paused = false;
     this.element.querySelector(".tetris-paused").classList.add("hide");
+    this.element.querySelector(".tetris-splash-screen").classList.add("hide");
     this.initField();
     this.clearField();
     this.renderPoints();
