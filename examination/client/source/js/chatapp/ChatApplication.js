@@ -144,11 +144,19 @@ ChatApplication.prototype.saveSettings = function(event) {
     if (this.username === "") {
         this.username = "User";
     }
+
     this.chat = new Chat(this.element, this.server, this.channel, this.username);
     this.chat.init();
     this.settingsOpen = false;
     this.setFocus();
     localStorage.setItem("username", this.username);
+};
+
+ChatApplication.prototype.maximize = function() {
+    BasicWindow.prototype.maximize.call(this);
+
+    //scroll to bottom
+    this.chat.scrollToBottom(false);
 };
 
 ChatApplication.prototype.addFocus = function() {
