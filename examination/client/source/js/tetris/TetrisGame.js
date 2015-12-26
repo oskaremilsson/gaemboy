@@ -195,8 +195,8 @@ TetrisGame.prototype.render = function() {
 };
 
 TetrisGame.prototype.renderPoints = function() {
-    var pointsElem = this.element.querySelector(".tetris-side-container .tetris-points");
-    var levelElem = this.element.querySelector(".tetris-side-container .tetris-level");
+    var pointsElem = this.element.querySelector(".tetris-points");
+    var levelElem = this.element.querySelector(".tetris-level");
     var pointNode = document.createTextNode(this.points);
     var levelNode = document.createTextNode(this.level);
 
