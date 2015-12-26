@@ -124,3 +124,13 @@
 	text-shadow: 0 0 10px rgba(26, 0, 0, 0.61);
 	font-family: 'Lobster', cursive;
 }
+
+.tetris-app .tetris-paused {
+	position: absolute;
+	text-align: center;
+	width: 250px;
+	padding-top: 190px;
+	height: 100%;
+	color: #f47023;
+	background-color: #000000;
+}

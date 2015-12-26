@@ -74,6 +74,15 @@ TetrisApplication.prototype.keyInput = function(key) {
         else if (key === 32) {
             this.game.fallBlockToBottom();
         }
+        else if (key === 13) {
+            //play/pause
+            if (this.game.paused) {
+                this.game.resumeGame();
+            }
+            else {
+                this.game.pauseGame();
+            }
+        }
     }
     else {
         if (key === 13) {

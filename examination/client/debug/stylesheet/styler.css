@@ -296,3 +296,7 @@ body {
 .resize-icon {
 	transform: scale(-1, -1);
 }
+
+.hide {
+	display: none;
+}

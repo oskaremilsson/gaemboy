@@ -24,6 +24,7 @@ function TetrisGame(element) {
     this.points = 0;
     this.highScore = 0;
     this.nextBlock = undefined;
+    this.paused = false;
 
     this.fallingBlockInterval = undefined;
 }
@@ -31,6 +32,24 @@ function TetrisGame(element) {
 TetrisGame.prototype.init = function() {
     this.initField();
     this.print();
+
+    this.element.addEventListener("focusout", this.pauseGame.bind(this));
+};
+
+TetrisGame.prototype.pauseGame = function() {
+    //paus the game
+    if (this.fallingBlockInterval) {
+        window.clearInterval(this.fallingBlockInterval);
+        this.paused = true;
+        this.element.querySelector(".tetris-paused").classList.remove("hide");
+    }
+};
+
+TetrisGame.prototype.resumeGame = function() {
+    //start the drop-interval again
+    this.fallingBlockInterval = window.setInterval(this.fallBlock.bind(this), this.fallSpeed);
+    this.paused = false;
+    this.element.querySelector(".tetris-paused").classList.add("hide");
 };
 
 TetrisGame.prototype.start = function() {

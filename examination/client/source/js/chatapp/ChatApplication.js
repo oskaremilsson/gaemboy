@@ -17,15 +17,13 @@ function ChatApplication(options) {
 ChatApplication.prototype = Object.create(BasicWindow.prototype);
 ChatApplication.prototype.constructor =  ChatApplication;
 
-ChatApplication.prototype.init = function(){
+ChatApplication.prototype.init = function() {
     if (localStorage.getItem("username")) {
         this.username = localStorage.getItem("username");
     }
     this.print();
 
     this.element.querySelector(".window-menu").addEventListener("click", this.menuClicked.bind(this));
-    //this.chat = new Chat(this.element, this.server, this.channel, this.username);
-    //this.chat.init();
 };
 
 ChatApplication.prototype.print = function() {
