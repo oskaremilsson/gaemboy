@@ -29,11 +29,11 @@ Desktop.prototype.mouseUp = function() {
     window.removeEventListener("mousemove", this.mouseMoveFunc);
     window.removeEventListener("mouseup", this.mouseUpFunc);
     this.activeWindow.element.classList.remove("moving");
-    //this.activeWindow = undefined;
 };
 
 Desktop.prototype.mouseDown = function(event) {
     var element = event.target;
+
     //get the clicked-windows "main-div"
     if (element.parentNode.classList) {
         while (!element.parentNode.classList.contains("main-frame")) {

@@ -14,51 +14,60 @@ Launcher.prototype.init = function() {
     console.log(appList);
     for (var i = 0; i < appList.length; i += 1) {
         iTag = appList[i].querySelector("i");
-        appList[i].addEventListener("click", this.startApplication.bind(this), true);
+        appList[i].addEventListener("click", this.launcherClick.bind(this), true);
     }
 
 };
 
-Launcher.prototype.startApplication = function(event) {
+Launcher.prototype.getClickedLauncherElement = function(target) {
+    var element;
+
+    if (target.getAttribute("value")) {
+        element = target;
+    }
+    else if (target.parentNode.getAttribute("value")) {
+        //is the i-tag in the li
+        element = target.parentNode;
+    }
+
+    return element;
+};
+
+Launcher.prototype.launcherClick = function(event) {
     var value;
     var icon;
     var title;
-    var newApp = false;
-    var marginX = 10 * (this.desktop.offsetX);
-    var marginY = 10 * (this.desktop.offsetY);
-
-    var element;
-    if (event.target.getAttribute("value")) {
-        element = event.target;
-    }
-    else if (event.target.parentNode.getAttribute("value")) {
-        //is the i-tag in the li
-        element = event.target.parentNode;
-    }
+    var element = this.getClickedLauncherElement(event.target);
 
     if (element) {
         value = element.getAttribute("value");
+    }
 
-        if (value) {
-
-            //this handles the "running-apps"-clicks. should be broken out!
-            var switchTo = value.split(":");
-            if (switchTo[0] === "id") {
-                if (element.classList.contains("tooltip-close")) {
-                    this.desktop.closeWindow(switchTo[1]);
-                }
-                else {
-                    this.switchToWindow(switchTo[1]);
-                }
+    if (value) {
+        //this handles the "running-apps"-clicks.
+        var switchTo = value.split(":");
+        if (switchTo[0] === "id") {
+            if (element.classList.contains("tooltip-close")) {
+                this.desktop.closeWindow(switchTo[1]);
             }
-            //end of running-apps handle
-
             else {
-                icon = element.querySelector("i").textContent;
-                title = element.querySelector(".tooltip-title").textContent;
+                this.switchToWindow(switchTo[1]);
             }
         }
+
+        //end of running-apps handle
+        else {
+            icon = element.querySelector("i").textContent;
+            title = element.querySelector(".tooltip-title").textContent;
+            this.startApplication(value, icon, title);
+        }
     }
+};
+
+Launcher.prototype.startApplication = function(value, icon, title) {
+    var newApp = false;
+    var marginX = 10 * (this.desktop.offsetX);
+    var marginY = 10 * (this.desktop.offsetY);
 
     var appOptions = {
         id: "win-" + this.desktop.serialNumber,
@@ -81,6 +90,7 @@ Launcher.prototype.startApplication = function(event) {
 
             break;
         }
+
         case "memory":
         {
             appOptions.keyActivated = true;
@@ -89,6 +99,7 @@ Launcher.prototype.startApplication = function(event) {
 
             break;
         }
+
         case "chat":
         {
             appOptions.maximizable = true;
@@ -97,6 +108,7 @@ Launcher.prototype.startApplication = function(event) {
 
             break;
         }
+
         case "tetris":
         {
             appOptions.keyActivated = true;
@@ -105,6 +117,7 @@ Launcher.prototype.startApplication = function(event) {
 
             break;
         }
+
         case "reset":
         {
             console.log("resetting");
