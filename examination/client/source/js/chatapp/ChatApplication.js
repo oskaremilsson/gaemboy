@@ -193,16 +193,6 @@ ChatApplication.prototype.saveSettings = function() {
 };
 
 /**
- * Function to maximize the application
- */
-ChatApplication.prototype.maximize = function() {
-    BasicWindow.prototype.maximize.call(this);
-
-    //scroll to bottom (not working?)
-    this.chat.scrollToBottom(false);
-};
-
-/**
  * Function to add focus to the window
  */
 ChatApplication.prototype.addFocus = function() {
