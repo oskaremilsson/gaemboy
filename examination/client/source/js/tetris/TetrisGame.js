@@ -31,11 +31,12 @@ function TetrisGame(element) {
     this.nextBlock = undefined;
     this.paused = false;
     this.FXsounds = true;
-    this.BGsounds = true;
+    this.BGsounds = false;
     this.bgMusic = new Audio("//root.oskaremilsson.se/tetris-sounds/tetris.mp3");
     this.rotateSound = new Audio("//root.oskaremilsson.se/tetris-sounds/rotate-block.mp3");
     this.landSound = new Audio("//root.oskaremilsson.se/tetris-sounds/land-block.mp3");
     this.lineSound = new Audio("//root.oskaremilsson.se/tetris-sounds/line-remove.mp3");
+    this.moveSound = new Audio("//root.oskaremilsson.se/tetris-sounds/move-block.mp3");
     this.gameoverSound = new Audio("//root.oskaremilsson.se/tetris-sounds/game-over.mp3");
 
     this.fallingBlockInterval = undefined;
@@ -49,7 +50,7 @@ TetrisGame.prototype.init = function() {
     this.print();
 
     //add listener to pause if focus is lost
-    this.element.addEventListener("focusout", this.pauseGame.bind(this));
+    this.element.addEventListener("blur", this.pauseGame.bind(this));
 
     //add listener for the sounds toggle
     this.element.querySelector(".tetris-side-info").addEventListener("click", this.soundToggle.bind(this));
@@ -59,6 +60,11 @@ TetrisGame.prototype.init = function() {
  * Function to pause the game
  */
 TetrisGame.prototype.pauseGame = function() {
+    if (this.BGsounds) {
+        //play background music
+        this.bgMusic.pause();
+    }
+
     //pause the game
     if (this.fallingBlockInterval && this.alive) {
         window.clearInterval(this.fallingBlockInterval);
@@ -71,6 +77,11 @@ TetrisGame.prototype.pauseGame = function() {
  * Function to resume the game
  */
 TetrisGame.prototype.resumeGame = function() {
+    if (this.BGsounds) {
+        //play background music
+        this.bgMusic.play();
+    }
+
     //start the drop-interval again
     this.fallingBlockInterval = window.setInterval(this.fallBlock.bind(this), this.fallSpeed);
     this.paused = false;
@@ -441,6 +452,12 @@ TetrisGame.prototype.isFallable = function() {
  */
 TetrisGame.prototype.moveFallingBlock = function(dir) {
     if (this.isMovable(dir)) {
+        if (this.FXsounds) {
+            //play sound
+            this.moveSound.currentTime = 0;
+            this.moveSound.play();
+        }
+
         this.fallingBlock.topLeft.col += dir;
     }
 
@@ -492,13 +509,13 @@ TetrisGame.prototype.isMovable = function(dir) {
  * @param dir - positive or negative number to handle left/Right
  */
 TetrisGame.prototype.rotateFallingBlock = function(dir) {
-    if (this.FXsounds) {
-        //play sound
-        this.rotateSound.currentTime = 0;
-        this.rotateSound.play();
-    }
-
     if (this.isRotatable(dir)) {
+        if (this.FXsounds) {
+            //play sound
+            this.rotateSound.currentTime = 0;
+            this.rotateSound.play();
+        }
+
         var newRotation = this.fallingBlock.rotation + dir;
         if (newRotation > 3) {
             newRotation = 0;
@@ -696,7 +713,7 @@ TetrisGame.prototype.soundToggle = function(event) {
         event.target.classList.toggle("sounds");
         this.BGsounds = !this.BGsounds;
 
-        if (this.BGsounds) {
+        if (this.BGsounds && this.alive) {
             this.bgMusic.play();
         }
         else {
