@@ -1,6 +1,5 @@
-/**
- * Created by Oskar on 2015-11-23.
- */
+"use strict";
+
 var MemoryBoard = require("./MemoryBoard");
 var MemoryCard = require("./MemoryCard");
 var Timer = require("./Timer");
@@ -33,19 +32,19 @@ MemoryGame.prototype.init = function() {
     var i = 0;
     this.board = [];
     if (this.x > this.y) {
-        for(i = 0; i < this.x; i += 1) {
+        for (i = 0; i < this.x; i += 1) {
             this.board.push(new Array(this.y));
         }
     }
     else {
-        for(i = 0; i < this.y; i += 1) {
+        for (i = 0; i < this.y; i += 1) {
             this.board.push(new Array(this.x));
         }
     }
 
     this.visibleCards = [];
-    for(i = 0; i < this.y; i += 1) {
-        for(var j = 0; j < this.x - 1; j += 2) {
+    for (i = 0; i < this.y; i += 1) {
+        for (var j = 0; j < this.x - 1; j += 2) {
             this.board[i][j] = new MemoryCard("" + i + j, this.images.pop());
             this.board[i][j+1] = new MemoryCard("" + i + (j + 1), this.images.pop());
         }
@@ -99,7 +98,6 @@ MemoryGame.prototype.turnCard = function(element) {
 
 MemoryGame.prototype.checkIfCorrect = function() {
     this.turns += 1;
-    console.log(this.visibleCards);
     if (this.visibleCards[0].imgNr === this.visibleCards[1].imgNr) {
         this.element.querySelector(".card-" + this.visibleCards[0].id).classList.add("right");
         this.element.querySelector(".card-" + this.visibleCards[1].id).classList.add("right");
@@ -122,7 +120,9 @@ MemoryGame.prototype.checkIfCorrect = function() {
             this.element.querySelector(".card-" + this.visibleCards[i].id).classList.add("wrong");
             this.element.querySelector(".card-" + this.visibleCards[i].id).classList.remove("disable");
         }
+
         setTimeout(this.turnBackCards.bind(this), 1000);
+
         //this.changePlayer();
     }
 };
@@ -140,7 +140,6 @@ MemoryGame.prototype.turnBackCards = function() {
     var tempCard;
     for (var i = 0; i < this.visibleCards.length; i += 1) {
         tempCard = this.visibleCards[i];
-        console.log(tempCard);
         this.element.querySelector(".card-" + tempCard.id).classList.remove("wrong", "img", "img-" + tempCard.imgNr);
     }
 
@@ -149,7 +148,6 @@ MemoryGame.prototype.turnBackCards = function() {
 };
 
 MemoryGame.prototype.gameOver = function() {
-    console.log("turns:" + this.turns);
     this.totalTime = this.timer.stop();
     var template = document.querySelector("#template-memory-gameover").content.cloneNode(true);
     template.querySelector(".memory-turns").appendChild(document.createTextNode(this.turns));

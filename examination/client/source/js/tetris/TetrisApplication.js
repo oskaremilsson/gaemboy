@@ -22,7 +22,6 @@ TetrisApplication.prototype.init = function() {
 
 TetrisApplication.prototype.print = function() {
     BasicWindow.prototype.print.call(this);
-    console.log("printing Tetris");
     this.element.classList.add("tetris-app");
     this.element.querySelector("i").classList.add("tetris-icon");
 

@@ -18,9 +18,9 @@ Player.prototype.printPile = function() {
 Player.prototype.addToPile = function() {
     console.log("prints player card");
     var cardDiv = document.createElement("div");
-    console.log(this.cards);
+
     cardDiv.classList.add("card", "img", "img-" + this.cards[this.cards.length - 1], "matched-card");
-    if(this.cards.length > 1) {
+    if (this.cards.length > 1) {
         cardDiv.classList.add("pile");
     }
 

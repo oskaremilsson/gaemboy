@@ -17,7 +17,6 @@ function Chat(element, server, channel, username) {
 }
 
 Chat.prototype.init = function() {
-    console.log("inits the chat");
     this.print();
 
     this.readStoredMessages();
@@ -77,7 +76,6 @@ Chat.prototype.setOffline = function() {
     this.element.querySelector(".window-icon").classList.remove("chat-connecting");
     this.element.querySelector(".window-icon").classList.add("chat-offline");
     this.online = false;
-    console.log("offline");
 
     var data = {
         username: "GlaDos",
@@ -87,15 +85,12 @@ Chat.prototype.setOffline = function() {
 };
 
 Chat.prototype.setOnline = function() {
-    //this.socket.send(JSON.stringify(this.data));
-    console.log("online = true");
     this.online = true;
     this.element.querySelector(".window-icon").classList.remove("chat-connecting");
     this.element.querySelector(".window-icon").classList.add("chat-online");
 };
 
 Chat.prototype.newMessageFromServer = function(event) {
-    console.log(event.data);
     var data = JSON.parse(event.data);
     if (data.type === "message") {
         //add timestamp to data-object
@@ -114,16 +109,17 @@ Chat.prototype.formSubmit = function(event) {
     if (event) {
         event.preventDefault();
     }
+
     if (this.online) {
         var input = this.element.querySelector(".chat-inputField").value;
 
         if (input.length > 1) {
             var msg = {
-                "type": "message",
-                "data": input,
-                "username": this.username,
-                "channel": this.channel,
-                "key": this.key
+                type: "message",
+                data: input,
+                username: this.username,
+                channel: this.channel,
+                key: this.key
             };
 
             this.socket.send(JSON.stringify(msg));
@@ -208,7 +204,7 @@ Chat.prototype.toggleFocus = function() {
 
 Chat.prototype.checkInput = function(event) {
     var input = event.target.value;
-    console.log(input.charCodeAt(input.length  -1));
+
     if (input.length > 0) {
         this.element.querySelector(".chat-sendButton").removeAttribute("disabled");
     }
@@ -240,7 +236,7 @@ Chat.prototype.parseMessageWithLinks = function(text) {
         if (words[i].slice(0, 7) === "http://") {
             link = words[i].slice(7);
         }
-        else if(words[i].slice(0, 8) === "https://") {
+        else if (words[i].slice(0, 8) === "https://") {
             link = words[i].slice(7);
         }
 

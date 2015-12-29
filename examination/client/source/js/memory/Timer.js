@@ -6,6 +6,7 @@
  */
 function Timer() {
     this.startTime = undefined;
+
     //this.interval = undefined;
 }
 
@@ -44,7 +45,7 @@ Timer.prototype.stop = function() {
  * @param diff{Number} the time to be printed
  */
 Timer.prototype.print = function(diff) {
-    if(this.element.hasChildNodes()) {
+    if (this.element.hasChildNodes()) {
         this.element.replaceChild(document.createTextNode(diff), this.element.firstChild);
     }
     else {

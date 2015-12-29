@@ -156,11 +156,9 @@ TetrisGame.prototype.dropNewBlock = function() {
     this.clearNextBlock();
     this.newNextBlock();
 
-    console.log(this.fallSpeed);
     this.fallingBlockInterval = window.setInterval(this.fallBlock.bind(this), this.fallSpeed);
 
     if (this.isCollision()) {
-        console.log("Game over");
         this.saveHighScore();
         this.element.querySelector(".tetris-grid-body").classList.add("game-over");
         this.alive = false;
@@ -273,8 +271,7 @@ TetrisGame.prototype.renderNextBlock = function() {
 };
 
 TetrisGame.prototype.clearNextBlock = function() {
-    //clear field
-    console.log("clearing nextblock");
+    //clear next-block
     var trs = this.element.querySelectorAll(".tetris-next-block tbody tr");
     var tds;
     for (var row = 0; row < trs.length; row += 1) {
@@ -298,7 +295,6 @@ TetrisGame.prototype.isCollision = function() {
                     collision = true;
                 }
 
-                //console.log(this.field[row + potentialTopLeft.row][col + potentialTopLeft.col]);
                 else if (this.field[row + this.fallingBlock.topLeft.row][col + this.fallingBlock.topLeft.col] !== 0) {
                     //the space is taken
                     collision = true;
@@ -324,13 +320,10 @@ TetrisGame.prototype.isFallable = function() {
             if (shape[row][col] !== 0) {
                 if (row + potentialTopLeft.row >= this.field.length) {
                     //this block would be below the playing field
-                    console.log("out of bounds");
                     fallable = false;
                 }
-                //console.log(this.field[row + potentialTopLeft.row][col + potentialTopLeft.col]);
                 else if (this.field[row + potentialTopLeft.row][col + potentialTopLeft.col] !== 0) {
                     //the space is taken
-                    console.log("collision");
                     fallable = false;
                 }
             }

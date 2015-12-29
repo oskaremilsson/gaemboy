@@ -28,8 +28,7 @@ ChatApplication.prototype.init = function() {
 
 ChatApplication.prototype.print = function() {
     BasicWindow.prototype.print.call(this);
-    console.log("printing chat");
-    //document.querySelector("#" + this.id).classList.add("chat-app");
+
     this.element.classList.add("chat-app");
     this.element.querySelector(".window-icon").classList.add("chat-offline");
 
@@ -115,13 +114,11 @@ ChatApplication.prototype.addSettings = function(element) {
 
     template.querySelector("input[type='button']").addEventListener("click" , this.saveSettings.bind(this));
 
-    console.log(template.querySelector("form"));
     element.querySelector(".settings").appendChild(template);
     return element;
 };
 
 ChatApplication.prototype.saveSettings = function(event) {
-    console.log(event);
     if (this.chat) {
         this.chat.socket.close();
     }
@@ -138,7 +135,6 @@ ChatApplication.prototype.saveSettings = function(event) {
     this.clearContent();
 
     //start the new chat
-    console.log("start 'new' chat with param");
     if (this.username === "") {
         this.username = "User";
     }
@@ -160,7 +156,6 @@ ChatApplication.prototype.maximize = function() {
 ChatApplication.prototype.addFocus = function() {
     if (!this.element.classList.contains("focused-window")) {
         this.element.classList.add("focused-window");
-        console.log("adding focus-class");
     }
 };
 

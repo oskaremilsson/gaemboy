@@ -10,7 +10,6 @@ ExampleApplication.prototype.constructor =  ExampleApplication;
 
 ExampleApplication.prototype.print = function() {
     BasicWindow.prototype.print.call(this);
-    console.log("printing example");
     document.querySelector("#" + this.id).classList.add("example-app");
 
 };

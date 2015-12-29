@@ -11,7 +11,7 @@ function Launcher(desktop) {
 Launcher.prototype.init = function() {
     var iTag;
     var appList = document.querySelectorAll(".launcher li");
-    console.log(appList);
+
     for (var i = 0; i < appList.length; i += 1) {
         iTag = appList[i].querySelector("i");
         appList[i].addEventListener("click", this.launcherClick.bind(this), true);
@@ -120,7 +120,6 @@ Launcher.prototype.startApplication = function(value, icon, title) {
 
         case "reset":
         {
-            console.log("resetting");
             this.desktop.clearDesktop();
             break;
         }
@@ -144,15 +143,11 @@ Launcher.prototype.checkBounds = function(app) {
     var windowW = window.innerWidth;
     var windowH = window.innerHeight;
 
-    console.log(app.y + "+" + parseInt(app.element.offsetHeight));
     var appRight = app.x + parseInt(app.element.offsetWidth);
     var appBottom = app.y + parseInt(app.element.offsetHeight);
 
-    console.log(windowW + "," + windowH);
-
     //check if the app-window is out of bounds and get it into bounds
     if (appRight > windowW || app.x < 0) {
-        console.log("out of x bounds. fixing");
         //reset the offset
         this.desktop.offsetX = 1;
 
@@ -182,9 +177,7 @@ Launcher.prototype.switchToWindow = function(id) {
 
 Launcher.prototype.addRunningApp = function(type, app) {
     //get the tooltip-container for the app and add it to the list
-    console.log(type);
     var container = document.querySelector("li[value='" + type + "'] .tooltip-container");
-    console.log(container);
     var template = document.querySelector("#template-tooltip").content.cloneNode(true);
     template.querySelector(".tooltip").appendChild(document.createTextNode(app.title + "(" + app.id + ")"));
     template.querySelector(".tooltip").setAttribute("value", "id:" + app.id);

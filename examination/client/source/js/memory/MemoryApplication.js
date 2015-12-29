@@ -24,7 +24,6 @@ MemoryApplication.prototype.init = function() {
 
 MemoryApplication.prototype.print = function() {
     BasicWindow.prototype.print.call(this);
-    console.log("printing memory");
     this.element.classList.add("memory-app");
 
     var menu = this.element.querySelector(".window-menu");
@@ -105,7 +104,6 @@ MemoryApplication.prototype.saveSettings = function() {
 };
 
 MemoryApplication.prototype.keyInput = function(key) {
-    console.log("key in memory:" + key);
     if (!this.markedCard) {
         this.markedCard = this.element.querySelector(".card");
         this.markedCard.classList.add("marked");
@@ -113,35 +111,33 @@ MemoryApplication.prototype.keyInput = function(key) {
     else {
         //toogle the markedCard before changing markedCard
         this.markedCard.classList.toggle("marked");
-        console.log(this.markedCard);
         switch (key) {
             case 39: {
                 this.keyRight();
                 break;
             }
+
             case 37: {
                 this.keyLeft();
                 break;
             }
+
             case 38: {
                 this.keyUp();
                 break;
             }
+
             case 40: {
                 this.keyDown();
                 break;
             }
+
             case 13: {
                 this.game.turnCard(this.markedCard);
                 break;
             }
         }
 
-        //this.markedCard = element;
-
-        //element.focus();
-        //console.log(document.activeElement);
-        //switch
         this.markedCard.classList.toggle("marked");
     }
 };

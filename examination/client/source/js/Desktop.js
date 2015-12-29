@@ -25,7 +25,6 @@ Desktop.prototype.init = function() {
 };
 
 Desktop.prototype.mouseUp = function() {
-    console.log("removing move-listener");
     window.removeEventListener("mousemove", this.mouseMoveFunc);
     window.removeEventListener("mouseup", this.mouseUpFunc);
     this.activeWindow.element.classList.remove("moving");
@@ -54,7 +53,6 @@ Desktop.prototype.mouseDown = function(event) {
                 this.clickY = event.clientY - this.activeWindow.y;
                 element.classList.add("moving");
 
-                console.log("adding mousemove-listener");
                 window.addEventListener("mousemove", this.mouseMoveFunc);
                 window.addEventListener("mouseup", this.mouseUpFunc);
             }
@@ -64,23 +62,18 @@ Desktop.prototype.mouseDown = function(event) {
 };
 
 Desktop.prototype.mouseMove = function(event) {
-    console.log("trying to move window");
     var newX = event.clientX - this.clickX;
     var newY = event.clientY - this.clickY;
 
-    console.log(this.activeWindow.element.offsetWidth);
     var newMiddleX = newX + parseInt(this.activeWindow.element.offsetWidth) / 2;
     var newMiddleY = newY + parseInt(this.activeWindow.element.offsetHeight) / 2;
 
     var windowW = window.innerWidth;
     var windowH = window.innerHeight;
 
-    console.log(newMiddleX + "<" + windowW + "&&" + newMiddleX + "> 0 && " + newMiddleY + "<" + windowH + "&&" + newY + "> 0");
-
     if (newMiddleX < windowW && newMiddleX > 0 && newMiddleY < windowH && newY > 0) {
         this.activeWindow.x = event.clientX - this.clickX;
         this.activeWindow.y = event.clientY - this.clickY;
-
 
         this.activeWindow.element.classList.remove("reset-window");
         this.activeWindow.element.style.left = this.activeWindow.x + "px";
@@ -89,7 +82,6 @@ Desktop.prototype.mouseMove = function(event) {
 };
 
 Desktop.prototype.windowButtonClick = function(event) {
-    console.log("clicked window-button");
     var action = event.target.classList;
 
     var element = event.target;

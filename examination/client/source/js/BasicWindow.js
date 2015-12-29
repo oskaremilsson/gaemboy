@@ -18,7 +18,6 @@ BasicWindow.prototype.destroy = function() {
 };
 
 BasicWindow.prototype.print = function() {
-    console.log("printing");
     var template  = document.querySelector("#template-window").content.cloneNode(true);
     var templateWindow = template.querySelector("div");
     templateWindow.setAttribute("id", this.id);
