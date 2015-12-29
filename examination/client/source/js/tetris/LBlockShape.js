@@ -23,7 +23,7 @@ function LBlockShape() {
     ];
     this.rotation = 0;
     this.topLeft = {
-        row: 0,
+        row: -3,
         col: 4
     };
 }

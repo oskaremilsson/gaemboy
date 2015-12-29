@@ -23,7 +23,7 @@ function IBlockShape() {
     ];
     this.rotation = 0;
     this.topLeft = {
-        row: 0,
+        row: -4,
         col: 4
     };
 }

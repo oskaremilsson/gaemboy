@@ -23,7 +23,7 @@ function SBlockShape() {
     ];
     this.rotation = 0;
     this.topLeft = {
-        row: 0,
+        row: -2,
         col: 4
     };
 }
