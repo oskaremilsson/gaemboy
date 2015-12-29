@@ -4,14 +4,23 @@ var MemoryApplication = require("./memory/MemoryApplication");
 var ChatApplication = require("./chatapp/ChatApplication");
 var TetrisApplication = require("./tetris/TetrisApplication");
 
+/**
+ * Constructor for the launcher
+ * @param desktop, the parent Desktop object
+ * @constructor
+ */
 function Launcher(desktop) {
     this.desktop = desktop;
 }
 
+/**
+ * Function to initialize the basics
+ */
 Launcher.prototype.init = function() {
     var iTag;
     var appList = document.querySelectorAll(".launcher li");
 
+    //Add eventlisteners to the launcher-buttons
     for (var i = 0; i < appList.length; i += 1) {
         iTag = appList[i].querySelector("i");
         appList[i].addEventListener("click", this.launcherClick.bind(this), true);
@@ -19,6 +28,52 @@ Launcher.prototype.init = function() {
 
 };
 
+/**
+ * Function to handle the clicks in the launcher
+ * @param event
+ */
+Launcher.prototype.launcherClick = function(event) {
+    var value;
+    var icon;
+    var title;
+
+    //Get the element that got clicked
+    var element = this.getClickedLauncherElement(event.target);
+
+    if (element) {
+        //get value from the element
+        value = element.getAttribute("value");
+    }
+
+    if (value) {
+        var switchTo = value.split(":");
+
+        //check if the click is in the "running-apps"-section.
+        if (switchTo[0] === "id") {
+            if (element.classList.contains("tooltip-close")) {
+                //close pressed, close window
+                this.desktop.closeWindow(switchTo[1]);
+            }
+            else {
+                //running-apps-tab clicked, switch to that app
+                this.switchToWindow(switchTo[1]);
+            }
+        }
+
+        //start the app that got clicked
+        else {
+            icon = element.querySelector("i").textContent;
+            title = element.querySelector(".tooltip-title").textContent;
+            this.startApplication(value, icon, title);
+        }
+    }
+};
+
+/**
+ * Function to get what element got clicked in the launcher
+ * @param target - the event-target from click
+ * @returns DOM-element
+ */
 Launcher.prototype.getClickedLauncherElement = function(target) {
     var element;
 
@@ -33,42 +88,18 @@ Launcher.prototype.getClickedLauncherElement = function(target) {
     return element;
 };
 
-Launcher.prototype.launcherClick = function(event) {
-    var value;
-    var icon;
-    var title;
-    var element = this.getClickedLauncherElement(event.target);
-
-    if (element) {
-        value = element.getAttribute("value");
-    }
-
-    if (value) {
-        //this handles the "running-apps"-clicks.
-        var switchTo = value.split(":");
-        if (switchTo[0] === "id") {
-            if (element.classList.contains("tooltip-close")) {
-                this.desktop.closeWindow(switchTo[1]);
-            }
-            else {
-                this.switchToWindow(switchTo[1]);
-            }
-        }
-
-        //end of running-apps handle
-        else {
-            icon = element.querySelector("i").textContent;
-            title = element.querySelector(".tooltip-title").textContent;
-            this.startApplication(value, icon, title);
-        }
-    }
-};
-
+/**
+ * Function to start new application
+ * @param value - what app should be started
+ * @param icon - what icon to use
+ * @param title - what title to use
+ */
 Launcher.prototype.startApplication = function(value, icon, title) {
     var newApp = false;
     var marginX = 10 * (this.desktop.offsetX);
     var marginY = 10 * (this.desktop.offsetY);
 
+    //create the settings-object
     var appOptions = {
         id: "win-" + this.desktop.serialNumber,
         x: marginX,
@@ -81,6 +112,7 @@ Launcher.prototype.startApplication = function(value, icon, title) {
         keyActivated: false
     };
 
+    //check what app to start and start it, add eventually maximizable and keyActivated
     switch (value) {
         case "example": {
             appOptions.maximizable = true;
@@ -93,6 +125,7 @@ Launcher.prototype.startApplication = function(value, icon, title) {
 
         case "memory":
         {
+            //set setting to listen on keys
             appOptions.keyActivated = true;
             newApp = new MemoryApplication(appOptions);
             newApp.init();
@@ -102,6 +135,7 @@ Launcher.prototype.startApplication = function(value, icon, title) {
 
         case "chat":
         {
+            //set option to be able to maximize window
             appOptions.maximizable = true;
             newApp = new ChatApplication(appOptions);
             newApp.init();
@@ -111,6 +145,7 @@ Launcher.prototype.startApplication = function(value, icon, title) {
 
         case "tetris":
         {
+            //set option to listen on keys
             appOptions.keyActivated = true;
             newApp = new TetrisApplication(appOptions);
             newApp.init();
@@ -120,25 +155,38 @@ Launcher.prototype.startApplication = function(value, icon, title) {
 
         case "reset":
         {
+            //reset the desktop
             this.desktop.clearDesktop();
             break;
         }
     }
 
     if (newApp) {
+        //add listener to the window-buttons
         var buttons = document.querySelector("#" + newApp.id + " .window-buttons");
         buttons.addEventListener("click", this.desktop.windowButtonClick.bind(this.desktop));
+
+        //save the object to windows-array
         this.desktop.windows.push(newApp);
+
+        //add to the running-apps-list
         this.addRunningApp(value, newApp);
+
+        //increase the serialnumber and such
         this.desktop.serialNumber += 1;
         this.desktop.offsetX += 1;
         this.desktop.offsetY += 1;
 
+        //set focus to the new app and check bounds
         this.desktop.setFocus(newApp.element);
         this.checkBounds(newApp);
     }
 };
 
+/**
+ * Function to handle if the new window is out of bounds
+ * @param app - the app-object to be checked
+ */
 Launcher.prototype.checkBounds = function(app) {
     var windowW = window.innerWidth;
     var windowH = window.innerHeight;
@@ -165,16 +213,28 @@ Launcher.prototype.checkBounds = function(app) {
     }
 };
 
+/**
+ * Function to handle focus on call, and show minimized window again
+ * @param id - the window-id to set focus on
+ */
 Launcher.prototype.switchToWindow = function(id) {
     var window = document.querySelector("#" + id);
     if (window) {
+        //if minimized, show it again
         if (window.classList.contains("minimized")) {
             window.classList.remove("minimized");
         }
+
+        //set focus
         this.desktop.setFocus(window);
     }
 };
 
+/**
+ * Function to add a new app to the running-app-list
+ * @param type - what type is the app (what list to add to)
+ * @param app - the app-object to be added
+ */
 Launcher.prototype.addRunningApp = function(type, app) {
     //get the tooltip-container for the app and add it to the list
     var container = document.querySelector("li[value='" + type + "'] .tooltip-container");

@@ -8,6 +8,9 @@ function ExampleApplication(id, x, y) {
 ExampleApplication.prototype = Object.create(BasicWindow.prototype);
 ExampleApplication.prototype.constructor =  ExampleApplication;
 
+/**
+ * Print the example app
+ */
 ExampleApplication.prototype.print = function() {
     BasicWindow.prototype.print.call(this);
     document.querySelector("#" + this.id).classList.add("example-app");

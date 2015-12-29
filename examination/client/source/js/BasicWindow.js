@@ -1,5 +1,10 @@
 "use strict";
 
+/**
+ * Constructor for basic window
+ * @param options, object with the settings
+ * @constructor
+ */
 function BasicWindow(options) {
     this.id = options.id || "" + new Date().getTime();
     this.element = undefined;
@@ -13,11 +18,18 @@ function BasicWindow(options) {
     this.zIndex = options.zIndex;
 }
 
+/**
+ * Destroy the window
+ */
 BasicWindow.prototype.destroy = function() {
     document.querySelector("#main-frame").removeChild(this.element);
 };
 
+/**
+ * Print the window
+ */
 BasicWindow.prototype.print = function() {
+    //get the template and modify it to the params
     var template  = document.querySelector("#template-window").content.cloneNode(true);
     var templateWindow = template.querySelector("div");
     templateWindow.setAttribute("id", this.id);
@@ -26,10 +38,15 @@ BasicWindow.prototype.print = function() {
     templateWindow.style.zIndex = this.zIndex;
     templateWindow.setAttribute("tabindex", this.tabIndex);
 
+    //insert the new window before launcher in the DOM
     var element = document.querySelector("#main-frame");
     var launcher = document.querySelector(".launcher");
     element.insertBefore(template, launcher);
+
+    //save the element to the object
     this.element = document.querySelector("#" + this.id);
+
+    //add title and icon to the window
     this.element.querySelector(".window-title").appendChild(document.createTextNode(this.title));
     this.element.querySelector(".window-icon").appendChild(document.createTextNode(this.icon));
 
@@ -42,10 +59,16 @@ BasicWindow.prototype.print = function() {
     }
 };
 
+/**
+ * Minimize the window
+ */
 BasicWindow.prototype.minimize = function() {
     this.element.classList.toggle("minimized");
 };
 
+/**
+ * Maximize the window
+ */
 BasicWindow.prototype.maximize = function() {
     this.element.classList.toggle("maximized");
 
