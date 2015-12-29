@@ -206,7 +206,7 @@ TetrisGame.prototype.dropNewBlock = function() {
     //add fallinterval with current speed
     this.fallingBlockInterval = window.setInterval(this.fallBlock.bind(this), this.fallSpeed);
 
-    if (this.isCollision()) {
+    if (!this.isFallable()) {
         //the new block collided at launch, game over
         this.saveHighScore();
         this.element.querySelector(".tetris-grid-body").classList.add("game-over");
@@ -360,37 +360,6 @@ TetrisGame.prototype.clearNextBlock = function() {
             tds[col].setAttribute("class", "");
         }
     }
-};
-
-/**
- * Function to check if the fallingblock collided at launch
- * @returns {boolean} - collision or not
- */
-TetrisGame.prototype.isCollision = function() {
-    var collision = false;
-
-    var shape = this.fallingBlock.shapes[this.fallingBlock.rotation];
-
-    for (var row = 0; row < shape.length; row += 1) {
-        for (var col = 0; col < shape[row].length; col += 1) {
-            if (shape[row][col] !== 0) {
-                //check that the shape is not above the field
-                if (row + this.fallingBlock.topLeft.row >= 0) {
-                    if (row + this.fallingBlock.topLeft.row >= this.field.length) {
-                        //this block would be below the playing field
-                        collision = true;
-                    }
-                    else if (this.field[row + this.fallingBlock.topLeft.row][col + this.fallingBlock.topLeft.col] !== 0) {
-                        //the space is taken
-                        collision = true;
-                    }
-                }
-
-            }
-        }
-    }
-
-    return collision;
 };
 
 /**
