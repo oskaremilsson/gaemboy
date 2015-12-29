@@ -224,7 +224,9 @@ TetrisGame.prototype.landFallingBlock = function() {
     for (var row = 0; row < shape.length; row += 1) {
         for (var col = 0; col < shape[row].length; col += 1) {
             if (shape[row][col] !== 0) {
-                this.field[row + this.fallingBlock.topLeft.row][col + this.fallingBlock.topLeft.col] = shape[row][col];
+                if (row + this.fallingBlock.topLeft.row >= 0) {
+                    this.field[row + this.fallingBlock.topLeft.row][col + this.fallingBlock.topLeft.col] = shape[row][col];
+                }
             }
         }
     }
@@ -423,19 +425,19 @@ TetrisGame.prototype.isMovable = function(dir) {
 
     for (var row = 0; row < shape.length; row += 1) {
         for (var col = 0; col < shape[row].length; col += 1) {
+            if (col + potentialTopLeft.col < 0) {
+                //this block would be to the left of the playing field
+                movable = false;
+            }
+
+            if (col + potentialTopLeft.col >= this.field[0].length) {
+                //this block would be to the right of the playing field
+                movable = false;
+            }
+
             //check that the shape is not above the field
             if (row + potentialTopLeft.row >= 0) {
                 if (shape[row][col] !== 0) {
-                    if (col + potentialTopLeft.col < 0) {
-                        //this block would be to the left of the playing field
-                        movable = false;
-                    }
-
-                    if (col + potentialTopLeft.col >= this.field[0].length) {
-                        //this block would be to the right of the playing field
-                        movable = false;
-                    }
-
                     if (this.field[row + potentialTopLeft.row][col + potentialTopLeft.col] !== 0) {
                         //the space is taken
                         movable = false;
