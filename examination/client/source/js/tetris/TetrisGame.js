@@ -38,6 +38,7 @@ function TetrisGame(element) {
     this.lineSound = new Audio("//root.oskaremilsson.se/tetris-sounds/line-remove.mp3");
     this.moveSound = new Audio("//root.oskaremilsson.se/tetris-sounds/move-block.mp3");
     this.gameoverSound = new Audio("//root.oskaremilsson.se/tetris-sounds/game-over.mp3");
+    this.fourRowSound = new Audio("//root.oskaremilsson.se/tetris-sounds/four-rows.mp3");
 
     this.fallingBlockInterval = undefined;
 }
@@ -122,7 +123,13 @@ TetrisGame.prototype.start = function() {
     if (this.BGsounds) {
         //play background music
         this.bgMusic.play();
+        this.bgMusic.addEventListener("ended", this.playBackgroundMusic.bind(this), false);
     }
+};
+
+TetrisGame.prototype.playBackgroundMusic = function() {
+    this.bgMusic.currentTime = 0;
+    this.bgMusic.play();
 };
 
 /**
@@ -279,12 +286,21 @@ TetrisGame.prototype.landFallingBlock = function() {
         }
     }
 
+    //reset the fullRows array
+    this.fullRows = [];
+
     //check if there are full rows after landing
     this.findFullRows();
 
     if (this.fullRows.length > 0) {
+        //call function to make animations
+        this.animateFullRows();
+
+        //erase the animation
+        window.setTimeout(this.clearAnimation.bind(this), 600);
+
         //erase the rows
-        this.eraseFullRows();
+        window.setTimeout(this.eraseFullRows.bind(this), 350);
 
         //count points
         this.points += this.countRowPoints();
@@ -295,10 +311,21 @@ TetrisGame.prototype.landFallingBlock = function() {
         }
 
         //reset the fullRows array
-        this.fullRows = [];
+        //this.fullRows = [];
 
         //render the points
         this.renderPoints();
+    }
+};
+
+/**
+ * Function to erase animation-classes
+ */
+TetrisGame.prototype.clearAnimation = function() {
+    var trs = this.element.querySelectorAll(".tetris-grid-body tr");
+
+    for (var i = 0; i < trs.length; i += 1) {
+        trs[i].classList.remove("full-row");
     }
 };
 
@@ -624,13 +651,30 @@ TetrisGame.prototype.findFullRows = function() {
 };
 
 /**
+ * Function to aminate the full rows
+ */
+TetrisGame.prototype.animateFullRows = function() {
+    var trs = this.element.querySelectorAll(".tetris-grid-body tr");
+
+    for (var i = 0; i < this.fullRows.length; i += 1) {
+        trs[this.fullRows[i]].classList.add("full-row");
+    }
+};
+
+/**
  * Function to erase the full rows from field
  */
 TetrisGame.prototype.eraseFullRows = function() {
     if (this.FXsounds) {
         //play sound
-        this.lineSound.currentTime = 0;
-        this.lineSound.play();
+        if (this.fullRows.length === 4) {
+            this.fourRowSound.currentTime = 0;
+            this.fourRowSound.play();
+        }
+        else {
+            this.lineSound.currentTime = 0;
+            this.lineSound.play();
+        }
     }
 
     for (var i = 0; i < this.fullRows.length; i += 1) {

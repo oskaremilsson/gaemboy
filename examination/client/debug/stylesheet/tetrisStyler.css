@@ -184,3 +184,15 @@
 	content: "volume_up";
 	cursor: pointer;
 }
+
+.tetris-app .full-row {
+	transition: all 1s;
+	transform: scale(2);
+	opacity: 0;
+}
+
+.tetris-app .tetris-grid-body .full-row td {
+	background: url(../image/tetris/fire.gif);
+	background-size: 80px 80px;
+	background-position: 50% 50%;
+}
