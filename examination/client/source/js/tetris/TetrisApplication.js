@@ -2,6 +2,11 @@
 var BasicWindow = require("../BasicWindow");
 var TetrisGame = require("./TetrisGame");
 
+/**
+ * Constructor function for the tetris-app
+ * @param options - the settings-object
+ * @constructor
+ */
 function TetrisApplication(options) {
     BasicWindow.call(this, options);
 
@@ -11,15 +16,23 @@ function TetrisApplication(options) {
 TetrisApplication.prototype = Object.create(BasicWindow.prototype);
 TetrisApplication.prototype.constructor =  TetrisApplication;
 
+/**
+ * Init the basics
+ */
 TetrisApplication.prototype.init = function() {
     this.print();
 
+    //create new game
     this.game = new TetrisGame(this.element);
     this.game.init();
 
+    //add eventlistener for the menu
     this.element.querySelector(".window-menu").addEventListener("click", this.menuClicked.bind(this));
 };
 
+/**
+ * Function to print the app
+ */
 TetrisApplication.prototype.print = function() {
     BasicWindow.prototype.print.call(this);
     this.element.classList.add("tetris-app");
@@ -34,6 +47,10 @@ TetrisApplication.prototype.print = function() {
     menu.appendChild(alt1);
 };
 
+/**
+ * Function to handle the menu-clicks
+ * @param event - click-event
+ */
 TetrisApplication.prototype.menuClicked = function(event) {
     var target;
     if (event.target.tagName.toLowerCase() === "a") {
@@ -53,7 +70,12 @@ TetrisApplication.prototype.menuClicked = function(event) {
     }
 };
 
+/**
+ * Function to handle the key-inputs
+ * @param key - the key-code
+ */
 TetrisApplication.prototype.keyInput = function(key) {
+    //If game is "alive" and not paused, call the correct functions in game
     if (this.game.alive) {
         if (!this.game.paused) {
             if (key === 37) {
@@ -81,22 +103,28 @@ TetrisApplication.prototype.keyInput = function(key) {
             }
         }
         else {
+            //the game is paused resume game if enter
             if (key === 13) {
                 this.game.resumeGame();
             }
         }
     }
     else {
+        //game is not running, start on enter
         if (key === 13) {
             this.game.start();
         }
     }
 };
 
+/**
+ * Function to destroy the app
+ */
 TetrisApplication.prototype.destroy = function() {
     if (this.game.fallingBlockInterval) {
         window.clearInterval(this.game.fallingBlockInterval);
     }
+
     document.querySelector("#main-frame").removeChild(this.element);
 };
 

@@ -213,7 +213,7 @@ Chat.prototype.checkInput = function(event) {
     }
 
     //check if the last char was enter
-    if (input.charCodeAt(input.length  -1) === 10) {
+    if (input.charCodeAt(input.length - 1) === 10) {
         this.formSubmit();
     }
 

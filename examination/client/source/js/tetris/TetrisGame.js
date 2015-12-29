@@ -11,6 +11,11 @@ var TBlockShape = require("./TBlockShape");
  * http://gamedevelopment.tutsplus.com/tutorials/implementing-tetris-collision-detection--gamedev-852
  */
 
+/**
+ * Contructor function for the tetris game
+ * @param element - the dom-element to be printed to
+ * @constructor
+ */
 function TetrisGame(element) {
     this.element = element;
     this.fallingBlock = undefined;
@@ -29,15 +34,22 @@ function TetrisGame(element) {
     this.fallingBlockInterval = undefined;
 }
 
+/**
+ * Initialized the basics of the module
+ */
 TetrisGame.prototype.init = function() {
     this.initField();
     this.print();
 
+    //add listener to pause if focus is lost
     this.element.addEventListener("focusout", this.pauseGame.bind(this));
 };
 
+/**
+ * Function to pause the game
+ */
 TetrisGame.prototype.pauseGame = function() {
-    //paus the game
+    //pause the game
     if (this.fallingBlockInterval && this.alive) {
         window.clearInterval(this.fallingBlockInterval);
         this.paused = true;
@@ -45,6 +57,9 @@ TetrisGame.prototype.pauseGame = function() {
     }
 };
 
+/**
+ * Function to resume the game
+ */
 TetrisGame.prototype.resumeGame = function() {
     //start the drop-interval again
     this.fallingBlockInterval = window.setInterval(this.fallBlock.bind(this), this.fallSpeed);
@@ -52,22 +67,30 @@ TetrisGame.prototype.resumeGame = function() {
     this.element.querySelector(".tetris-paused").classList.add("hide");
 };
 
+/**
+ * Start the game
+ */
 TetrisGame.prototype.start = function() {
     if (this.fallingBlockInterval) {
         window.clearInterval(this.fallingBlockInterval);
     }
 
+    //set all the variables to the start-state
     this.alive = true;
     this.level = 1;
     this.points = 0;
     this.fallSpeed = 600;
     this.rowCount = 0;
     this.readHighScore();
+
+    //make sure the classes is resetted
     this.element.querySelector(".tetris-grid-body").classList.remove("game-over");
     this.element.querySelector(".tetris-points").classList.remove("new-highscore");
-    this.paused = false;
     this.element.querySelector(".tetris-paused").classList.add("hide");
     this.element.querySelector(".tetris-splash-screen").classList.add("hide");
+
+    //run all the functions to make the magic happen
+    this.paused = false;
     this.initField();
     this.clearField();
     this.renderPoints();
@@ -76,42 +99,61 @@ TetrisGame.prototype.start = function() {
     this.render();
 };
 
+/**
+ * Function to read the high score from local storage
+ */
 TetrisGame.prototype.readHighScore = function() {
     if (localStorage.getItem("tetris-hs")) {
         this.highScore = localStorage.getItem("tetris-hs");
     }
 };
 
+/**
+ * Function to save the high score to local storage
+ */
 TetrisGame.prototype.saveHighScore = function() {
     if (this.points > this.highScore) {
         localStorage.setItem("tetris-hs", this.points);
     }
 };
 
+/**
+ * Function to fall the block one row down
+ */
 TetrisGame.prototype.fallBlock = function() {
     if (this.isFallable()) {
         this.fallingBlock.topLeft.row += 1;
     }
     else {
+        //block has collided, land the block and drop new
         window.clearInterval(this.fallingBlockInterval);
         this.landFallingBlock();
         this.dropNewBlock();
     }
 
+    //render the change
     this.render();
 };
 
+/**
+ * Function to fall block to bottom directly
+ */
 TetrisGame.prototype.fallBlockToBottom = function() {
     while (this.isFallable()) {
         this.fallingBlock.topLeft.row += 1;
     }
 
+    //render the change
     this.render();
 };
 
+/**
+ * Function to randomize a new block
+ */
 TetrisGame.prototype.newNextBlock = function() {
     var shape = Math.floor(Math.random() * 7);
 
+    //create new block from the random number
     switch (shape) {
         case 0: {
             this.nextBlock = new JBlockShape();
@@ -150,15 +192,22 @@ TetrisGame.prototype.newNextBlock = function() {
     }
 };
 
+/**
+ * Function to drop new block
+ */
 TetrisGame.prototype.dropNewBlock = function() {
+    //get the block from next-block
     this.fallingBlock = this.nextBlock;
 
+    //get a new next block
     this.clearNextBlock();
     this.newNextBlock();
 
+    //add fallinterval with current speed
     this.fallingBlockInterval = window.setInterval(this.fallBlock.bind(this), this.fallSpeed);
 
     if (this.isCollision()) {
+        //the new block collided at launch, game over
         this.saveHighScore();
         this.element.querySelector(".tetris-grid-body").classList.add("game-over");
         this.alive = false;
@@ -166,8 +215,10 @@ TetrisGame.prototype.dropNewBlock = function() {
     }
 };
 
+/**
+ * Function to land the falling block to the field
+ */
 TetrisGame.prototype.landFallingBlock = function() {
-    //this.clearFallingBlock();
     var shape = this.fallingBlock.shapes[this.fallingBlock.rotation];
 
     for (var row = 0; row < shape.length; row += 1) {
@@ -178,23 +229,33 @@ TetrisGame.prototype.landFallingBlock = function() {
         }
     }
 
+    //check if there are full rows after landing
     this.findFullRows();
 
     if (this.fullRows.length > 0) {
+        //erase the rows
         this.eraseFullRows();
+
+        //count points
         this.points += this.countRowPoints();
 
+        //if new HS add class to show it to the user
         if (this.points > this.highScore) {
             this.element.querySelector(".tetris-points").classList.add("new-highscore");
         }
 
+        //reset the fullRows array
         this.fullRows = [];
+
+        //render the points
         this.renderPoints();
     }
 };
 
+/**
+ * Function to render the game
+ */
 TetrisGame.prototype.render = function() {
-    //this.clearFallingBlock();
     this.clearField();
 
     // Change the classes to render the blocks to user
@@ -204,26 +265,34 @@ TetrisGame.prototype.render = function() {
         tds = trs[row].querySelectorAll(".tetris-grid td");
         for (var col = 0; col < this.field[row].length; col += 1) {
             if (this.field[row][col] !== 0) {
-                //should render class for block here
+                //add the class to show block-part
                 tds[col].classList.add("tetris-block-part");
             }
         }
     }
 
+    //render the falling block and nextblock
     this.renderFallingBlock();
     this.renderNextBlock();
 };
 
+/**
+ * Function to render the points
+ */
 TetrisGame.prototype.renderPoints = function() {
     var pointsElem = this.element.querySelector(".tetris-points");
     var levelElem = this.element.querySelector(".tetris-level");
     var pointNode = document.createTextNode(this.points);
     var levelNode = document.createTextNode(this.level);
 
+    //replace the textnodes to the new ones
     pointsElem.replaceChild(pointNode, pointsElem.firstChild);
     levelElem.replaceChild(levelNode, levelElem.firstChild);
 };
 
+/**
+ * Function to render the falling block
+ */
 TetrisGame.prototype.renderFallingBlock = function() {
     var row;
     var col;
@@ -242,12 +311,17 @@ TetrisGame.prototype.renderFallingBlock = function() {
                 //draw block at position corresponding to the shapes position
                 var y = row + this.fallingBlock.topLeft.row;
                 var x = col + this.fallingBlock.topLeft.col;
+
+                //add class to the correct block-part
                 tds[y][x].classList.add("tetris-falling-block-part", "color-" + shape[row][col]);
             }
         }
     }
 };
 
+/**
+ * Render the next block
+ */
 TetrisGame.prototype.renderNextBlock = function() {
     var row;
     var col;
@@ -270,6 +344,9 @@ TetrisGame.prototype.renderNextBlock = function() {
     }
 };
 
+/**
+ * Function to clear the next-block-container
+ */
 TetrisGame.prototype.clearNextBlock = function() {
     //clear next-block
     var trs = this.element.querySelectorAll(".tetris-next-block tbody tr");
@@ -277,11 +354,16 @@ TetrisGame.prototype.clearNextBlock = function() {
     for (var row = 0; row < trs.length; row += 1) {
         tds = trs[row].querySelectorAll("td");
         for (var col = 0; col < tds.length; col += 1) {
+            //clear the column
             tds[col].setAttribute("class", "");
         }
     }
 };
 
+/**
+ * Function to check if the fallingblock collided at launch
+ * @returns {boolean} - collision or not
+ */
 TetrisGame.prototype.isCollision = function() {
     var collision = false;
 
@@ -306,6 +388,10 @@ TetrisGame.prototype.isCollision = function() {
     return collision;
 };
 
+/**
+ * Function to check if the block is fallable
+ * @returns {boolean} - fallable or not
+ */
 TetrisGame.prototype.isFallable = function() {
     var fallable = true;
 
@@ -333,6 +419,10 @@ TetrisGame.prototype.isFallable = function() {
     return fallable;
 };
 
+/**
+ * Function to move the falling block
+ * @param dir
+ */
 TetrisGame.prototype.moveFallingBlock = function(dir) {
     if (this.isMovable(dir)) {
         this.fallingBlock.topLeft.col += dir;
@@ -341,6 +431,11 @@ TetrisGame.prototype.moveFallingBlock = function(dir) {
     this.render();
 };
 
+/**
+ * Function to check if block is movable
+ * @param dir - negative or positive number
+ * @returns {boolean} - movable or not
+ */
 TetrisGame.prototype.isMovable = function(dir) {
     var movable = true;
     var shape = this.fallingBlock.shapes[this.fallingBlock.rotation];
@@ -356,10 +451,12 @@ TetrisGame.prototype.isMovable = function(dir) {
                     //this block would be to the left of the playing field
                     movable = false;
                 }
+
                 if (col + potentialTopLeft.col >= this.field[0].length) {
                     //this block would be to the right of the playing field
                     movable = false;
                 }
+
                 if (this.field[row + potentialTopLeft.row][col + potentialTopLeft.col] !== 0) {
                     //the space is taken
                     movable = false;
@@ -371,6 +468,10 @@ TetrisGame.prototype.isMovable = function(dir) {
     return movable;
 };
 
+/**
+ * Function to rotate falling block
+ * @param dir - positive or negative number to handle left/Right
+ */
 TetrisGame.prototype.rotateFallingBlock = function(dir) {
     if (this.isRotatable(dir)) {
         var newRotation = this.fallingBlock.rotation + dir;
@@ -388,6 +489,11 @@ TetrisGame.prototype.rotateFallingBlock = function(dir) {
 
 };
 
+/**
+ * Function to check if the block is rotatable
+ * @param dir - neg or pos number
+ * @returns {boolean} - rotatable or not
+ */
 TetrisGame.prototype.isRotatable = function(dir) {
     var rotatable = true;
 
@@ -401,7 +507,6 @@ TetrisGame.prototype.isRotatable = function(dir) {
 
     //create potential shape
     var potentialShape = this.fallingBlock.shapes[potentialRotation];
-
 
     for (var row = 0; row < potentialShape.length; row += 1) {
         for (var col = 0; col < potentialShape[row].length; col += 1) {
@@ -427,6 +532,9 @@ TetrisGame.prototype.isRotatable = function(dir) {
     return rotatable;
 };
 
+/**
+ * Function to clear all the tablerows in game
+ */
 TetrisGame.prototype.clearField = function() {
     //clear field
     var trs = this.element.querySelectorAll("tr");
@@ -434,26 +542,33 @@ TetrisGame.prototype.clearField = function() {
     for (var row = 0; row < this.field.length; row += 1) {
         tds = trs[row].querySelectorAll("td");
         for (var col = 0; col < this.field[row].length; col += 1) {
+            //reset the classes
             tds[col].setAttribute("class", "");
         }
     }
 };
 
+/**
+ * Function to find the fullrows on the field
+ */
 TetrisGame.prototype.findFullRows = function() {
     //find full rows
     var full = false;
     for (var row = 0; row < this.field.length; row += 1) {
         for (var col = 0; col < this.field[row].length - 1; col += 1) {
-            if(this.field[row].indexOf(0) === -1) {
+            if (this.field[row].indexOf(0) === -1) {
                 //row is full
                 full = true;
             }
         }
+
         if (full) {
+            //add them to the array os full rows
             this.fullRows.push(row);
             this.rowCount += 1;
 
             if (this.rowCount % 5 === 0 && this.fallSpeed > 150) {
+                //speed up the game
                 this.fallSpeed -= 35;
                 this.level += 1;
             }
@@ -463,6 +578,9 @@ TetrisGame.prototype.findFullRows = function() {
     }
 };
 
+/**
+ * Function to erase the full rows from field
+ */
 TetrisGame.prototype.eraseFullRows = function() {
     for (var i = 0; i < this.fullRows.length; i += 1) {
         //remove the full row from field
@@ -470,14 +588,24 @@ TetrisGame.prototype.eraseFullRows = function() {
 
         //add a new empty on top of field
         var newRow = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+        //add it to the beginning of array
         this.field.unshift(newRow);
     }
 };
 
+/**
+ * Function to count the points
+ * @returns {number} - the new points
+ */
 TetrisGame.prototype.countRowPoints = function() {
+    //100p for one row, add additional 20% per extra row
     return this.basePoints + ((this.fullRows.length - 1) * this.basePoints) * 1.2;
 };
 
+/**
+ * Function to print the gameboard
+ */
 TetrisGame.prototype.print = function() {
     //print the chat-template to this.element
     var template = document.querySelector("#template-tetris-application").content.cloneNode(true);
@@ -488,12 +616,12 @@ TetrisGame.prototype.print = function() {
 
     for (var row = 0; row < this.field.length; row += 1) {
         tr = document.createElement("tr");
-        //tr.setAttribute("id", "row-" + row);
+
         for (var col = 0; col < this.field[row].length; col += 1) {
             td = document.createElement("td");
-            //td.setAttribute("id", "col-" + col);
             tr.appendChild(td);
         }
+
         frag.appendChild(tr);
     }
 
@@ -502,6 +630,9 @@ TetrisGame.prototype.print = function() {
     this.element.querySelector(".window-content").appendChild(template);
 };
 
+/**
+ * Function to initialize the field-array
+ */
 TetrisGame.prototype.initField = function() {
     this.field = [
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
