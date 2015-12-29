@@ -30,6 +30,13 @@ function TetrisGame(element) {
     this.highScore = 0;
     this.nextBlock = undefined;
     this.paused = false;
+    this.FXsounds = true;
+    this.BGsounds = true;
+    this.bgMusic = new Audio("//root.oskaremilsson.se/tetris-sounds/tetris.mp3");
+    this.rotateSound = new Audio("//root.oskaremilsson.se/tetris-sounds/rotate-block.mp3");
+    this.landSound = new Audio("//root.oskaremilsson.se/tetris-sounds/land-block.mp3");
+    this.lineSound = new Audio("//root.oskaremilsson.se/tetris-sounds/line-remove.mp3");
+    this.gameoverSound = new Audio("//root.oskaremilsson.se/tetris-sounds/game-over.mp3");
 
     this.fallingBlockInterval = undefined;
 }
@@ -43,6 +50,9 @@ TetrisGame.prototype.init = function() {
 
     //add listener to pause if focus is lost
     this.element.addEventListener("focusout", this.pauseGame.bind(this));
+
+    //add listener for the sounds toggle
+    this.element.querySelector(".tetris-side-info").addEventListener("click", this.soundToggle.bind(this));
 };
 
 /**
@@ -97,6 +107,11 @@ TetrisGame.prototype.start = function() {
     this.newNextBlock();
     this.dropNewBlock();
     this.render();
+
+    if (this.BGsounds) {
+        //play background music
+        this.bgMusic.play();
+    }
 };
 
 /**
@@ -212,6 +227,22 @@ TetrisGame.prototype.dropNewBlock = function() {
         this.element.querySelector(".tetris-grid-body").classList.add("game-over");
         this.alive = false;
         window.clearInterval(this.fallingBlockInterval);
+
+        if (this.BGsounds) {
+            //stop background music
+            this.bgMusic.pause();
+            this.bgMusic.currentTime = 0;
+        }
+
+        window.setTimeout(this.playGameOverSound.bind(this), 500);
+    }
+};
+
+TetrisGame.prototype.playGameOverSound = function() {
+    if (this.FXsounds) {
+        //play gameover sound
+        this.gameoverSound.currentTime = 0;
+        this.gameoverSound.play();
     }
 };
 
@@ -219,6 +250,12 @@ TetrisGame.prototype.dropNewBlock = function() {
  * Function to land the falling block to the field
  */
 TetrisGame.prototype.landFallingBlock = function() {
+    if (this.FXsounds) {
+        //play sound
+        this.landSound.currentTime = 0;
+        this.landSound.play();
+    }
+
     var shape = this.fallingBlock.shapes[this.fallingBlock.rotation];
 
     for (var row = 0; row < shape.length; row += 1) {
@@ -455,6 +492,12 @@ TetrisGame.prototype.isMovable = function(dir) {
  * @param dir - positive or negative number to handle left/Right
  */
 TetrisGame.prototype.rotateFallingBlock = function(dir) {
+    if (this.FXsounds) {
+        //play sound
+        this.rotateSound.currentTime = 0;
+        this.rotateSound.play();
+    }
+
     if (this.isRotatable(dir)) {
         var newRotation = this.fallingBlock.rotation + dir;
         if (newRotation > 3) {
@@ -567,6 +610,12 @@ TetrisGame.prototype.findFullRows = function() {
  * Function to erase the full rows from field
  */
 TetrisGame.prototype.eraseFullRows = function() {
+    if (this.FXsounds) {
+        //play sound
+        this.lineSound.currentTime = 0;
+        this.lineSound.play();
+    }
+
     for (var i = 0; i < this.fullRows.length; i += 1) {
         //remove the full row from field
         this.field.splice(this.fullRows[i], 1);
@@ -637,6 +686,28 @@ TetrisGame.prototype.initField = function() {
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ];
+};
+
+/**
+ * Function to toggle the sounds
+ */
+TetrisGame.prototype.soundToggle = function(event) {
+    if (event.target.id === "tetris-music-toggle") {
+        event.target.classList.toggle("sounds");
+        this.BGsounds = !this.BGsounds;
+
+        if (this.BGsounds) {
+            this.bgMusic.play();
+        }
+        else {
+            this.bgMusic.pause();
+            this.bgMusic.currentTime = 0;
+        }
+    }
+    else if (event.target.id === "tetris-sound-toggle") {
+        event.target.classList.toggle("sounds");
+        this.FXsounds = !this.FXsounds;
+    }
 };
 
 module.exports = TetrisGame;

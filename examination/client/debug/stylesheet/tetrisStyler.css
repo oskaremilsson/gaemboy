@@ -153,3 +153,34 @@
 .tetris-app .tetris-splash-screen li {
 	margin-top: 5px;
 }
+
+.tetris-app .sound-controller {
+	margin-top: 10px;
+	display: inline-block;
+}
+
+.tetris-app .sound-controller p {
+	display: block;
+	width: 80px;
+	float: right;
+	margin-top: 5px;
+	color: #ffffff;
+}
+
+.tetris-app .sound-controller i {
+	display: block;
+	width: 24px;
+	float: left;
+}
+
+.tetris-app .mute:after {
+	color: #000000;
+	content: "volume_off";
+	cursor: pointer;
+}
+
+.tetris-app .sounds:after {
+	color: #ffffff;
+	content: "volume_up";
+	cursor: pointer;
+}

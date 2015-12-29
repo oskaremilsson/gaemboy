@@ -125,6 +125,11 @@ TetrisApplication.prototype.destroy = function() {
         window.clearInterval(this.game.fallingBlockInterval);
     }
 
+    if (this.game.bgMusic) {
+        //stop background music
+        this.game.bgMusic.pause();
+    }
+
     document.querySelector("#main-frame").removeChild(this.element);
 };
 

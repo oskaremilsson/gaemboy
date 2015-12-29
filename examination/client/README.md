@@ -86,7 +86,7 @@ You are free to add functionality not described above. Added functionality could
 * Use the messages to play memory against an opponent. Perferably using a seperate channel.
 
 My added features:
-* Send-button only clickable if text
+* Send-button only clickable if given input
 * Enter sends message
 * Auto-scroll to bottom when new message
 * Don't auto-scroll to bottom if you have scrolled up to read old messages
@@ -105,6 +105,8 @@ All students working on this assignment uses the same server and can read all me
 * Faster speed the more you play
 * New Game-alternative in menu
 * View next block 
+* Fall from above the field
+* Sound effects with mute-options
 
 ## Hints and recommendations
 Hints and recommendations below are only suggestions and nothing you need to abide by.
