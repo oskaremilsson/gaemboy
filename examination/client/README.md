@@ -14,6 +14,16 @@ Please check that your application meets the requirements below before submittin
 * ~~Windows should get focus when clicked/dragged.~~
 * ~~The window with focus shall be on top of all other windows.~~
 
+## Extended functionality to PWD
+* Maximize/Restore windows
+* Minimize/Restore windows
+* List of "running-apps" in the launcher (hover the start-buttons)
+* Close windows from "running-apps"-list
+* Restore/set focus on app from "running-apps"-list
+* Out-of-bounds check when moving windows
+* Start "unlimited" apps without window getting out of screen
+* Animations
+
 The following three applications should at least be included in the desktop application:
 * ~~A memory-game~~
 * ~~A chat connected to a central chat channel using websockets~~
@@ -29,7 +39,13 @@ See [exercise/memory/README.md](https://github.com/1dv022/exercise/blob/memory/e
 ### Functional requirements, Memory application:
 * ~~The user should be able to open and play multiple memory games simultaneously.~~
 * ~~The user should be able to play the game using only the keyboard.~~
-* ~~One, by you decided, extended feature (settings)~~
+* ~~One, by you decided, extended feature~~
+
+## My extended feature
+* Settings tab to change the board-size
+* Timer to get the time it took
+* Count the amount of tries
+* When playing with the arrows on keyboard the marked-card "loops" (starts over at beginning when at last)
 
 ## The chat application
 The chat application shall be connected to other students chats via a web socket-server.
@@ -78,7 +94,7 @@ Your application can simply ignore those messages completly.
 You are free to add functionality not described above. Added functionality could be:
 * ~~Ability to choose which channel to listen to.~~
 * ~~Caching message history.~~
-* Added support for emojis.
+* ~~Added support for emojis.~~
 * Added support for writing code.
 * ~~Ability to change username.~~
 * Encrypted messages on a special channel to allow secret communication.
@@ -86,6 +102,7 @@ You are free to add functionality not described above. Added functionality could
 * Use the messages to play memory against an opponent. Perferably using a seperate channel.
 
 My added features:
+* Settings tab in the menu to change channels and username (and server)
 * Send-button only clickable if given input
 * Enter sends message
 * Auto-scroll to bottom when new message
@@ -99,14 +116,17 @@ All students working on this assignment uses the same server and can read all me
 ### Features
 * All the standard blocks and format
 * Play with the keyboard
-* Points scale when removing many rows with the same block
 * Auto drop on space-press
 * Faster drop on down-arrow-press
 * Faster speed the more you play
 * New Game-alternative in menu
 * View next block 
 * Fall from above the field
+* Pause game if focus is lost from app
+* Points scale when removing many rows with the same block
 * Sound effects with mute-options
+* Animations for fullrows and points
+* New game-button in the menu
 
 ## Hints and recommendations
 Hints and recommendations below are only suggestions and nothing you need to abide by.

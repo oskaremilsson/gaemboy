@@ -365,6 +365,8 @@ TetrisGame.prototype.renderPoints = function() {
     //replace the textnodes to the new ones
     pointsElem.replaceChild(pointNode, pointsElem.firstChild);
     levelElem.replaceChild(levelNode, levelElem.firstChild);
+
+    this.animateNewPoints();
 };
 
 /**
@@ -747,6 +749,26 @@ TetrisGame.prototype.initField = function() {
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ];
+};
+
+/**
+ * Function to animate new points
+ */
+TetrisGame.prototype.animateNewPoints = function() {
+    var elem = this.element.querySelector(".tetris-points");
+
+    elem.classList.add("tetris-new-points");
+
+    window.setTimeout(this.clearNewPointsAnimation.bind(this), 550);
+};
+
+/**
+ * Function to remove the class set by the animate new points
+ */
+TetrisGame.prototype.clearNewPointsAnimation = function() {
+    var elem = this.element.querySelector(".tetris-points");
+
+    elem.classList.remove("tetris-new-points");
 };
 
 /**
