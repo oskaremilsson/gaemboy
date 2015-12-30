@@ -156,6 +156,11 @@ Chat.prototype.formSubmit = function(event) {
         var input = this.element.querySelector(".chat-inputField").value;
 
         if (input.length > 1) {
+            //check if the last char was enter, remove it
+            if (input.charCodeAt(input.length - 1) === 10) {
+                input = input.slice(0, -1);
+            }
+
             //the message is at least one char, create object to send
             var msg = {
                 type: "message",
@@ -192,7 +197,7 @@ Chat.prototype.printNewMessage = function(data) {
     //get the template for new message and modify it
     var template = document.querySelector("#template-chat-message-line").content.cloneNode(true);
     var usernameNode = document.createTextNode(data.username + ": ");
-    var messageNode = this.parseMessageWithLinks(data.data);
+    var messageNode = this.parseMessage(data.data);
 
     template.querySelector(".chat-message").appendChild(messageNode);
     if (data.timestamp) {
@@ -307,14 +312,16 @@ Chat.prototype.checkInput = function(event) {
 };
 
 /**
- * Function to find and parse links in message to clickable nodes
+ * Function to find and parse message to clickable links and emojis
  * @param text - the message
  * @returns {*} - documentFragment to append as message
  */
-Chat.prototype.parseMessageWithLinks = function(text) {
+Chat.prototype.parseMessage = function(text) {
     var frag = document.createDocumentFragment();
     var link;
+    var emoji;
     var aTag;
+    var spanTag;
     var linkNode;
     var textNode;
 
@@ -328,6 +335,9 @@ Chat.prototype.parseMessageWithLinks = function(text) {
         }
         else if (words[i].slice(0, 8) === "https://") {
             link = words[i].slice(7);
+        }
+        else if (words[i].charAt(0) === ":" || words[i].charAt(0) === ";") {
+            emoji = words[i];
         }
 
         if (link) {
@@ -346,6 +356,17 @@ Chat.prototype.parseMessageWithLinks = function(text) {
             //reset link
             link = undefined;
         }
+        else if (emoji) {
+            //emoji found, create it
+            spanTag = this.parseEmojis(emoji);
+
+            textNode = document.createTextNode(" ");
+
+            frag.appendChild(spanTag);
+            frag.appendChild(textNode);
+
+            emoji = undefined;
+        }
         else {
             //append the word as it is
             textNode = document.createTextNode(words[i] + " ");
@@ -354,6 +375,81 @@ Chat.prototype.parseMessageWithLinks = function(text) {
     }
 
     return frag;
+};
+
+Chat.prototype.parseEmojis = function(emoji) {
+    var template = document.querySelector("#template-chat-emoji").content.cloneNode(true);
+    var elem = template.querySelector(".emoji");
+    switch (emoji) {
+        case ":)":
+        case ":-)": {
+            elem.classList.add("emoji-smiley");
+            break;
+        }
+
+        case ":D":
+        case ":-D": {
+            elem.classList.add("emoji-happy");
+            break;
+        }
+
+        case ";)":
+        case ";-)": {
+            elem.classList.add("emoji-flirt");
+            break;
+        }
+
+        case ":O":
+        case ":-O": {
+            elem.classList.add("emoji-surprised");
+            break;
+        }
+
+        case ":P":
+        case ":-P": {
+            elem.classList.add("emoji-tounge");
+            break;
+        }
+
+        case ":@": {
+            elem.classList.add("emoji-angry");
+            break;
+        }
+
+        case ":S":
+        case ":-S": {
+            elem.classList.add("emoji-confused");
+            break;
+        }
+
+        case ":(":
+        case ":-(": {
+            elem.classList.add("emoji-sad");
+            break;
+        }
+
+        case ":'(":
+        case ":'-(": {
+            elem.classList.add("emoji-crying");
+            break;
+        }
+
+        case ":L": {
+            elem.classList.add("emoji-heart");
+            break;
+        }
+
+        case ":3": {
+            elem.classList.add("emoji-cat");
+            break;
+        }
+
+        default: {
+            elem = document.createTextNode(emoji);
+        }
+    }
+
+    return elem;
 };
 
 /**

@@ -188,3 +188,54 @@
 	border-bottom: 1px solid rgba(0,0,0,0.2);
 	font-size: 12px;
 }
+
+.chat-app .emoji {
+	width: 19px;
+	height: 19px;
+	display: inline-block;
+	background: url(../image/smileys.png);
+}
+
+.chat-app .emoji-smiley {
+	background-position: -10px -22px;
+}
+
+.chat-app .emoji-happy {
+	background-position: -39px -22px;
+}
+
+.chat-app .emoji-flirt {
+	background-position: -68px -22px;
+}
+
+.chat-app .emoji-surprised {
+	background-position: -97px -22px;
+}
+
+.chat-app .emoji-tounge {
+	background-position: -126px -22px;
+}
+
+.chat-app .emoji-angry {
+	background-position: -184px -22px;
+}
+
+.chat-app .emoji-confused {
+	background-position: -213px -22px;
+}
+
+.chat-app .emoji-sad {
+	background-position: -271px -22px;
+}
+
+.chat-app .emoji-crying {
+	background-position: -10px -67px;
+}
+
+.chat-app .emoji-heart {
+	background-position: -97px -112px;
+}
+
+.chat-app .emoji-cat {
+	background-position: -184px -112px;
+}
