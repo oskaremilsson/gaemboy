@@ -147,18 +147,18 @@
 	max-width: 65%;
 	min-width: 12px;
 	min-height: 15px;
-}
 
-.chat-app .chat-bubble .chat-message-line {
-	background: #7fc2df;
+	word-wrap: break-word;
 	border-radius: 8px;
 	margin-left: 3px;
 }
 
+.chat-app .chat-bubble .chat-message-line {
+	background: #7fc2df;
+}
+
 .chat-app .chat-bubble-me .chat-message-line {
 	background: #86e47c;
-	border-radius: 8px;
-	margin-right: 3px;
 }
 
 .chat-app .chat-bubble::after {
