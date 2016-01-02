@@ -101,6 +101,10 @@ TetrisApplication.prototype.keyInput = function(key) {
                 //enter: play/pause
                 this.game.pauseGame();
             }
+            else if (key === 68) {
+                //d (demo-mode)
+                this.game.demoGame();
+            }
         }
         else {
             //the game is paused resume game if enter
