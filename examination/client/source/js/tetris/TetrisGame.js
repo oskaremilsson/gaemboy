@@ -30,7 +30,7 @@ function TetrisGame(element) {
     this.highScore = 0;
     this.nextBlock = undefined;
     this.paused = false;
-    this.FXsounds = true;
+    this.FXsounds = false;
     this.BGsounds = false;
     this.bgMusic = new Audio("//root.oskaremilsson.se/tetris-sounds/tetris.mp3");
     this.rotateSound = new Audio("//root.oskaremilsson.se/tetris-sounds/rotate-block.mp3");
@@ -55,6 +55,23 @@ TetrisGame.prototype.init = function() {
 
     //add listener for the sounds toggle
     this.element.querySelector(".tetris-side-info").addEventListener("click", this.soundToggle.bind(this));
+
+    //read sound-settings from local
+    if (localStorage.getItem("FXsounds")) {
+        var FXsounds = localStorage.getItem("FXsounds");
+        if (FXsounds === "true") {
+            this.FXsounds = true;
+            this.element.querySelector("#tetris-sound-toggle").classList.add("sounds");
+        }
+    }
+
+    if (localStorage.getItem("BGsounds")) {
+        var BGsounds = localStorage.getItem("BGsounds");
+        if (BGsounds === "true") {
+            this.BGsounds = true;
+            this.element.querySelector("#tetris-music-toggle").classList.add("sounds");
+        }
+    }
 };
 
 /**
@@ -779,6 +796,9 @@ TetrisGame.prototype.soundToggle = function(event) {
         event.target.classList.toggle("sounds");
         this.BGsounds = !this.BGsounds;
 
+        //dave to local storage
+        localStorage.setItem("BGsounds", this.BGsounds);
+
         if (this.BGsounds && this.alive) {
             this.bgMusic.play();
         }
@@ -790,6 +810,9 @@ TetrisGame.prototype.soundToggle = function(event) {
     else if (event.target.id === "tetris-sound-toggle") {
         event.target.classList.toggle("sounds");
         this.FXsounds = !this.FXsounds;
+
+        //save to local storage
+        localStorage.setItem("FXsounds", this.FXsounds);
     }
 };
 
