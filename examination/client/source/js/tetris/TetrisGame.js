@@ -599,18 +599,18 @@ TetrisGame.prototype.isRotatable = function(dir) {
     for (var row = 0; row < potentialShape.length; row += 1) {
         for (var col = 0; col < potentialShape[row].length; col += 1) {
             //check that the shape is not above the field
+            if (col + this.fallingBlock.topLeft.col < 0) {
+                //this block would be to the left of the playing field
+                rotatable = false;
+            }
+
+            if (col + this.fallingBlock.topLeft.col >= this.field[0].length) {
+                //this block would be to the right of the playing field
+                rotatable = false;
+            }
+
             if (row + this.fallingBlock.topLeft.row >= 0) {
                 if (potentialShape[row][col] !== 0) {
-                    if (col + this.fallingBlock.topLeft.col < 0) {
-                        //this block would be to the left of the playing field
-                        rotatable = false;
-                    }
-
-                    if (col + this.fallingBlock.topLeft.col >= this.field[0].length) {
-                        //this block would be to the right of the playing field
-                        rotatable = false;
-                    }
-
                     if (this.field[row + this.fallingBlock.topLeft.row][col + this.fallingBlock.topLeft.col] !== 0) {
                         //the space is taken
                         rotatable = false;
