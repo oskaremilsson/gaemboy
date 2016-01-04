@@ -3,6 +3,7 @@ var ExA = require("./ExampleApplication");
 var MemoryApplication = require("./memory/MemoryApplication");
 var ChatApplication = require("./chatapp/ChatApplication");
 var TetrisApplication = require("./tetris/TetrisApplication");
+var AboutApplication = require("./AboutApplication");
 
 /**
  * Constructor for the launcher
@@ -17,15 +18,7 @@ function Launcher(desktop) {
  * Function to initialize the basics
  */
 Launcher.prototype.init = function() {
-    var iTag;
-    var appList = document.querySelectorAll(".launcher li");
-
-    //Add eventlisteners to the launcher-buttons
-    for (var i = 0; i < appList.length; i += 1) {
-        iTag = appList[i].querySelector("i");
-        appList[i].addEventListener("click", this.launcherClick.bind(this), true);
-    }
-
+    document.querySelector(".launcher").addEventListener("click", this.launcherClick.bind(this), true);
 };
 
 /**
@@ -149,6 +142,15 @@ Launcher.prototype.startApplication = function(value, icon, title) {
             appOptions.keyActivated = true;
             newApp = new TetrisApplication(appOptions);
             newApp.init();
+
+            break;
+        }
+
+        case "about":
+        {
+            appOptions.maximizable = true;
+            newApp = new AboutApplication(appOptions);
+            newApp.print();
 
             break;
         }

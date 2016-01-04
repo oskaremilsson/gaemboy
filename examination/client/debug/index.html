@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="stylesheet/memoryStyler.css">
     <link rel="stylesheet" type="text/css" href="stylesheet/chatStyler.css">
     <link rel="stylesheet" type="text/css" href="stylesheet/tetrisStyler.css">
+    <link rel="stylesheet" type="text/css" href="stylesheet/aboutStyler.css">
     <title>KittyOSX Toulouse</title>
     <!-- TEMPLATES -->
     <template id="template-window">
@@ -171,6 +172,44 @@
             </ul>
         </div>
     </template>
+
+    <template id="template-about-application">
+        <h1>About</h1>
+        <p class="about-copyright">©2016 Oskar Emilsson</p>
+        <h3>What is this?</h3>
+        <p>This is the last assignment in the course <a href="https://coursepress.lnu.se/kurs/klientbaserad-webbprogrammering/" target="_blank">1DV022</a> at Linnaeus University in Kalmar, Sweden.</p>
+
+        <h2><i class="material-icons md-30 launch-icon tetris-icon">image_aspect_ratio</i> Tetris</h2>
+        <h3>Controls</h3>
+        <ul>
+            <li><h4>Left/Right Arrow:</h4>Move block left/right</li>
+            <li><h4>Down Arrow: </h4>Drop block down faster</li>
+            <li><h4>Space: </h4>Drop block to the bottom</li>
+            <li><h4>Enter: </h4>Start/Pause/Resume</li>
+        </ul>
+
+        <h3>Points</h3>
+        <p>Points are based on the amount of full rows at the same time. You earn 20% more points per extra row!</p>
+
+        <h3>Sounds</h3>
+        <p>Use the speaker-toggles in the tetris to toggle sounds. The app remembers your settings between startups.</p>
+
+        <h2><i class="material-icons md-30 launch-icon">apps</i> Memory</h2>
+        <p>You can either play with your mouse or with arrow-keys. When you start the application a timer starts. When you
+            complete the game you will see the time and amount of tries.</p>
+        <p>In the settings you can change the board-size.</p>
+
+        <h2><i class="material-icons md-30 launch-icon">chat</i> Chat</h2>
+        <p>You can change Username, Channel and server at any time in the settings.</p>
+        <h3>Emojis</h3>
+        <img src="image/about_smileys.png" />
+
+        <h3>History</h3>
+        <p>Each channel-history is saved and loaded the next time you get online!</p>
+
+        <h2><i class="material-icons md-30 launch-icon">loop</i> Reset Desktop</h2>
+        <p>This resets the desktop and quits all the open applications.</p>
+    </template>
     <!-- END OF TEMPLATES -->
 </head>
 <body>
@@ -205,6 +244,14 @@
                 <div class="tooltip-container">
                     <div class="tooltip-line">
                         <span class="tooltip-title">Tetris</span>
+                    </div>
+                </div>
+            </li>
+            <li value="about">
+                <i class="material-icons md-30 launch-icon">help_outline</i>
+                <div class="tooltip-container">
+                    <div class="tooltip-line">
+                        <span class="tooltip-title">About</span>
                     </div>
                 </div>
             </li>
