@@ -31,6 +31,7 @@ function Launcher(desktop) {
 Launcher.prototype.init = function() {
     document.querySelector(".launcher").addEventListener("click", this.launcherClick.bind(this), true);
 
+    this.updateClock();
     window.setInterval(this.updateClock.bind(this), 1000);
 };
 
@@ -262,6 +263,9 @@ Launcher.prototype.addRunningApp = function(type, app) {
 
 };
 
+/**
+ * Function to update the clock
+ */
 Launcher.prototype.updateClock = function() {
     var dateObj = new Date();
     var date = dateObj.toLocaleDateString("sv-se", this.dateStampOptions);
