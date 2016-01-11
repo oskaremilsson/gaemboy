@@ -12,6 +12,17 @@ var AboutApplication = require("./AboutApplication");
  */
 function Launcher(desktop) {
     this.desktop = desktop;
+
+    //the datestampoptions to use
+    this.dateStampOptions = {
+        year: "numeric", month: "numeric",
+        day: "numeric"
+    };
+
+    //the timestampoptions to use
+    this.timeStampOptions = {
+        hour: "2-digit", minute: "2-digit"
+    };
 }
 
 /**
@@ -19,6 +30,8 @@ function Launcher(desktop) {
  */
 Launcher.prototype.init = function() {
     document.querySelector(".launcher").addEventListener("click", this.launcherClick.bind(this), true);
+
+    window.setInterval(this.updateClock.bind(this), 1000);
 };
 
 /**
@@ -247,6 +260,21 @@ Launcher.prototype.addRunningApp = function(type, app) {
 
     container.appendChild(template);
 
+};
+
+Launcher.prototype.updateClock = function() {
+    var dateObj = new Date();
+    var date = dateObj.toLocaleDateString("sv-se", this.dateStampOptions);
+    var time = dateObj.toLocaleTimeString("sv-se", this.timeStampOptions);
+
+    var timeElem = document.querySelector(".launcher-clock-time");
+    var dateElem = document.querySelector(".launcher-clock-date");
+
+    var timeNode = document.createTextNode(time);
+    var dateNode = document.createTextNode(date);
+
+    timeElem.replaceChild(timeNode, timeElem.firstChild);
+    dateElem.replaceChild(dateNode, dateElem.firstChild);
 };
 
 module.exports = Launcher;
