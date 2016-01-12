@@ -76,39 +76,17 @@ TetrisApplication.prototype.menuClicked = function(event) {
  */
 TetrisApplication.prototype.keyInput = function(key) {
     //If game is "alive" and not paused, call the correct functions in game
-    if (this.game.alive) {
-        /*if (key === 37) {
-            //left
-            this.game.moveFallingBlock(-1);
-        }
-        else if (key === 39) {
-            //right
-            this.game.moveFallingBlock(1);
-        }
-        else if (key === 38) {
-            //up
-            this.game.rotateFallingBlock(1);
-        }
-        else if (key === 40) {
-            //down
-            this.game.fallBlock();
-        }
-        else if (key === 32) {
-            this.game.fallBlockToBottom();
-        }
-        else if (key === 13) {
-            //enter: play/pause
-            this.game.pauseGame();
-        }
-        else if (key === 68) {
-            //d (demo-mode)
-            this.game.demoGame();
-        }*/
+    if (this.game.alive && !this.game.paused) {
         this.inputToGameHandler(key);
     }
     else {
         if (key === 13) {
-            this.game.start();
+            if (this.game.paused) {
+                this.game.resumeGame();
+            }
+            else {
+                this.game.start();
+            }
         }
     }
 };
@@ -147,13 +125,7 @@ TetrisApplication.prototype.inputToGameHandler = function(key) {
 
         case 13: {
             //enter
-            if (this.game.paused) {
-                this.game.resumeGame();
-            }
-            else {
-                this.game.pauseGame();
-            }
-
+            this.game.pauseGame();
             break;
         }
 

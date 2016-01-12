@@ -376,8 +376,8 @@ TetrisGame.prototype.render = function() {
 TetrisGame.prototype.renderPoints = function() {
     var pointsElem = this.element.querySelector(".tetris-points");
     var levelElem = this.element.querySelector(".tetris-level");
-    var pointNode = document.createTextNode(this.points);
-    var levelNode = document.createTextNode(this.level);
+    var pointNode = document.createTextNode(this.points.toString());
+    var levelNode = document.createTextNode(this.level.toString());
 
     //replace the textnodes to the new ones
     pointsElem.replaceChild(pointNode, pointsElem.firstChild);

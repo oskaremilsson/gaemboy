@@ -320,52 +320,24 @@ Chat.prototype.parseMessage = function(text) {
     var frag = document.createDocumentFragment();
     var link;
     var emoji;
-    var aTag;
-    var spanTag;
-    var linkNode;
     var textNode;
 
     //split message into words
     var words = text.split(" ");
 
-    for (var i = 0; i < words.length; i++) {
+    for (var i = 0; i < words.length; i += 1) {
         //search for links
         if (words[i].slice(0, 7) === "http://") {
             link = words[i].slice(7);
+            frag = this.addLinkOrEmojiToFragment(frag, "link", link);
         }
         else if (words[i].slice(0, 8) === "https://") {
             link = words[i].slice(7);
+            frag = this.addLinkOrEmojiToFragment(frag, "link", link);
         }
         else if (words[i].charAt(0) === ":" || words[i].charAt(0) === ";") {
             emoji = words[i];
-        }
-
-        if (link) {
-            //link found, create a-element
-            aTag = document.createElement("a");
-            aTag.setAttribute("href", "//" + link);
-            aTag.setAttribute("target", "_blank");
-            linkNode = document.createTextNode(link);
-
-            aTag.appendChild(linkNode);
-            textNode = document.createTextNode(" ");
-
-            frag.appendChild(aTag);
-            frag.appendChild(textNode);
-
-            //reset link
-            link = undefined;
-        }
-        else if (emoji) {
-            //emoji found, create it
-            spanTag = this.parseEmojis(emoji);
-
-            textNode = document.createTextNode(" ");
-
-            frag.appendChild(spanTag);
-            frag.appendChild(textNode);
-
-            emoji = undefined;
+            frag = this.addLinkOrEmojiToFragment(frag, "emoji", emoji);
         }
         else {
             //append the word as it is
@@ -377,6 +349,47 @@ Chat.prototype.parseMessage = function(text) {
     return frag;
 };
 
+/**
+ * Function to add the links or emoji to fragment
+ * @param frag, the fragment
+ * @param type, type of the thing to parse
+ * @param data, data to parse
+ * @returns {*}, the fragment
+ */
+Chat.prototype.addLinkOrEmojiToFragment = function(frag, type, data) {
+    var textNode;
+    if (type === "link") {
+        //link found, create a-element
+        var aTag = document.createElement("a");
+        aTag.setAttribute("href", "//" + data);
+        aTag.setAttribute("target", "_blank");
+        var linkNode = document.createTextNode(data);
+
+        aTag.appendChild(linkNode);
+        textNode = document.createTextNode(" ");
+
+        frag.appendChild(aTag);
+        frag.appendChild(textNode);
+
+    }
+    else if (type === "emoji") {
+        //emoji found, create it
+        var spanTag = this.parseEmojis(data);
+
+        textNode = document.createTextNode(" ");
+
+        frag.appendChild(spanTag);
+        frag.appendChild(textNode);
+    }
+
+    return frag;
+};
+
+/**
+ * Function to parse the emoji
+ * @param emoji
+ * @returns {Element} the emoji-element
+ */
 Chat.prototype.parseEmojis = function(emoji) {
     var template = document.querySelector("#template-chat-emoji").content.cloneNode(true);
     var elem = template.querySelector(".emoji");
