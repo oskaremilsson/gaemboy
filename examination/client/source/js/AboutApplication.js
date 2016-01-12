@@ -14,7 +14,6 @@ AboutApplication.prototype.constructor =  AboutApplication;
  */
 AboutApplication.prototype.print = function() {
     BasicWindow.prototype.print.call(this);
-    //document.querySelector("#" + this.id).classList.add("about-app");
     this.element.classList.add("about-app");
 
     var template = document.querySelector("#template-about-application").content.cloneNode(true);

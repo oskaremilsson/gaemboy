@@ -77,46 +77,90 @@ TetrisApplication.prototype.menuClicked = function(event) {
 TetrisApplication.prototype.keyInput = function(key) {
     //If game is "alive" and not paused, call the correct functions in game
     if (this.game.alive) {
-        if (!this.game.paused) {
-            if (key === 37) {
-                //left
-                this.game.moveFallingBlock(-1);
-            }
-            else if (key === 39) {
-                //right
-                this.game.moveFallingBlock(1);
-            }
-            else if (key === 38) {
-                //up
-                this.game.rotateFallingBlock(1);
-            }
-            else if (key === 40) {
-                //down
-                this.game.fallBlock();
-            }
-            else if (key === 32) {
-                this.game.fallBlockToBottom();
-            }
-            else if (key === 13) {
-                //enter: play/pause
-                this.game.pauseGame();
-            }
-            else if (key === 68) {
-                //d (demo-mode)
-                this.game.demoGame();
-            }
+        /*if (key === 37) {
+            //left
+            this.game.moveFallingBlock(-1);
         }
-        else {
-            //the game is paused resume game if enter
-            if (key === 13) {
-                this.game.resumeGame();
-            }
+        else if (key === 39) {
+            //right
+            this.game.moveFallingBlock(1);
         }
+        else if (key === 38) {
+            //up
+            this.game.rotateFallingBlock(1);
+        }
+        else if (key === 40) {
+            //down
+            this.game.fallBlock();
+        }
+        else if (key === 32) {
+            this.game.fallBlockToBottom();
+        }
+        else if (key === 13) {
+            //enter: play/pause
+            this.game.pauseGame();
+        }
+        else if (key === 68) {
+            //d (demo-mode)
+            this.game.demoGame();
+        }*/
+        this.inputToGameHandler(key);
     }
     else {
-        //game is not running, start on enter
         if (key === 13) {
             this.game.start();
+        }
+    }
+};
+
+TetrisApplication.prototype.inputToGameHandler = function(key) {
+    switch (key) {
+        case 37: {
+            //left
+            this.game.moveFallingBlock(-1);
+            break;
+        }
+
+        case 39: {
+            //right
+            this.game.moveFallingBlock(1);
+            break;
+        }
+
+        case 38: {
+            //up
+            this.game.rotateFallingBlock(1);
+            break;
+        }
+
+        case 40: {
+            //down
+            this.game.fallBlock();
+            break;
+        }
+
+        case 32: {
+            //space
+            this.game.fallBlockToBottom();
+            break;
+        }
+
+        case 13: {
+            //enter
+            if (this.game.paused) {
+                this.game.resumeGame();
+            }
+            else {
+                this.game.pauseGame();
+            }
+
+            break;
+        }
+
+        case 68: {
+            //d
+            this.game.demoGame();
+            break;
         }
     }
 };
