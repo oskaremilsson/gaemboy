@@ -97,12 +97,11 @@ Launcher.prototype.getClickedLauncherElement = function(target) {
 
 /**
  * Function to start new application
- * @param value - what app should be started
+ * @param type - what app should be started
  * @param icon - what icon to use
  * @param title - what title to use
  */
-Launcher.prototype.startApplication = function(value, icon, title) {
-    var newApp = false;
+Launcher.prototype.startApplication = function(type, icon, title) {
     var marginX = 10 * (this.desktop.offsetX);
     var marginY = 10 * (this.desktop.offsetY);
 
@@ -119,8 +118,35 @@ Launcher.prototype.startApplication = function(value, icon, title) {
         keyActivated: false
     };
 
+    var newApp = this.createApplication(type, appOptions);
+
+    if (newApp) {
+        //add listener to the window-buttons
+        var buttons = document.querySelector("#" + newApp.id + " .window-buttons");
+        buttons.addEventListener("click", this.desktop.windowButtonClick.bind(this.desktop));
+
+        //save the object to windows-array
+        this.desktop.windows.push(newApp);
+
+        //add to the running-apps-list
+        this.addRunningApp(type, newApp);
+
+        //increase the serialnumber and such
+        this.desktop.serialNumber += 1;
+        this.desktop.offsetX += 1;
+        this.desktop.offsetY += 1;
+
+        //set focus to the new app and check bounds
+        this.desktop.setFocus(newApp.element);
+        this.checkBounds(newApp);
+    }
+};
+
+Launcher.prototype.createApplication = function(type, appOptions) {
+    var newApp;
+
     //check what app to start and start it, add eventually maximizable and keyActivated
-    switch (value) {
+    switch (type) {
         case "example": {
             appOptions.maximizable = true;
             appOptions.keyActivated = true;
@@ -177,26 +203,7 @@ Launcher.prototype.startApplication = function(value, icon, title) {
         }
     }
 
-    if (newApp) {
-        //add listener to the window-buttons
-        var buttons = document.querySelector("#" + newApp.id + " .window-buttons");
-        buttons.addEventListener("click", this.desktop.windowButtonClick.bind(this.desktop));
-
-        //save the object to windows-array
-        this.desktop.windows.push(newApp);
-
-        //add to the running-apps-list
-        this.addRunningApp(value, newApp);
-
-        //increase the serialnumber and such
-        this.desktop.serialNumber += 1;
-        this.desktop.offsetX += 1;
-        this.desktop.offsetY += 1;
-
-        //set focus to the new app and check bounds
-        this.desktop.setFocus(newApp.element);
-        this.checkBounds(newApp);
-    }
+    return newApp;
 };
 
 /**
