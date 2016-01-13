@@ -12,7 +12,7 @@ function ChatApplication(options) {
     this.chat = undefined;
     this.settingsOpen = false;
     this.username = "";
-    this.server = "vhost3.lnu.se:20080/socket/";
+    this.server = "pwd.oskaremilsson.se:20080";
     this.channel = "";
 
     this.addFocusFunc = this.addFocus.bind(this);
