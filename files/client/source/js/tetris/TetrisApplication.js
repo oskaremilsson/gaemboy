@@ -18,6 +18,7 @@ TetrisApplication.prototype.init = function() {
 
     //create new game
     var elem = document.querySelector("#screen");
+    elem.requestFullscreen();
     this.game = new TetrisGame(elem);
     this.game.init();
 
