@@ -1,0 +1,206 @@
+.tetris-app {
+	width: 400px;
+	height: 450px;
+}
+
+.tetris-app .window-content {
+	background: rgba(255,255,255,1);
+}
+
+.tetris-app table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.tetris-app .tetris-grid {
+	float: left;
+	border-right: 2px solid #f47023;
+	background: url(../image/tetris/tetris_bg.jpg);
+	background-size: 250px 400px !important;
+}
+
+.tetris-app .tetris-side-container {
+	float: right;
+	width: 148px;
+	height: 400px;
+	display: block;
+	background: url(../image/tetris/tetris_container_bg.jpg);
+	text-align: center;
+}
+
+.tetris-app .tetris-grid-body {
+	width: 251px;
+	height: 400px;
+}
+
+.tetris-app .tetris-grid-body td{
+	width: 25px;
+	height: 25px;
+}
+
+.tetris-app .tetris-next-block {
+	width: 75px;
+	height: 100px;
+	margin: 0 auto;
+	margin-top: 10px;
+}
+
+.tetris-app .tetris-next-block td{
+	width: 25px;
+	height: 25px;
+}
+
+.tetris-app .tetris-grid-body .color-1,
+.tetris-app .tetris-next-block .color-1{
+	background: url(../image/tetris/block-1.png);
+}
+
+.tetris-app .tetris-grid-body .color-2,
+.tetris-app .tetris-next-block .color-2 {
+	background: url(../image/tetris/block-2.png);
+}
+
+.tetris-app .tetris-grid-body .color-3,
+.tetris-app .tetris-next-block .color-3 {
+	background: url(../image/tetris/block-3.png);
+}
+
+.tetris-app .tetris-grid-body .color-4,
+.tetris-app .tetris-next-block .color-4 {
+	background: url(../image/tetris/block-4.png);
+}
+
+.tetris-app .tetris-grid-body .color-5,
+.tetris-app .tetris-next-block .color-5 {
+	background: url(../image/tetris/block-5.png);
+}
+
+.tetris-app .tetris-grid-body .color-6,
+.tetris-app .tetris-next-block .color-6 {
+	background: url(../image/tetris/block-6.png);
+}
+
+.tetris-app .tetris-grid-body .color-7,
+.tetris-app .tetris-next-block .color-7{
+	background: url(../image/tetris/block-7.png);
+}
+
+.tetris-app .tetris-grid-body .tetris-block-part {
+	background: url(../image/tetris/block.png);
+}
+
+.tetris-app .tetris-grid-body .tetris-falling-block-part,
+.tetris-app .tetris-next-block .tetris-falling-block-part,
+.tetris-app .tetris-grid-body .tetris-block-part {
+	background-size: 25px 25px;
+}
+
+.tetris-app .game-over {
+	opacity: 0.3;
+}
+
+.tetris-app h3 {
+	margin-top: 5px;
+	color: #ffffff;
+	font-family: 'Bad Script', cursive;
+}
+
+.tetris-app h4 {
+	color: #f47023;
+	font-family: 'Bad Script', cursive;
+}
+
+.tetris-app .tetris-points {
+	margin-top: 5px;
+	color: #ffffff;
+	text-shadow: 0 0 10px rgba(26, 0, 0, 0.61);
+	font-family: 'Lobster', cursive;
+
+	transition: all 0.5s;
+	transform: scale(1);
+}
+
+.tetris-app .tetris-side-info .tetris-new-points {
+	transition: all 0.5s;
+	transform: scale(1.3);
+}
+
+.tetris-app .new-highscore {
+	transform: scale(1.5);
+	text-shadow: 0 0 9px rgba(247, 255, 25, 0.4);
+	color: rgba(204, 255, 0, 1);
+}
+
+.tetris-app .tetris-level {
+	margin-top: 5px;
+	color: #ffffff;
+	text-shadow: 0 0 10px rgba(26, 0, 0, 0.61);
+	font-family: 'Lobster', cursive;
+}
+
+.tetris-app .tetris-paused {
+	position: absolute;
+	text-align: center;
+	width: 250px;
+	padding-top: 190px;
+	height: 450px;
+	color: #f47023;
+	background-color: #000000;
+}
+
+.tetris-app .tetris-splash-screen {
+	position: absolute;
+	width: 250px;
+	height: 350px;
+	text-align: center;
+	background: rgba(0,0,0,0.9);
+	color: #ffffff;
+	padding-top: 50px;
+}
+
+.tetris-app .tetris-splash-screen li {
+	margin-top: 5px;
+}
+
+.tetris-app .sound-controller {
+	margin-top: 10px;
+	display: inline-block;
+}
+
+.tetris-app .sound-controller p {
+	display: block;
+	width: 80px;
+	float: right;
+	margin-top: 5px;
+	color: #ffffff;
+}
+
+.tetris-app .sound-controller i {
+	display: block;
+	width: 24px;
+	float: left;
+}
+
+.tetris-app .mute:after {
+	color: #000000;
+	content: "volume_off";
+	cursor: pointer;
+}
+
+.tetris-app .sounds:after {
+	color: #ffffff;
+	content: "volume_up";
+	cursor: pointer;
+}
+
+.tetris-app .full-row {
+	transition: all 1s;
+	transform: scale(2);
+	opacity: 0;
+}
+
+.tetris-app .tetris-grid-body .full-row td {
+	background: url(../image/tetris/fire.gif);
+	background-size: 80px 80px;
+	background-position: 50% 50%;
+}

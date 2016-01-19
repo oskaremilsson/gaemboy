@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>GAEMBOY</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet/styler.css">
+    <link rel="stylesheet" type="text/css" href="stylesheet/tetrisStyler.css">
+
+</head>
+
+<div id="screen" class="tetris-app">
+    <table class="tetris-grid">
+        <tbody class="tetris-grid-body">
+        </tbody>
+    </table>
+    <div class="tetris-side-container">
+        <h3>Next:</h3>
+        <table class="tetris-next-block">
+            <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="tetris-side-info">
+            <h3>Points:</h3>
+            <p class="tetris-points">0</p>
+            <h3>Level:</h3>
+            <p class="tetris-level">1</p>
+
+            <div class="sound-controller"><i id="tetris-music-toggle" class="material-icons mute"></i><p>Music FX</p></div>
+            <div class="sound-controller"><i id="tetris-sound-toggle" class="material-icons mute"></i><p>Sound FX</p></div>
+        </div>
+    </div>
+
+    <div class="tetris-paused hide">
+        <p>-paused-</p>
+        <p>Press ENTER to resume</p>
+    </div>
+
+    <div class="tetris-splash-screen">
+        <h3>Controls:</h3>
+        <ul>
+            <li><h4>Left/Right Arrow:</h4>Move block left/right</li>
+            <li><h4>Down Arrow: </h4>Drop block down faster</li>
+            <li><h4>Space: </h4>Drop block to the bottom</li>
+            <li><h4>Enter: </h4>Start/Pause/Resume</li>
+        </ul>
+    </div>
+</div>
+
+<script src="js/build.js"></script>
+</body>
+</html>

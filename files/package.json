@@ -1,0 +1,46 @@
+{
+  "name": "gaemboytetris",
+  "version": "0.0.1",
+  "homepage": "http://gaemboy.se",
+  "contributors": [
+    {
+      "name": "OskarEmilsson",
+      "email": "osk@remilsson.se"
+    },
+    {
+      "name": "OscarNordquist",
+      "email": "Oscar.cv.nordquist@gmail.com"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "engines": {
+    "node": ">=5.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "browserify": "^12.0.1",
+    "http-server": "^0.8.5",
+    "npm-run-all": "^1.2.13",
+    "watchify": "^3.6.0"
+  },
+  "bin": {},
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "watch": "npm-run-all --parallel watch:*",
+    "debug": "npm-run-all --parallel server:http watch:*",
+    "build:html": "cp -R ./client/source/*.html ./client/debug/",
+    "build:css": "cp -R ./client/source/css/*.css ./client/debug/stylesheet/",
+    "build:img": "cp -R ./client/source/image ./client/debug/",
+    "server:http": "http-server ./client/debug -p 4000",
+    "watch:js": "watchify ./client/source/js/app.js -o ./client/debug/js/build.js -d -v --poll",
+    "watch:html": "nodemon --watch ./client/source -e html -x \"npm run build:html\" --legacy-watch",
+    "watch:css": "nodemon --watch ./client/source/css -e css -x \"npm run build:css\" --legacy-watch",
+    "watch:img": "nodemon --watch ./client/source/image -e jpg,jpeg,png,webp,gif,svg -x \"npm run build:img\" --legacy-watch"
+  }
+}

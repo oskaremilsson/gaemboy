@@ -1,0 +1,47 @@
+@import url(https://fonts.googleapis.com/css?family=Muli);
+@import url(https://fonts.googleapis.com/css?family=Bad+Script);
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+
+* {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	font-family: 'Muli', sans-serif;
+
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+
+*:focus {
+	outline: none;
+}
+
+body {
+	background: url(../image/bg.jpg) no-repeat center center fixed;
+	background-size: cover;
+}
+
+.material-icons.md-12 { font-size: 12px; }
+.material-icons.md-13 { font-size: 13px; }
+.material-icons.md-16 { font-size: 16px; }
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-30 { font-size: 30px; }
+
+.no-pointer {
+	pointer-events: none;
+}
+
+.float-right {
+	float: right;
+}
+
+.float-left {
+	float: left;
+}
+
+.hide {
+	display: none;
+}
