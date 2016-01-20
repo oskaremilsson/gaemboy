@@ -360,7 +360,7 @@ TetrisGame.prototype.render = function() {
         for (var col = 0; col < this.field[row].length; col += 1) {
             if (this.field[row][col] !== 0) {
                 //add the class to show block-part
-                tds[col].classList.add("tetris-block-part");
+                tds[col].classList.add("tetris-block-part", "color-" + this.field[row][col]);
             }
         }
     }

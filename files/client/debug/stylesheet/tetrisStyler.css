@@ -15,8 +15,9 @@
 .tetris-app .tetris-grid {
 	float: left;
 	border-right: 2px solid #f47023;
-	background: url(../image/tetris/tetris_bg.jpg);
-	background-size: 250px 400px !important;
+	/*background: url(../image/tetris/tetris_bg.jpg);
+	background-size: 250px 400px !important;*/
+    background: rgba(255, 255, 0, 1);
 }
 
 .tetris-app .tetris-side-container {
@@ -38,17 +39,26 @@
 	height: 25px;
 }
 
-.tetris-app .tetris-next-block {
-	width: 75px;
-	height: 100px;
-	margin: 0 auto;
-	margin-top: 10px;
+.tetris-app .tetris-next-wrapper {
+    width: 100px;
+    height: 100px;
+    background: url(../image/tetris/next_bg.jpg);
+    background-size: 100px 100px;
+    margin: 0 auto;
 }
 
-.tetris-app .tetris-next-block td{
-	width: 25px;
-	height: 25px;
+.tetris-app .tetris-next-block {
+	width: 50px;
+	height: 50px;
+    padding: 0;
+	margin: 0 auto;
+	margin-top: 22px;
 }
+/*
+.tetris-app .tetris-next-block td{
+	width: 20px;
+	height: 20px;
+}*/
 
 .tetris-app .tetris-grid-body .color-1,
 .tetris-app .tetris-next-block .color-1{
@@ -85,18 +95,21 @@
 	background: url(../image/tetris/block-7.png);
 }
 
-.tetris-app .tetris-grid-body .tetris-block-part {
+/*.tetris-app .tetris-grid-body .tetris-block-part {
 	background: url(../image/tetris/block.png);
-}
+}*/
 
 .tetris-app .tetris-grid-body .tetris-falling-block-part,
-.tetris-app .tetris-next-block .tetris-falling-block-part,
 .tetris-app .tetris-grid-body .tetris-block-part {
 	background-size: 25px 25px;
 }
 
+.tetris-app .tetris-next-block .tetris-falling-block-part {
+    background-size: 12px 12px;
+}
+
 .tetris-app .game-over {
-	opacity: 0.3;
+	opacity: 0.9;
 }
 
 .tetris-app h3 {
