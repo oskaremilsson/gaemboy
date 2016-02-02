@@ -60,6 +60,7 @@
     background-size: cover;
     margin: 0 auto;
     position: relative;
+    margin-top: 5%
 }
 
 .tetris-app .tetris-next-block {
@@ -152,7 +153,8 @@
 }
 
 .tetris-app h3 {
-	margin-top: 5px;
+    margin: 0;
+	margin-top: 1%;
 	color: #ffffff;
 	font-family: 'Bad Script', cursive;
     font-size: 11px;
@@ -164,7 +166,8 @@
 }
 
 .tetris-app .tetris-points {
-	margin-top: 5px;
+	margin-top: 1%;
+    margin-bottom: 2%;
     font-size: 12px;
 	color: #ffffff;
 	text-shadow: 0 0 10px rgba(26, 0, 0, 0.61);
