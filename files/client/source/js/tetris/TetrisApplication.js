@@ -83,12 +83,12 @@ TetrisApplication.prototype.inputToGameHandler = function(key) {
             this.game.pauseGame();
             break;
         }
-
+        /* for dev-showcase
         case 68: {
             //d
             this.game.demoGame();
             break;
-        }
+        }*/
     }
 };
 
