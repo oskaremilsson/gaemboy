@@ -1,79 +1,351 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <title>GAEMBOY OF DESTINY</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>GAEMBOY</title>
+  <link href='https://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
+
     <link rel="stylesheet" type="text/css" href="stylesheet/styler.css">
+  <link rel="stylesheet" type="text/css" href="stylesheet/main.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheet/dot.css" />
     <link rel="stylesheet" type="text/css" href="stylesheet/tetrisStyler.css">
-
 </head>
-<p>SOOON.... In the meantime; play tetris without "the cool thing" that is yet to come!</p>
-
-<div id="screen" class="tetris-app">
-    <table class="tetris-grid">
-        <tbody class="tetris-grid-body">
-        </tbody>
-    </table>
-    <div class="tetris-side-container">
-        <h3>Next:</h3>
-        <div class="tetris-next-wrapper">
-            <table class="tetris-next-block">
-                <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+<body>
+  <div class="gameboy-container">
+    <div class="gameboy-main">
+    <div class="lower-round">
+      <div class="back-screen">
+        <div class="front-screen tetris-app">
+            <!--
+            Start of tetris html structure
+            -->
+            <table class="tetris-grid">
+                <tbody class="tetris-grid-body">
                 </tbody>
             </table>
+            <div class="tetris-side-container">
+                <div class="tetris-next-wrapper">
+                    <table class="tetris-next-block">
+                        <tbody>
+                        <tr>
+                            <td><div></div></td>
+                            <td><div></div></td>
+                            <td><div></div></td>
+                            <td><div></div></td>
+                        </tr>
+                        <tr>
+                            <td><div></div></td>
+                            <td><div></div></td>
+                            <td><div></div></td>
+                            <td><div></div></td>
+                        </tr>
+                        <tr>
+                            <td><div></div></td>
+                            <td><div></div></td>
+                            <td><div></div></td>
+                            <td><div></div></td>
+                        </tr>
+                        <tr>
+                            <td><div></div></td>
+                            <td><div></div></td>
+                            <td><div></div></td>
+                            <td><div></div></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tetris-side-info">
+                    <h3>Points:
+                        <span class="tetris-points">0</span></h3>
+                    <h3>Level:
+                        <span class="tetris-level">1</span></h3>
+
+                    <div class="sound-controller"><i id="tetris-music-toggle" class="material-icons mute"></i><p>Music FX</p></div>
+                    <div class="sound-controller"><i id="tetris-sound-toggle" class="material-icons mute"></i><p>Sound FX</p></div>
+                </div>
+            </div>
+
+            <div class="tetris-paused hide">
+                <p>-paused-</p>
+                <p>Press ENTER to resume</p>
+            </div>
+
+            <div class="tetris-splash-screen">
+                <p>press start</p>
+            </div>
+            <!--
+            End of tetris
+            -->
         </div>
-
-        <div class="tetris-side-info">
-            <h3>Points:</h3>
-            <p class="tetris-points">0</p>
-            <h3>Level:</h3>
-            <p class="tetris-level">1</p>
-
-            <div class="sound-controller"><i id="tetris-music-toggle" class="material-icons mute"></i><p>Music FX</p></div>
-            <div class="sound-controller"><i id="tetris-sound-toggle" class="material-icons mute"></i><p>Sound FX</p></div>
+        <div class="power-led">
         </div>
+        <div class="mark-container">
+          <div class="power-led-mark">
+            <div class="power-led-mark-out">
+            </div>
+          </div>
+          <div class="power-led-mark">
+            <div class="power-led-mark-out">
+            </div>
+          </div>
+          <div class="power-led-mark">
+            <div class="power-led-mark-out">
+            </div>
+          </div>
+        </div>
+        <div class="power">
+          <p>POWER</p>
+        </div>
+        <div class="game-boy">
+          <p><span class="gaemboy-less-space">GAEM BOY</span> <span class="color-set">C<span class="purple">O</span><span class="green">L</span><span class="yellow">O</span><span class="blue">R</span></span></p>
+        </div>
+      </div>
+      <div class="nintendo">
+        <p>NINTNEDO</p>
+      </div>
+      <div class="a-button">
+        <p>A</p>
+      </div>
+      <div class="b-button">
+        <p>B</p>
+      </div>
+      <div class="controller-container">
+        <div class="left-right-btn">
+          <div class="arrow-left">
+            <div class="shade">
+            </div>
+          </div>
+          <div class="arrow-right">
+          </div>
+        </div>
+        <div class="up-down-btn">
+          <div class="arrow-up">
+          </div>
+          <div class="round-middle">
+          </div>
+          <div class="arrow-down">
+          </div>
+        </div>
+        <div class="left-part"></div>
+        <div class="right-part"></div>
+        <div class="up-part"></div>
+        <div class="down-part"></div>
+        <div class="left-right-btn-fix"></div>
+      </div>
+      <div class="start">
+      </div>
+      <div class="select">
+      </div>
+      <div class="start-select-container">
+        <p>SELECT
+          <spanc class="start-select-space"> START</p>
+      </div>
+      <div class="speaker-container">
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+        <div class="dot">
+        </div>
+      </div>
     </div>
+    <div class="behind">
+  </div>
+  </div>
 
-    <div class="tetris-paused hide">
-        <p>-paused-</p>
-        <p>Press ENTER to resume</p>
-    </div>
-
-    <div class="tetris-splash-screen">
-        <h3>Controls:</h3>
-        <ul>
-            <li><h4>Left/Right Arrow:</h4>Move block left/right</li>
-            <li><h4>Down Arrow: </h4>Drop block down faster</li>
-            <li><h4>Space: </h4>Drop block to the bottom</li>
-            <li><h4>Enter: </h4>Start/Pause/Resume</li>
-        </ul>
-    </div>
-</div>
-
-<script src="js/build.js"></script>
+  <script src="js/build.js"></script>
 </body>
 </html>

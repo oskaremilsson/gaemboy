@@ -1,0 +1,405 @@
+.dot {
+  width: 4px;
+  height: 4px;
+  background-color: #1c0608;
+  opacity: 0.5;
+  float: left;
+  border-radius: 5px;
+  margin: 1px;
+}
+
+.dot:nth-child(0) {
+  opacity: 1;
+}
+
+.dot:nth-child(1) {
+  opacity: 0;
+}
+
+.dot:nth-child(2) {
+  opacity: 1;
+}
+
+.dot:nth-child(3) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(4) {
+  opacity: 1;
+}
+
+.dot:nth-child(5) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(6) {
+  opacity: 1;
+}
+
+.dot:nth-child(7) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(8) {
+  opacity: 1;
+}
+
+.dot:nth-child(9) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(10) {
+  opacity: 0;
+}
+
+.dot:nth-child(11) {
+  opacity: 1;
+}
+
+.dot:nth-child(12) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(13) {
+  opacity: 1;
+}
+
+.dot:nth-child(14) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(15) {
+  opacity: 1;
+}
+
+.dot:nth-child(16) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(17) {
+  opacity: 1;
+}
+
+.dot:nth-child(18) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(19) {
+  opacity: 1;
+}
+
+.dot:nth-child(20) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(21) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(22) {
+  opacity: 1;
+}
+
+.dot:nth-child(23) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(24) {
+  opacity: 1;
+}
+
+.dot:nth-child(25) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(26) {
+  opacity: 1;
+}
+
+.dot:nth-child(27) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(28) {
+  opacity: 1;
+}
+
+.dot:nth-child(29) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(30) {
+  opacity: 1;
+}
+
+.dot:nth-child(31) {
+  opacity: 1;
+}
+
+.dot:nth-child(32) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(33) {
+  opacity: 1;
+}
+
+.dot:nth-child(34) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(35) {
+  opacity: 1;
+}
+
+.dot:nth-child(36) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(37) {
+  opacity: 1;
+}
+
+.dot:nth-child(38) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(39) {
+  opacity: 1;
+}
+
+.dot:nth-child(40) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(41) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(42) {
+  opacity: 1;
+}
+
+.dot:nth-child(43) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(44) {
+  opacity: 1;
+}
+
+.dot:nth-child(45) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(46) {
+  opacity: 1;
+}
+
+.dot:nth-child(47) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(48) {
+  opacity: 1;
+}
+
+.dot:nth-child(49) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(50) {
+  opacity: 1;
+}
+
+.dot:nth-child(51) {
+  opacity: 1;
+}
+
+.dot:nth-child(52) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(53) {
+  opacity: 1;
+}
+
+.dot:nth-child(54) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(55) {
+  opacity: 1;
+}
+
+.dot:nth-child(57) {
+  opacity: 1;
+}
+
+.dot:nth-child(58) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(59) {
+  opacity: 1;
+}
+
+.dot:nth-child(60) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(61) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(62) {
+  opacity: 1;
+}
+
+.dot:nth-child(63) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(64) {
+  opacity: 1;
+}
+
+.dot:nth-child(65) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(66) {
+  opacity: 1;
+}
+
+.dot:nth-child(67) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(68) {
+  opacity: 1;
+}
+
+.dot:nth-child(69) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(70) {
+  opacity: 1;
+}
+
+.dot:nth-child(71) {
+  opacity: 1;
+}
+
+.dot:nth-child(72) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(73) {
+  opacity: 1;
+}
+
+.dot:nth-child(74) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(75) {
+  opacity: 1;
+}
+
+.dot:nth-child(76) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(77) {
+  opacity: 1;
+}
+
+.dot:nth-child(78) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(79) {
+  opacity: 1;
+}
+
+.dot:nth-child(80) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(81) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(82) {
+  opacity: 1;
+}
+
+.dot:nth-child(83) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(84) {
+  opacity: 1;
+}
+
+.dot:nth-child(85) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(86) {
+  opacity: 1;
+}
+
+.dot:nth-child(87) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(88) {
+  opacity: 1;
+}
+
+.dot:nth-child(89) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(90) {
+  opacity: 1;
+}
+
+.dot:nth-child(91) {
+  opacity: 0;
+}
+
+.dot:nth-child(92) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(93) {
+  opacity: 1;
+}
+
+.dot:nth-child(94) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(95) {
+  opacity: 1;
+}
+
+.dot:nth-child(96) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(97) {
+  opacity: 1;
+}
+
+.dot:nth-child(98) {
+  opacity: 0.5;
+}
+
+.dot:nth-child(99) {
+  opacity: 1;
+}

@@ -15,9 +15,8 @@ function TetrisApplication() {
  */
 TetrisApplication.prototype.init = function() {
     //this.print();
-
     //create new game
-    var elem = document.querySelector("#screen");
+    var elem = document.querySelector(".front-screen");
     this.game = new TetrisGame(elem);
     this.game.init();
 

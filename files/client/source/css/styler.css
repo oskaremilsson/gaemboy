@@ -2,7 +2,7 @@
 @import url(https://fonts.googleapis.com/css?family=Bad+Script);
 @import url(https://fonts.googleapis.com/css?family=Lobster);
 
-* {
+/** {
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
@@ -19,9 +19,9 @@
 }
 
 body {
-	/*background: url(../image/bg.jpg) no-repeat center center fixed;*/
+	background: url(../image/bg.jpg) no-repeat center center fixed;
 	background-size: cover;
-}
+}*/
 
 .material-icons.md-12 { font-size: 12px; }
 .material-icons.md-13 { font-size: 13px; }

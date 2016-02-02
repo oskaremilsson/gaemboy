@@ -724,12 +724,15 @@ TetrisGame.prototype.print = function() {
     var frag = document.createDocumentFragment();
     var tr;
     var td;
+    var div;
 
     for (var row = 0; row < this.field.length; row += 1) {
         tr = document.createElement("tr");
 
         for (var col = 0; col < this.field[row].length; col += 1) {
+            div = document.createElement("div");
             td = document.createElement("td");
+            td.appendChild(div);
             tr.appendChild(td);
         }
 
@@ -744,6 +747,7 @@ TetrisGame.prototype.print = function() {
  */
 TetrisGame.prototype.initField = function() {
     this.field = [
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
