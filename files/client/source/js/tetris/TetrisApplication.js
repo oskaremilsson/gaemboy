@@ -22,6 +22,30 @@ TetrisApplication.prototype.init = function() {
 
     //add eventlistener
     document.addEventListener("keydown", this.keyInput.bind(this));
+    document.addEventListener("mousedown", this.click.bind(this));
+};
+
+/**
+ * Function to handle clicks
+ */
+TetrisApplication.prototype.click = function(event) {
+    console.log(event.target.classList[0]);
+    var key = event.target.classList[0];
+
+    //If game is "alive" and not paused, call the correct functions in game
+    if (this.game.alive && !this.game.paused) {
+        this.inputToGameHandler(key);
+    }
+    else {
+        if (key === "start") {
+            if (this.game.paused) {
+                this.game.resumeGame();
+            }
+            else {
+                this.game.start();
+            }
+        }
+    }
 };
 
 /**
@@ -48,37 +72,44 @@ TetrisApplication.prototype.keyInput = function(event) {
 
 TetrisApplication.prototype.inputToGameHandler = function(key) {
     switch (key) {
-        case 37: {
+        case 37:
+        case "arrow-left": {
             //left
             this.game.moveFallingBlock(-1);
             break;
         }
 
-        case 39: {
+        case 39:
+        case "arrow-right": {
             //right
             this.game.moveFallingBlock(1);
             break;
         }
 
-        case 38: {
+        case 38:
+        case "arrow-up":
+        case "a-button-label": {
             //up
             this.game.rotateFallingBlock(1);
             break;
         }
 
-        case 40: {
+        case 40:
+        case "arrow-down": {
             //down
             this.game.fallBlock();
             break;
         }
 
-        case 32: {
+        case 32:
+        case "b-button-label": {
             //space
             this.game.fallBlockToBottom();
             break;
         }
 
-        case 13: {
+        case 13:
+        case "start": {
             //enter
             this.game.pauseGame();
             break;
