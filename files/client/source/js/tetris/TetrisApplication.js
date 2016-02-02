@@ -8,6 +8,9 @@ var TetrisGame = require("./TetrisGame");
  */
 function TetrisApplication() {
     this.game = undefined;
+    this.leftTouch = false;
+    this.rightTouch = false;
+    this.moveSpeed = 80;
 }
 
 /**
@@ -24,14 +27,50 @@ TetrisApplication.prototype.init = function() {
     document.addEventListener("keydown", this.keyInput.bind(this));
     document.addEventListener("mousedown", this.click.bind(this));
     document.addEventListener("touchstart", this.click.bind(this));
+    document.addEventListener("touchend", this.resetTouch.bind(this));
+};
+
+TetrisApplication.prototype.resetTouch = function() {
+    if (this.leftTouch) {
+        clearInterval(this.leftTouch);
+    }
+
+    if (this.rightTouch) {
+        clearInterval(this.rightTouch);
+    }
 };
 
 /**
  * Function to handle clicks
  */
 TetrisApplication.prototype.click = function(event) {
+    event.preventDefault();
     console.log(event.target.classList[0]);
     var key = event.target.classList[0];
+    /*
+    var currX = 0;
+    var currY = 0;
+    var cachedX = 0;
+    var cachedY = 0;
+
+    var pointer = getPointerEvent(event);
+
+    // caching the current x
+    cachedX = currX = pointer.pageX;
+
+    // caching the current y
+    cachedY = currY = pointer.pageY;
+
+    // a touch event is detected
+    var touchStarted = true;
+
+    // detecting if after 200ms the finger is still in the same position
+    setTimeout(function() {
+        if ((cachedX === currX) && !touchStarted && (cachedY === currY)) {
+            // Here you get the Tap event
+            console.log("tap that!");
+        }
+    }, 200);*/
 
     //If game is "alive" and not paused, call the correct functions in game
     if (this.game.alive && !this.game.paused) {
@@ -72,18 +111,35 @@ TetrisApplication.prototype.keyInput = function(event) {
 };
 
 TetrisApplication.prototype.inputToGameHandler = function(key) {
+    var _this = this;
     switch (key) {
-        case 37:
-        case "arrow-left": {
+        case 37: {
             //left
             this.game.moveFallingBlock(-1);
             break;
         }
 
-        case 39:
+        case "arrow-left": {
+            //left
+            this.game.moveFallingBlock(-1);
+            this.leftTouch = setInterval(function() {
+                _this.game.moveFallingBlock(-1);
+            }, this.moveSpeed);
+            break;
+        }
+
+        case 39: {
+            //right
+            this.game.moveFallingBlock(1);
+            break;
+        }
+
         case "arrow-right": {
             //right
             this.game.moveFallingBlock(1);
+            this.rightTouch = setInterval(function() {
+                _this.game.moveFallingBlock(1);
+            }, this.moveSpeed);
             break;
         }
 
