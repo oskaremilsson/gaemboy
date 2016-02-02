@@ -26,7 +26,6 @@ TetrisApplication.prototype.init = function() {
     //add eventlistener
     document.addEventListener("keydown", this.keyInput.bind(this));
     document.addEventListener("mousedown", this.click.bind(this));
-    document.addEventListener("click", this.click.bind(this));
     document.addEventListener("touchstart", this.click.bind(this));
     document.addEventListener("touchend", this.resetTouch.bind(this));
 };
